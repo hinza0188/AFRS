@@ -3,3 +3,6 @@
 
 # ignore Mac File system
 .DS_Store/
+
+# ignore output from java
+out/
