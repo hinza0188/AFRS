@@ -2,7 +2,7 @@
 .idea/
 
 # ignore Mac File system
-.DS_Store/
+.DS_Store
 
 # ignore output from java
 out/
