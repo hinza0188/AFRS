@@ -8,9 +8,20 @@ import java.time.OffsetDateTime;
 
 public class Airport
 {
-    private String name;
-    private String location;
+    private String abbreviation;
+    private String cityName;
     private String weather;
 
     private OffsetDateTime timeDelay;
+
+    public Airport(String abbreviation, String cityName)
+    {
+        this.abbreviation = abbreviation;
+        this.cityName = cityName;
+    }
+
+    public String toString()
+    {
+        return cityName + " (" + abbreviation + ")";
+    }
 }

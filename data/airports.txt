@@ -1,0 +1,13 @@
+ATL,Atlanta
+BOS,Boston
+DFW,Dallas-Fort Wroth
+IAD,Washington DC
+JFK,New York City
+LAS,Las Vegas
+LAX,Los Angeles
+MCO,Orlando
+ORD,Chicago
+PHX,Phoenix
+ROC,Rochester
+SEA,Seattle-Tacoma
+SFO,San Francisco
