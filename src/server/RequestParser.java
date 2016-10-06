@@ -4,6 +4,8 @@
 
 package server;
 
+import information.AirportManager;
+
 public class RequestParser
 {
     private static final String TERMINATOR = ";";
@@ -29,8 +31,32 @@ public class RequestParser
             String[] commandArgs = possibleFullCommand.split(" ");
             if (commandArgs.length > 0)
             {
+                /* COMMAND LIST w/ ARGS
+                    get_weather airport
+                    get_itinerary origin_airport destination_airport
+                    make_reservation first_name last_name itinerary_id
+                    delete_reservation first_name last_name origin_airport destination_airport
+                    get_reservation first_name last_name [origin_airport] [destination_airport]
+                */
+
                 String mainCommand = commandArgs[0];
-                if (mainCommand.equals(""))
+                if (mainCommand.equals("get_weather"))
+                {
+
+                }
+                else if (mainCommand.equals("get_itinerary"))
+                {
+
+                }
+                else if (mainCommand.equals("make_reservation"))
+                {
+
+                }
+                else if (mainCommand.equals("delete_reservation"))
+                {
+
+                }
+                else if (mainCommand.equals("get_reservation"))
                 {
 
                 }
