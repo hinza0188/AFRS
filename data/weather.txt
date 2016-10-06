@@ -1,0 +1,13 @@
+ATL,sunny,95,rain,100,
+BOS,partly cloudy,70,partly cloudy,75,cloudy,80
+DFW,sunny,90,rain,50,partly sunny,60
+IAD,sunny,85,rain,85,clear,85,partly cloudy,85,cloudy,85
+JFK,cloudy,85,partly cloudy,40,
+LAS,sunny,105
+LAX,sunny,80,sunny,85,sunny,90,rain,65
+MCO,cloudy,90,sunny,95,cloudy,90,rain,90
+ORD,windy,45,rain,50,sunny,80
+PHX,sunny,90,sunny,95,sunny,100,sunny,110,sunny,80
+ROC,snow,15,partly cloudy,40,hazy,95,rain,60,sunny,85
+SEA,cloudy,70,cloudy,75,cloudy,65
+SFO,sunny,55,partly cloudy,60
