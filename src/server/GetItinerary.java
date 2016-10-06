@@ -4,6 +4,18 @@
 
 package server;
 
-public class GetItinerary
+import information.Airport;
+
+public class GetItinerary implements Request
 {
+    public GetItinerary(Airport originAirport, Airport destinationAirport)
+    {
+
+    }
+
+    @Override
+    public String executeCommand()
+    {
+        return null;
+    }
 }

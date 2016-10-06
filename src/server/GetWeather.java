@@ -4,6 +4,18 @@
 
 package server;
 
-public class GetWeather
+import information.Airport;
+
+public class GetWeather implements Request
 {
+    public GetWeather(Airport airport)
+    {
+
+    }
+
+    @Override
+    public String executeCommand()
+    {
+        return null;
+    }
 }

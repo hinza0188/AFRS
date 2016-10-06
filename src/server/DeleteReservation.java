@@ -4,6 +4,28 @@
 
 package server;
 
-public class DeleteReservation
+import information.Airport;
+
+public class DeleteReservation implements Request
 {
+    public DeleteReservation(String passengerName, Airport originAirport, Airport destinationAirport)
+    {
+
+    }
+
+    public DeleteReservation(String passengerName, Airport originAirport)
+    {
+
+    }
+
+    public DeleteReservation(String passengerName)
+    {
+
+    }
+
+    @Override
+    public String executeCommand()
+    {
+        return null;
+    }
 }
