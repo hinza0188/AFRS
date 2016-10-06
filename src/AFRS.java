@@ -3,6 +3,7 @@
  */
 
 import server.RequestParser;
+import server.Request;
 import java.util.Scanner;
 
 public class AFRS
@@ -19,9 +20,25 @@ public class AFRS
         // main loop
         while (true)
         {
-            // read input
             System.out.print("> ");
+
+            // append input to parser
             String command = scanner.nextLine();
+            AFRS.parser.appendData(command);
+
+            // attempt to parse data
+            Request[] requestCommands = AFRS.parser.parseData();
+            if (requestCommands.length > 0)
+            {
+                // execute commands
+                for (Request requestCommand : requestCommands)
+                {
+                    requestCommand.executeCommand();
+                }
+
+                // clear data
+                AFRS.parser.clearData();
+            }
 
             // check if the user is quiting
             if (command.equals("quit"))
