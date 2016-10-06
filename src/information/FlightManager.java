@@ -8,5 +8,15 @@ import java.util.ArrayList;
 
 public class FlightManager
 {
+    private static FlightManager singleton = null;
     private ArrayList<Flight> flights;
+
+    protected FlightManager()  { }
+    public static FlightManager getManager()
+    {
+        if(singleton == null)
+            singleton = new FlightManager();
+
+        return singleton;
+    }
 }
