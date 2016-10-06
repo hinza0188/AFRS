@@ -10,7 +10,9 @@ public class Airport
 {
     private String abbreviation;
     private String cityName;
-    private String weather;
+
+    private String[] weather;
+    private int weatherRequestCounter = 0;
 
     private OffsetDateTime timeDelay;
 
@@ -18,6 +20,37 @@ public class Airport
     {
         this.abbreviation = abbreviation;
         this.cityName = cityName;
+    }
+
+    protected void setWeather(String[] weather)
+    {
+        this.weather = weather;
+    }
+
+    public String getAbbreviation()
+    {
+        return abbreviation;
+    }
+
+    public String getCityName()
+    {
+        return cityName;
+    }
+
+    public String getWeather()
+    {
+        // make sure we have some weather
+        if (this.weather.length < 1)
+            return null;
+
+        // return current weather
+        int currentWeatherIndex = this.weatherRequestCounter++ % this.weather.length;
+        return this.weather[currentWeatherIndex];
+    }
+
+    public OffsetDateTime getTimeDelay()
+    {
+        return timeDelay;
     }
 
     public String toString()
