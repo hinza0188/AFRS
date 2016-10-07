@@ -47,7 +47,7 @@ public class Itinerary implements Flyable
     }
 
     @Override
-    public float getAirfare()
+    public double getAirfare()
     {
         return 0;
     }

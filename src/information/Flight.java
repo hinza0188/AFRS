@@ -53,19 +53,19 @@ public class Flight implements Flyable
     @Override
     public Airport getOriginAirport()
     {
-        return null;
+        return this.originAirport;
     }
 
     @Override
     public Airport getDestinationAirport()
     {
-        return null;
+        return this.destinationAirport;
     }
 
     @Override
-    public float getAirfare()
+    public double getAirfare()
     {
-        return 0;
+        return this.airfare;
     }
 
     @Override

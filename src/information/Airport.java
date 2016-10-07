@@ -16,7 +16,7 @@ public class Airport
 
     private OffsetDateTime timeDelay;
 
-    public Airport(String abbreviation, String cityName)
+    protected Airport(String abbreviation, String cityName)
     {
         this.abbreviation = abbreviation;
         this.cityName = cityName;

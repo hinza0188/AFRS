@@ -17,5 +17,5 @@ public interface Flyable
     Airport getOriginAirport();
     Airport getDestinationAirport();
 
-    float getAirfare();
+    double getAirfare();
 }
