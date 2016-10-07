@@ -14,7 +14,7 @@ public class FlightManager
     private static String FLIGHTS_FILE_PATH = "data/flights.txt";
 
     private static FlightManager singleton = null;
-    public ArrayList<Flight> flights;
+    private ArrayList<Flight> flights;
 
     protected FlightManager()  { }
     public static FlightManager getManager()
@@ -27,6 +27,18 @@ public class FlightManager
         }
 
         return singleton;
+    }
+
+    public ArrayList<Flight> flightsLeavingAirport(Airport originAirport)
+    {
+        // find flights leaving
+        ArrayList<Flight> flightsLeaving = new ArrayList<Flight>();
+        this.flights.forEach(flight -> {
+            if (flight.getOriginAirport() == originAirport)
+                flightsLeaving.add(flight);
+        });
+
+        return flightsLeaving;
     }
 
     private void readFlightsFromFile(String filePath)
