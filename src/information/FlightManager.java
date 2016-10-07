@@ -21,6 +21,7 @@ public class FlightManager
     {
         if(singleton == null)
         {
+            // create manager (and read flights)
             singleton = new FlightManager();
             FlightManager.singleton.readFlightsFromFile(FLIGHTS_FILE_PATH);
         }
