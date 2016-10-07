@@ -23,7 +23,7 @@ public class AirportManager
     {
         if(AirportManager.singleton == null)
         {
-            // create manager (and read airports)
+            // create manager (and read airports/weather)
             AirportManager.singleton = new AirportManager();
             AirportManager.singleton.readAirportsFromFile(AIRPORT_FILE_PATH);
             AirportManager.singleton.readWeatherFromFile(AIRPORT_WEATHER_FILE_PATH);

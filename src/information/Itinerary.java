@@ -4,32 +4,32 @@
 
 package information;
 
-import java.time.ZonedDateTime;
+import java.time.LocalTime;
 
 public class Itinerary implements Flyable
 {
     private Flight[] legs;
 
     @Override
-    public ZonedDateTime getDepartureTime()
+    public LocalTime getDepartureTime()
     {
         return null;
     }
 
     @Override
-    public ZonedDateTime getArrivalTime()
+    public LocalTime getArrivalTime()
     {
         return null;
     }
 
     @Override
-    public ZonedDateTime getTrueDepartureTime()
+    public LocalTime getTrueDepartureTime()
     {
         return null;
     }
 
     @Override
-    public ZonedDateTime getTrueArrivalTime()
+    public LocalTime getTrueArrivalTime()
     {
         return null;
     }

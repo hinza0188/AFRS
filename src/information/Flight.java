@@ -4,34 +4,48 @@
 
 package information;
 
-import java.time.ZonedDateTime;
+import java.time.LocalTime;
 
 public class Flight implements Flyable
 {
     private int flightNumber;
     private Airport originAirport;
     private Airport destinationAirport;
+    private String departureTime;
+    private String arrivalTime;
+    private double airfare;
+
+    protected Flight(int flightNumber, Airport originAirport, Airport destinationAirport, String departureTime,
+                     String arrivalTime, double airfare)
+    {
+        this.flightNumber = flightNumber;
+        this.originAirport = originAirport;
+        this.destinationAirport = destinationAirport;
+        this.departureTime = departureTime;
+        this.arrivalTime = arrivalTime;
+        this.airfare = airfare;
+    }
 
     @Override
-    public ZonedDateTime getDepartureTime()
+    public LocalTime getDepartureTime()
     {
         return null;
     }
 
     @Override
-    public ZonedDateTime getArrivalTime()
+    public LocalTime getArrivalTime()
     {
         return null;
     }
 
     @Override
-    public ZonedDateTime getTrueDepartureTime()
+    public LocalTime getTrueDepartureTime()
     {
         return null;
     }
 
     @Override
-    public ZonedDateTime getTrueArrivalTime()
+    public LocalTime getTrueArrivalTime()
     {
         return null;
     }
@@ -52,5 +66,11 @@ public class Flight implements Flyable
     public float getAirfare()
     {
         return 0;
+    }
+
+    @Override
+    public String toString()
+    {
+        return this.originAirport.getAbbreviation() + " -> " + this.destinationAirport.getAbbreviation();
     }
 }

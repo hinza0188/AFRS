@@ -4,15 +4,15 @@
 
 package information;
 
-import java.time.ZonedDateTime;
+import java.time.LocalTime;
 
 public interface Flyable
 {
-    ZonedDateTime getDepartureTime();
-    ZonedDateTime getArrivalTime();
+    LocalTime getDepartureTime();
+    LocalTime getArrivalTime();
 
-    ZonedDateTime getTrueDepartureTime();
-    ZonedDateTime getTrueArrivalTime();
+    LocalTime getTrueDepartureTime();
+    LocalTime getTrueArrivalTime();
 
     Airport getOriginAirport();
     Airport getDestinationAirport();
