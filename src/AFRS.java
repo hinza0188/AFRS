@@ -4,13 +4,20 @@
 
 import server.RequestParser;
 import server.Request;
+import information.*;
 
 import java.util.Scanner;
+
 
 public class AFRS
 {
     static RequestParser parser = new RequestParser();
     static Scanner scanner = new Scanner(System.in);
+    
+    private AirportManager airportManager;
+    private FlightManager flightManager;
+    //private ItineraryManager itineraryManager;
+    private ReservationManager reservationManager;
 
     public static void main(String[] args)
     {
@@ -64,5 +71,9 @@ public class AFRS
         System.out.println();
         System.out.println("\tquit");
         System.out.println();
+    }
+    
+    protected void makeReservation(String passengerName, Itinerary itinerary){
+        reservationManager.makeReservation(passengerName, itinerary);
     }
 }
