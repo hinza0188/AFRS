@@ -29,7 +29,7 @@ public class Flight implements Flyable
     @Override
     public LocalTime getDepartureTime()
     {
-        return this.departureTime;
+        return null;
     }
 
     @Override
