@@ -5,18 +5,19 @@
 package information;
 
 import java.time.LocalTime;
+import java.time.OffsetTime;
 
 public class Flight implements Flyable
 {
     private int flightNumber;
     private Airport originAirport;
     private Airport destinationAirport;
-    private String departureTime;
-    private String arrivalTime;
+    private LocalTime departureTime;
+    private LocalTime arrivalTime;
     private double airfare;
 
-    protected Flight(int flightNumber, Airport originAirport, Airport destinationAirport, String departureTime,
-                     String arrivalTime, double airfare)
+    protected Flight(int flightNumber, Airport originAirport, Airport destinationAirport, LocalTime departureTime,
+                     LocalTime arrivalTime, double airfare)
     {
         this.flightNumber = flightNumber;
         this.originAirport = originAirport;
@@ -29,25 +30,39 @@ public class Flight implements Flyable
     @Override
     public LocalTime getDepartureTime()
     {
-        return null;
+        return this.departureTime;
     }
 
     @Override
     public LocalTime getArrivalTime()
     {
-        return null;
+        return this.arrivalTime;
     }
 
     @Override
     public LocalTime getTrueDepartureTime()
     {
-        return null;
+        // This seems dumb by adding hours, minutes, and seconds,
+        // but java is too dumb to run '+' operation
+        LocalTime current = getArrivalTime();
+        OffsetTime delta = getOriginAirport().getTimeDelay();
+        current.plusHours(delta.getHour());
+        current.plusMinutes(delta.getMinute());
+        current.plusSeconds(delta.getSecond());
+        return current;
     }
 
     @Override
     public LocalTime getTrueArrivalTime()
     {
-        return null;
+        // This seems dumb by adding hours, minutes, and seconds,
+        // but java is too dumb to run '+' operation
+        LocalTime current = getArrivalTime();
+        OffsetTime delta = getOriginAirport().getTimeDelay();
+        current.plusHours(delta.getHour());
+        current.plusMinutes(delta.getMinute());
+        current.plusSeconds(delta.getSecond());
+        return current;
     }
 
     @Override
