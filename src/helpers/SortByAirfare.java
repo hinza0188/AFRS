@@ -9,6 +9,6 @@ public class SortByAirfare implements ItinerarySortingAlgorithm
     @Override
     public void sortItineraries()
     {
-
+        
     }
 }

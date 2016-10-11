@@ -1,5 +1,7 @@
 /**
  * Created by hetelek on 10/6/16.
+ * modified by Roger
+ * modified by Dylan
  */
 
 package information;
@@ -19,6 +21,24 @@ public class ReservationManager
             singleton.reservations=new ArrayList<Reservation>();
         return singleton;
     }
+    
+    public String makeReservation(String passengerName, Itinerary itinerary){
+        Reservation newReservation = new Reservation(passengerName, itinerary);
+        reservations.add(newReservation);
+        return "Reservation made for "+passengerName+" from "+itinerary.getOriginAirport().getCityName()+" to "+itinerary.getDestinationAirport().getCityName()+"";
+    }
+    
+    public String deleteReservation(String passengerName, Airport originAirport, Airport destinationAirport){
+        for (Reservation res : reservations){
+            if ((res.getPassengerName() == passengerName) && (res.getDestinationAirport() == destinationAirport) && (res.getOriginAirport()==originAirport)){
+                reservations.remove(res);
+            }
+            else {
+                return "No matching reservation";
+            }
+        }
+        return "Reservation deleted for "+passengerName+" from "+originAirport.getCityName()+" to "+destinationAirport.getCityName()+"";
+
     public Reservation getReservation(String passengerName, Airport originAirport, Airport destinationAirport){
         for(Reservation currentReservation:this.reservations){
             if (currentReservation.getPassenger().equals(passengerName)&&currentReservation.getItinerary().getOriginAirport()==originAirport&&currentReservation.getItinerary().getDestinationAirport()==destinationAirport){
@@ -35,9 +55,10 @@ public class ReservationManager
                 passengersReservations.add(currentReservation);
             }
         }
-
         return passengersReservations;
     }
+    /*
+    // This code is duplicate, commented out on master
     public Reservation makeReservation(String passengerName, Itinerary itinerary)
     {
         //check if reservation exists
@@ -53,7 +74,9 @@ public class ReservationManager
             return null;
         }
     }
+    // This code is duplicate, commented out on master
     public void deleteReservation(Reservation reservation){
         this.reservations.remove(reservation);
     }
+    */
 }

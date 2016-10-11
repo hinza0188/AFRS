@@ -8,9 +8,13 @@ import information.Airport;
 
 public class GetItinerary implements Request
 {
+    Airport originAirport;
+    Airport destinationAirport;
+    
     public GetItinerary(Airport originAirport, Airport destinationAirport)
     {
-
+        this.originAirport = originAirport;
+        this.destinationAirport = destinationAirport;
     }
 
     @Override
