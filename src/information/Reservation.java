@@ -8,6 +8,7 @@ public class Reservation
 {
     private String passenger;
     private Itinerary itinerary;
+<<<<<<< HEAD
     
     public Reservation(String passenger, Itinerary itinerary){
         this.itinerary = itinerary;
@@ -24,5 +25,19 @@ public class Reservation
     
     public Airport getDestinationAirport(){
         return this.itinerary.getDestinationAirport();
+=======
+
+    public Itinerary getItinerary() {
+        return itinerary;
+    }
+
+    public String getPassenger() {
+        return passenger;
+    }
+
+    protected Reservation(String pass, Itinerary itin){
+        this.passenger=pass;
+        this.itinerary=itin;
+>>>>>>> refs/remotes/origin/master
     }
 }

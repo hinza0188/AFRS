@@ -3,10 +3,12 @@
  */
 
 package information;
+import java.time.LocalTime;
 
 import helpers.CSVReader;
 
 import java.io.FileNotFoundException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class FlightManager
@@ -59,8 +61,14 @@ public class FlightManager
                 // get data
                 String originAirportAbbreviation = data[0];
                 String destinationAirportAbbreviation = data[1];
-                String departureTime = data[2];
-                String arrivalTime = data[3];
+                String dTime = data[2];
+                String aTime = data[3];
+                //format example -> "7:02a"
+                DateTimeFormatter formatter =
+                        DateTimeFormatter.ofPattern("h:mma");
+                //@TODO: This formatter still needs more customization. Currently, 'a' prints in PM / AM format
+                LocalTime departureTime = LocalTime.parse(dTime, formatter);
+                LocalTime arrivalTime = LocalTime.parse(aTime, formatter);
                 int flightNumber = Integer.parseInt(data[4]);
                 double airfare = Double.parseDouble(data[5]);
 
