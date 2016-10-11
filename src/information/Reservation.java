@@ -25,6 +25,7 @@ public class Reservation
     public Airport getDestinationAirport() {
         return this.itinerary.getDestinationAirport();
     }
+
     public Itinerary getItinerary() {
         return itinerary;
     }
@@ -32,4 +33,5 @@ public class Reservation
     public String getPassenger() {
         return passenger;
     }
+
 }

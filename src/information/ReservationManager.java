@@ -22,12 +22,6 @@ public class ReservationManager
         return singleton;
     }
     
-    public String makeReservation(String passengerName, Itinerary itinerary){
-        Reservation newReservation = new Reservation(passengerName, itinerary);
-        reservations.add(newReservation);
-        return "Reservation made for "+passengerName+" from "+itinerary.getOriginAirport().getCityName()+" to "+itinerary.getDestinationAirport().getCityName()+"";
-    }
-    
     public String deleteReservation(String passengerName, Airport originAirport, Airport destinationAirport) {
         for (Reservation res : reservations) {
             if ((res.getPassengerName() == passengerName) && (res.getDestinationAirport() == destinationAirport) && (res.getOriginAirport() == originAirport)) {
@@ -56,9 +50,8 @@ public class ReservationManager
         }
         return passengersReservations;
     }
-    /*
-    // This code is duplicate, commented out on master
-    public Reservation makeReservation(String passengerName, Itinerary itinerary)
+
+    public String makeReservation(String passengerName, Itinerary itinerary)
     {
         //check if reservation exists
         if (getReservation(passengerName, itinerary.getOriginAirport(),itinerary.getDestinationAirport())==null){
@@ -66,16 +59,11 @@ public class ReservationManager
             Reservation newReservation = new Reservation(passengerName,itinerary);
             //add reservation to list
             this.reservations.add(newReservation);
-            return newReservation;
+            return "Reservation made for "+passengerName+" from "+itinerary.getOriginAirport().getCityName()+" to "+itinerary.getDestinationAirport().getCityName()+"";
         }
         else{
             //reservation exists raise error
-            return null;
+            return "Reservation Error: A reservation for " + passengerName + " already exists from " + itinerary.getOriginAirport() + " to " + itinerary.getDestinationAirport();
         }
     }
-    // This code is duplicate, commented out on master
-    public void deleteReservation(Reservation reservation){
-        this.reservations.remove(reservation);
-    }
-    */
 }
