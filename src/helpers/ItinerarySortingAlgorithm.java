@@ -4,7 +4,11 @@
 
 package helpers;
 
+import information.Itinerary;
+
+import java.util.ArrayList;
+
 public interface ItinerarySortingAlgorithm
 {
-    void sortItineraries();
+    ArrayList<Itinerary> sortItineraries(ArrayList<Itinerary> Itineraries);
 }

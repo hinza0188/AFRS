@@ -22,9 +22,9 @@ public class Reservation
         return this.itinerary.getOriginAirport();
     }
     
-    public Airport getDestinationAirport(){
+    public Airport getDestinationAirport() {
         return this.itinerary.getDestinationAirport();
-
+    }
     public Itinerary getItinerary() {
         return itinerary;
     }

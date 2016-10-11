@@ -3,7 +3,7 @@
  * Modifier : Jay
  * This class designs itinerary object under flyable interface
  */
- */
+
 
 package information;
 

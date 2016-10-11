@@ -28,17 +28,16 @@ public class ReservationManager
         return "Reservation made for "+passengerName+" from "+itinerary.getOriginAirport().getCityName()+" to "+itinerary.getDestinationAirport().getCityName()+"";
     }
     
-    public String deleteReservation(String passengerName, Airport originAirport, Airport destinationAirport){
-        for (Reservation res : reservations){
-            if ((res.getPassengerName() == passengerName) && (res.getDestinationAirport() == destinationAirport) && (res.getOriginAirport()==originAirport)){
+    public String deleteReservation(String passengerName, Airport originAirport, Airport destinationAirport) {
+        for (Reservation res : reservations) {
+            if ((res.getPassengerName() == passengerName) && (res.getDestinationAirport() == destinationAirport) && (res.getOriginAirport() == originAirport)) {
                 reservations.remove(res);
-            }
-            else {
+            } else {
                 return "No matching reservation";
             }
         }
-        return "Reservation deleted for "+passengerName+" from "+originAirport.getCityName()+" to "+destinationAirport.getCityName()+"";
-
+        return "Reservation deleted for " + passengerName + " from " + originAirport.getCityName() + " to " + destinationAirport.getCityName() + "";
+    }
     public Reservation getReservation(String passengerName, Airport originAirport, Airport destinationAirport){
         for(Reservation currentReservation:this.reservations){
             if (currentReservation.getPassenger().equals(passengerName)&&currentReservation.getItinerary().getOriginAirport()==originAirport&&currentReservation.getItinerary().getDestinationAirport()==destinationAirport){
