@@ -12,7 +12,8 @@ import java.util.ArrayList;
  */
 public class ItineraryManager {
     private static ItineraryManager singleton = null;
-    private List<Itinerary> itineraries;
+    private List<Itinerary> itineraries = new ArrayList<Itinerary>();
+    private int nextItineraryId = 0;
 
     protected ItineraryManager() { }
     public static ItineraryManager getManager() {
@@ -22,14 +23,13 @@ public class ItineraryManager {
         return singleton;
     }
 
+    public Itinerary getItineraryWithIdentifier(int identifier)
+    {
+        return this.itineraries.get(identifier);
+    }
+
     public List<Itinerary> getItineraries(Airport originAirport, Airport destinationAirport, int maxConnections)
     {
-        // clear current itinerary list
-        if (this.itineraries != null)
-            this.itineraries.clear();
-        else
-            this.itineraries = new ArrayList<Itinerary>();
-
         List<Flight> flights = FlightManager.getManager().flightsLeavingAirport(originAirport);
         for (Flight flight : flights)
         {
@@ -54,7 +54,7 @@ public class ItineraryManager {
         if (lastFlight.getDestinationAirport() == destinationAirport)
         {
             // create new itinerary
-            Itinerary itinerary = new Itinerary(currentFlights.toArray(new Flight[] { }));
+            Itinerary itinerary = new Itinerary(currentFlights.toArray(new Flight[] { }), nextItineraryId++);
             newItineraries.add(itinerary);
         }
 

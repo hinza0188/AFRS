@@ -12,10 +12,17 @@ import java.util.Arrays;
 
 public class Itinerary implements Flyable{
     private Flight[] legs;
+    private int identifier;
 
-    public Itinerary(Flight[] legs)
+    public Itinerary(Flight[] legs, int identifier)
     {
         this.legs = legs;
+        this.identifier = identifier;
+    }
+
+    public int getIdentifier()
+    {
+        return identifier;
     }
 
     @Override
