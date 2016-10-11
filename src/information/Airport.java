@@ -4,7 +4,7 @@
 
 package information;
 
-import java.time.OffsetDateTime;
+import java.time.OffsetTime;
 
 public class Airport
 {
@@ -14,7 +14,7 @@ public class Airport
     private String[] weather;
     private int weatherRequestCounter = 0;
 
-    private OffsetDateTime timeDelay;
+    private OffsetTime timeDelay;
 
     protected Airport(String abbreviation, String cityName)
     {
@@ -48,7 +48,7 @@ public class Airport
         return this.weather[currentWeatherIndex];
     }
 
-    public OffsetDateTime getTimeDelay()
+    public OffsetTime getTimeDelay()
     {
         return timeDelay;
     }
