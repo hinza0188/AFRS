@@ -8,9 +8,15 @@
 package information;
 
 import java.time.LocalTime;
+import java.util.Arrays;
 
 public class Itinerary implements Flyable{
     private Flight[] legs;
+
+    public Itinerary(Flight[] legs)
+    {
+        this.legs = legs;
+    }
 
     @Override
     public LocalTime getDepartureTime(){
@@ -59,5 +65,11 @@ public class Itinerary implements Flyable{
             tot += e.getAirfare();
         }
         return tot;
+    }
+
+    @Override
+    public String toString()
+    {
+        return Arrays.toString(legs);
     }
 }
