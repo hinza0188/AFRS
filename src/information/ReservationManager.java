@@ -19,7 +19,6 @@ public class ReservationManager
             singleton.reservations=new ArrayList<Reservation>();
         return singleton;
     }
-<<<<<<< HEAD
     
     public String makeReservation(String passengerName, Itinerary itinerary){
         Reservation newReservation = new Reservation(passengerName, itinerary);
@@ -27,17 +26,17 @@ public class ReservationManager
         return "Reservation made for "+passengerName+" from "+itinerary.getOriginAirport().getCityName()+" to "+itinerary.getDestinationAirport().getCityName()+"";
     }
     
-    public String deleteReservation(String passengerName, Airport originAirport, Airport destinationAirport){
-        for (Reservation res : reservations){
-            if ((res.getPassengerName() == passengerName) && (res.getDestinationAirport() == destinationAirport) && (res.getOriginAirport()==originAirport)){
+    public String deleteReservation(String passengerName, Airport originAirport, Airport destinationAirport) {
+        for (Reservation res : reservations) {
+            if ((res.getPassengerName() == passengerName) && (res.getDestinationAirport() == destinationAirport) && (res.getOriginAirport() == originAirport)) {
                 reservations.remove(res);
-            }
-            else {
+            } else {
                 return "No matching reservation";
             }
         }
-        return "Reservation deleted for "+passengerName+" from "+originAirport.getCityName()+" to "+destinationAirport.getCityName()+"";
-=======
+        return "Reservation deleted for " + passengerName + " from " + originAirport.getCityName() + " to " + destinationAirport.getCityName() + "";
+    }
+
     public Reservation getReservation(String passengerName, Airport originAirport, Airport destinationAirport){
         for(Reservation currentReservation:this.reservations){
             if (currentReservation.getPassenger().equals(passengerName)&&currentReservation.getItinerary().getOriginAirport()==originAirport&&currentReservation.getItinerary().getDestinationAirport()==destinationAirport){
@@ -57,6 +56,7 @@ public class ReservationManager
 
         return passengersReservations;
     }
+    /*
     public Reservation makeReservation(String passengerName, Itinerary itinerary)
     {
         //check if reservation exists
@@ -74,6 +74,6 @@ public class ReservationManager
     }
     public void deleteReservation(Reservation reservation){
         this.reservations.remove(reservation);
->>>>>>> refs/remotes/origin/master
     }
+    */
 }
