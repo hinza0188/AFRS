@@ -47,6 +47,11 @@ public class RequestParser
                 else if (mainCommand.equals("get_itinerary"))
                 {
                     //@TODO: Fill this command execution
+                    /*
+                    you need to check which sort is specified or use the default.
+                    this needs to create a strategy object before creating a command object with a strategy object
+                     */
+
                 }
                 else if (mainCommand.equals("make_reservation"))
                 {
