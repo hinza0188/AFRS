@@ -42,23 +42,23 @@ public class RequestParser
                 String mainCommand = commandArgs[0];
                 if (mainCommand.equals("get_weather"))
                 {
-
+                    //@TODO: Fill this command execution
                 }
                 else if (mainCommand.equals("get_itinerary"))
                 {
-
+                    //@TODO: Fill this command execution
                 }
                 else if (mainCommand.equals("make_reservation"))
                 {
-
+                    //@TODO: Fill this command execution
                 }
                 else if (mainCommand.equals("delete_reservation"))
                 {
-
+                    //@TODO: Fill this command execution
                 }
                 else if (mainCommand.equals("get_reservation"))
                 {
-
+                    //@TODO: Fill this command execution
                 }
             }
         }
