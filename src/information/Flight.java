@@ -42,26 +42,26 @@ public class Flight implements Flyable
     @Override
     public LocalTime getTrueDepartureTime()
     {
-        // This seems dumb by adding hours, minutes, and seconds,
-        // but java is too dumb to run '+' operation
-        LocalTime current = getArrivalTime();
-        OffsetTime delta = getOriginAirport().getTimeDelay();
+        LocalTime current = this.getDepartureTime();
+        OffsetTime delta = this.getOriginAirport().getTimeDelay();
+
         current.plusHours(delta.getHour());
         current.plusMinutes(delta.getMinute());
         current.plusSeconds(delta.getSecond());
+
         return current;
     }
 
     @Override
     public LocalTime getTrueArrivalTime()
     {
-        // This seems dumb by adding hours, minutes, and seconds,
-        // but java is too dumb to run '+' operation
-        LocalTime current = getArrivalTime();
-        OffsetTime delta = getOriginAirport().getTimeDelay();
+        LocalTime current = this.getArrivalTime();
+        OffsetTime delta = this.getOriginAirport().getTimeDelay();
+
         current.plusHours(delta.getHour());
         current.plusMinutes(delta.getMinute());
         current.plusSeconds(delta.getSecond());
+
         return current;
     }
 
