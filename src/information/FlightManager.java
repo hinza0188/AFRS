@@ -63,12 +63,11 @@ public class FlightManager
                 String destinationAirportAbbreviation = data[1];
                 String dTime = data[2];
                 String aTime = data[3];
-                //format example -> "7:02a"
-                DateTimeFormatter formatter =
-                        DateTimeFormatter.ofPattern("h:mma");
-                //@TODO: This formatter still needs more customization. Currently, 'a' prints in PM / AM format
-                LocalTime departureTime = LocalTime.parse(dTime, formatter);
-                LocalTime arrivalTime = LocalTime.parse(aTime, formatter);
+
+                // parse data
+                LocalTime departureTime = FlightManager.parseTime(dTime);
+                LocalTime arrivalTime = FlightManager.parseTime(aTime);
+
                 int flightNumber = Integer.parseInt(data[4]);
                 double airfare = Double.parseDouble(data[5]);
 
@@ -81,11 +80,28 @@ public class FlightManager
                         airfare);
                 this.flights.add(flight);
             }
-            //@TODO: Check if each data is parsed correctly
 
             // close file
             flightFile.close();
         }
         catch (FileNotFoundException ex) { }
+    }
+
+    private static LocalTime parseTime(String time)
+    {
+        // get string info
+        String timeOnly = time.substring(0, time.length() - 1);
+        String[] timeParts = timeOnly.split(":");
+
+        // parse info
+        int hour = Integer.parseInt(timeParts[0]);
+        int minute = Integer.parseInt(timeParts[1]);
+        boolean morning = time.charAt(time.length() - 1) == 'a';
+
+        // create local time
+        if (morning)
+            return LocalTime.of(hour - 1, minute);
+        else
+            return LocalTime.of(hour + 11, minute);
     }
 }
