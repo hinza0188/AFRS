@@ -77,6 +77,6 @@ public class Itinerary implements Flyable{
     @Override
     public String toString()
     {
-        return Arrays.toString(legs);
+        return Arrays.toString(legs) + " ($" + this.getAirfare() + ")";
     }
 }
