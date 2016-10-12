@@ -103,6 +103,13 @@ public class RequestParser
                 else if (mainCommand.equals("weather"))
                 {
                     // weather,airport;
+                    String airportAbbreviation = commandArgs[1];
+                    Airport airport = AirportManager.getManager().getAirport(airportAbbreviation);
+
+                    if (airport == null)
+                        throw new Exception("error,unknown airport");
+
+                    commands.add(new GetWeather(airport));
                 }
                 else
                 {
