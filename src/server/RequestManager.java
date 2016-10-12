@@ -28,7 +28,7 @@ public class RequestManager
     public static void main(String[] args)
     {
         // print usage
-        System.out.println("Welcome to the server.AFRS system.");
+        System.out.println("Welcome to the AFRS system.");
         RequestManager.printUsage();
 
         // main loop
@@ -40,23 +40,35 @@ public class RequestManager
             String command = scanner.nextLine();
             RequestManager.parser.appendData(command);
 
-            // attempt to parse data
-            Request[] requestCommands = RequestManager.parser.parseData();
-            if (requestCommands.length > 0)
+            try
             {
-                // execute commands
-                for (Request requestCommand : requestCommands)
+                // attempt to parse data
+                Request[] requestCommands = RequestManager.parser.parseData();
+                if (requestCommands.length > 0)
                 {
-                    requestCommand.executeCommand();
+                    // execute commands
+                    for (Request requestCommand : requestCommands)
+                    {
+                        System.out.println(requestCommand.executeCommand());
+                    }
+
+                    // clear data
+                    RequestManager.parser.clearData();
+                }
+                else
+                {
+                    System.out.println("partial-request");
                 }
 
-                // clear data
+                // check if the user is quiting
+                if (command.equals("quit"))
+                    break;
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex.getMessage());
                 RequestManager.parser.clearData();
             }
-
-            // check if the user is quiting
-            if (command.equals("quit"))
-                break;
         }
     }
 

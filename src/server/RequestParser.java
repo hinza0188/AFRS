@@ -4,6 +4,16 @@
 
 package server;
 
+import helpers.ItinerarySortingAlgorithm;
+import helpers.SortByAirfare;
+import helpers.SortByArrivalTime;
+import helpers.SortByDepartureTime;
+import information.Airport;
+import information.AirportManager;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class RequestParser
 {
     private static final String TERMINATOR = ";";
@@ -19,63 +29,89 @@ public class RequestParser
         this.currentData += data;
     }
 
-    public Request[] parseData()
+    public Request[] parseData() throws Exception
     {
+        if (currentData.length() < 1 || currentData.charAt(currentData.length() - 1) != ';')
+            return new Request[] { };
+
+        List<Request> commands = new ArrayList<Request>();
+
         // loop through each command
         String[] possibleFullCommands = this.currentData.split(TERMINATOR);
         for (String possibleFullCommand : possibleFullCommands)
         {
             // get individual arguments for command
-            String[] commandArgs = possibleFullCommand.split(" ");
+            String[] commandArgs = possibleFullCommand.split(",");
             if (commandArgs.length > 0)
             {
-                /* COMMAND LIST w/ ARGS
-                    get_weather airport
-                    get_itinerary origin_airport destination_airport
-                    make_reservation first_name last_name itinerary_id
-                    delete_reservation first_name last_name origin_airport destination_airport
-                    get_reservation first_name last_name [origin_airport] [destination_airport]
-                */
-
                 String mainCommand = commandArgs[0];
-                String requestParam_1 = commandArgs[1];
-                String requestParam_2 = commandArgs[2];
-                String requestParam_3 = commandArgs[3];
-                if (mainCommand.equals("get_weather"))
+                if (mainCommand.equals("info"))
                 {
-                    //@TODO: Fill this command execution
-                    System.out.println("get_weather command activated\n");  // this is testing purposes code
-                    System.out.println("received parameter: ");
-                    System.out.println(requestParam_1);
-                    /* Jay: I ran out of time to figure out how to call request object and connect with the
-                     * concrete command here.
-                     */
-                }
-                else if (mainCommand.equals("get_itinerary"))
-                {
-                    //@TODO: Fill this command execution
-                    /*
-                     * you need to check which sort is specified or use the default.
-                     * this needs to create a strategy object before creating a command object with a strategy object
-                     */
+                    // info,origin,destination[,connections[,sort-order]];
+                    String origin = commandArgs[1];
+                    String destination = commandArgs[2];
 
+                    // create parameters
+                    Airport originAirport = AirportManager.getManager().getAirport(origin);
+                    Airport destinationAirport = AirportManager.getManager().getAirport(destination);
+                    int maxConnections = 2;
+                    ItinerarySortingAlgorithm sortingMethod = new SortByDepartureTime();
+
+                    // parse optionals
+                    if (commandArgs.length >= 4 && commandArgs[3].length() > 0)
+                        maxConnections = Integer.parseInt(commandArgs[3]);
+                    if (commandArgs.length == 5)
+                    {
+                        switch (commandArgs[4])
+                        {
+                            case "departure":
+                                sortingMethod = new SortByDepartureTime();
+                                break;
+                            case "arrival":
+                                sortingMethod = new SortByArrivalTime();
+                                break;
+                            case "airfare":
+                                sortingMethod = new SortByAirfare();
+                                break;
+                            default:
+                                throw new Exception("error,invalid sort order");
+                        }
+                    }
+
+                    // check for invalid request
+                    if (originAirport == null)
+                        throw new Exception("error,unknown origin");
+                    else if (destinationAirport == null)
+                        throw new Exception("error,unknown destination");
+                    else if (maxConnections < 0 || maxConnections > 2)
+                        throw new Exception("error,invalid connection limit");
+
+                    commands.add(new GetItinerary(originAirport, destinationAirport, maxConnections, sortingMethod));
                 }
-                else if (mainCommand.equals("make_reservation"))
+                else if (mainCommand.equals("reserve"))
                 {
-                    //@TODO: Fill this command execution
+                    // reserve,id,passenger;
                 }
-                else if (mainCommand.equals("delete_reservation"))
+                else if (mainCommand.equals("retrieve"))
                 {
-                    //@TODO: Fill this command execution
+                    // retrieve,passenger[,origin[,destination]];
                 }
-                else if (mainCommand.equals("get_reservation"))
+                else if (mainCommand.equals("delete"))
                 {
-                    //@TODO: Fill this command execution
+                    // delete,passenger,origin,destination;
+                }
+                else if (mainCommand.equals("weather"))
+                {
+                    // weather,airport;
+                }
+                else
+                {
+                    throw new Exception("invalid-command");
                 }
             }
         }
 
-        return new Request[] { };
+        return commands.toArray(new Request[] { });
     }
 
     public void clearData()

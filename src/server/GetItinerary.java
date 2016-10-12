@@ -9,21 +9,22 @@ import information.Airport;
 
 public class GetItinerary implements Request
 {
-    Airport originAirport;
-    Airport destinationAirport;
-    ItinerarySortingAlgorithm sortingAlgorithm;
+    private Airport originAirport;
+    private Airport destinationAirport;
+    private int maxConnections;
+    private ItinerarySortingAlgorithm sortingAlgorithm;
     
-    public GetItinerary(Airport originAirport, Airport destinationAirport, ItinerarySortingAlgorithm sortingMethod)
+    public GetItinerary(Airport originAirport, Airport destinationAirport, int maxConnections, ItinerarySortingAlgorithm sortingMethod)
     {
         this.originAirport = originAirport;
         this.destinationAirport = destinationAirport;
-        this.sortingAlgorithm=sortingMethod;
-        //Call the AFRS with the origin, destination, and a sorting strategy
+        this.maxConnections = maxConnections;
+        this.sortingAlgorithm = sortingMethod;
     }
 
     @Override
     public String executeCommand()
     {
-        return null;
+        return AFRS.getItinerary(originAirport, destinationAirport, maxConnections, sortingAlgorithm);
     }
 }

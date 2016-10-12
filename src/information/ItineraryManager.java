@@ -25,20 +25,28 @@ public class ItineraryManager {
 
     public Itinerary getItineraryWithIdentifier(int identifier)
     {
-        return this.itineraries.get(identifier);
+        // find itinierary
+        for (Itinerary itinerary : this.itineraries)
+            if (itinerary.getIdentifier() == identifier)
+                return itinerary;
+
+        return null;
     }
 
     public List<Itinerary> getItineraries(Airport originAirport, Airport destinationAirport, int maxConnections)
     {
+        List<Itinerary> allNewItineraries = new ArrayList<Itinerary>();
+
         List<Flight> flights = FlightManager.getManager().flightsLeavingAirport(originAirport);
         for (Flight flight : flights)
         {
             List<Flight> flightsList = Arrays.asList(new Flight[] { flight });
             List<Itinerary> newItineraries = this.getItineraries(flightsList, destinationAirport, maxConnections, 0);
-            this.itineraries.addAll(newItineraries);
+            allNewItineraries.addAll(newItineraries);
         }
 
-        return this.itineraries;
+        this.itineraries.addAll(allNewItineraries);
+        return allNewItineraries;
     }
 
     private List<Itinerary> getItineraries(List<Flight> currentFlights, Airport destinationAirport, int maxConnections, int depth)

@@ -8,7 +8,6 @@ import helpers.CSVReader;
 
 import java.io.FileNotFoundException;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class FlightManager
