@@ -76,15 +76,15 @@ public class RequestManager
     {
         // print usage
         System.out.println("Usage:");
-        System.out.println("\tcommand_name required_arguments [option_arguments]");
+        System.out.println("\tcommand_name,required_arguments[,option_arguments]");
         System.out.println();
 
         // print actual commands
-        System.out.println("\tget_weather airport");
-        System.out.println("\tget_itinerary origin_airport destination_airport");
-        System.out.println("\tmake_reservation first_name last_name itinerary_id");
-        System.out.println("\tdelete_reservation first_name last_name origin_airport destination_airport");
-        System.out.println("\tget_reservation first_name last_name [origin_airport] [destination_airport]");
+        System.out.println("\tinfo,origin,destination[,connections[,sort-order]];");
+        System.out.println("\treserve,id,passenger;");
+        System.out.println("\tretrieve,passenger[,origin[,destination]];");
+        System.out.println("\tdelete,passenger,origin,destination;");
+        System.out.println("\tweather,airport;");
 
         System.out.println();
         System.out.println("\tquit");
