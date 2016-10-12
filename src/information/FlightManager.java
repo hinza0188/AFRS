@@ -81,6 +81,7 @@ public class FlightManager
                         airfare);
                 this.flights.add(flight);
             }
+            //@TODO: Check if each data is parsed correctly
 
             // close file
             flightFile.close();
