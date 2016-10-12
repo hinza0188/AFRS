@@ -6,11 +6,12 @@ package helpers;
 import information.Itinerary;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 public class SortByArrivalTime implements ItinerarySortingAlgorithm
 {
     @Override
-    public ArrayList<Itinerary>  sortItineraries(ArrayList<Itinerary> Itineraries)
+    public List<Itinerary> sortItineraries(List<Itinerary> Itineraries)
     {
         /*
         for (int i=0;i<Itineraries.size()-1; i++){

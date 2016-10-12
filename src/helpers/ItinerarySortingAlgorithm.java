@@ -7,8 +7,9 @@ package helpers;
 import information.Itinerary;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface ItinerarySortingAlgorithm
 {
-    ArrayList<Itinerary> sortItineraries(ArrayList<Itinerary> Itineraries);
+    List<Itinerary> sortItineraries(List<Itinerary> Itineraries);
 }
