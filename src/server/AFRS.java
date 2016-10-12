@@ -2,7 +2,8 @@ package server; /**
  * Created by Yongki Jay An
  */
 
-import information.*;
+import information.Itinerary;
+import information.ReservationManager;
 
 public class AFRS
 {

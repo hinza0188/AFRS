@@ -6,7 +6,6 @@ package helpers;
 
 import information.Itinerary;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface ItinerarySortingAlgorithm

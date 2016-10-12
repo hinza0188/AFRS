@@ -4,8 +4,6 @@
 
 package server;
 
-import information.AirportManager;
-
 public class RequestParser
 {
     private static final String TERMINATOR = ";";
