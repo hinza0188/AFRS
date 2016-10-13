@@ -8,24 +8,20 @@ import information.Airport;
 
 public class DeleteReservation implements Request
 {
+    private String passengerName;
+    private Airport originAirport;
+    private Airport destinationAirport;
+
     public DeleteReservation(String passengerName, Airport originAirport, Airport destinationAirport)
     {
-
-    }
-
-    public DeleteReservation(String passengerName, Airport originAirport)
-    {
-
-    }
-
-    public DeleteReservation(String passengerName)
-    {
-
+        this.passengerName = passengerName;
+        this.originAirport = originAirport;
+        this.destinationAirport = destinationAirport;
     }
 
     @Override
     public String executeCommand()
     {
-        return null;
+        return AFRS.deleteReservation(this.passengerName, this.originAirport, this.destinationAirport);
     }
 }

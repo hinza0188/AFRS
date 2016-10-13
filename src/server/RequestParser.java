@@ -132,6 +132,17 @@ public class RequestParser
                 else if (mainCommand.equals("delete"))
                 {
                     // delete,passenger,origin,destination;
+                    String passenger = commandArgs[1];
+                    Airport originAirport = AirportManager.getManager().getAirport(commandArgs[2]);
+                    Airport destinationAirport = AirportManager.getManager().getAirport(commandArgs[3]);
+
+                    if (originAirport == null)
+                        throw new Exception("error,unknown origin");
+
+                    if (destinationAirport == null)
+                        throw new Exception("error,unknown destination");
+
+                    commands.add(new DeleteReservation(passenger, originAirport, destinationAirport));
                 }
                 else if (mainCommand.equals("weather"))
                 {
