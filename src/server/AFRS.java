@@ -73,7 +73,7 @@ public class AFRS
         String airportCode = airport.getAbbreviation();
 
         // create weather string
-        String stringBuilder = "weather," + airportCode + "," + weather + "," + delayTime;
+        String stringBuilder = "weather," + airportCode + "," + weather + "," + delayTime.getMinute();
 
         return stringBuilder;
     }
