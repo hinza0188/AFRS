@@ -117,8 +117,8 @@ public class RequestParser
     public static MakeReservation parseMakeReservationCommand(String[] commandArgs) throws Exception
     {
         // reserve,id,passenger;
-        String passenger = commandArgs[1];
-        int identifier = Integer.parseInt(commandArgs[2]);
+        int identifier = Integer.parseInt(commandArgs[1]);
+        String passenger = commandArgs[2];
 
         // create itinerary
         Itinerary itinerary = ItineraryManager.getManager().getItineraryWithIdentifier(identifier);
