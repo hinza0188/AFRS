@@ -13,9 +13,11 @@ public class ReservationManager
     private static ReservationManager singleton = null;
     private ArrayList<Reservation> reservations;
 
-    protected ReservationManager()  {
-        reservations=new ArrayList<Reservation>();
+    protected ReservationManager()
+    {
+        reservations = new ArrayList<Reservation>();
     }
+
     public static ReservationManager getManager()
     {
         if(singleton == null)
