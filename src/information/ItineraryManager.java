@@ -12,15 +12,17 @@ import java.util.List;
  * takes care of sorting algorithms and manages
  * each itinerary objects
  */
-public class ItineraryManager {
+public class ItineraryManager
+{
     private static ItineraryManager singleton = null;
     private List<Itinerary> itineraries = new ArrayList<Itinerary>();
 
     protected ItineraryManager() { }
-    public static ItineraryManager getManager() {
-        if(singleton == null) {
+    public static ItineraryManager getManager()
+    {
+        if(singleton == null)
             singleton = new ItineraryManager();
-        }
+
         return singleton;
     }
 

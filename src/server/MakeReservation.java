@@ -17,9 +17,9 @@ import information.Itinerary;
 
 public class MakeReservation implements Request
 {
-    String passengerName;
-    Itinerary itinerary;
-    boolean undone = false;
+    private String passengerName;
+    private Itinerary itinerary;
+    private boolean undone = false;
     
     public MakeReservation(String passengerName, Itinerary itinerary)
     {

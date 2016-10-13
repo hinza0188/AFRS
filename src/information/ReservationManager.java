@@ -59,7 +59,7 @@ public class ReservationManager
         }
         else
         {
-            for(Reservation currentReservation:this.reservations)
+            for(Reservation currentReservation : this.reservations)
             {
                 if (currentReservation.getPassenger().equals(passengerName)
                         && (currentReservation.getItinerary().getOriginAirport() == originAirport || currentReservation.getItinerary().getDestinationAirport() == destinationAirport))

@@ -10,8 +10,8 @@ import java.util.Stack;
 
 public class RequestManager
 {
-    static RequestParser parser = new RequestParser();
-    static Scanner scanner = new Scanner(System.in);
+    private static RequestParser parser = new RequestParser();
+    private static Scanner scanner = new Scanner(System.in);
 
     private static RequestManager singleton = null;
     List<server.Request> commandStack = new Stack<server.Request>();
