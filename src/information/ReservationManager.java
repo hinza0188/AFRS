@@ -21,7 +21,7 @@ public class ReservationManager
         return singleton;
     }
     
-    public String deleteReservation(String passengerName, Airport originAirport, Airport destinationAirport)
+    public boolean deleteReservation(String passengerName, Airport originAirport, Airport destinationAirport)
     {
         for (Reservation reservation : this.reservations)
         {
@@ -30,11 +30,11 @@ public class ReservationManager
                     && reservation.getOriginAirport() == originAirport)
             {
                 reservations.remove(reservation);
-                return "delete,successful";
+                return true;
             }
         }
 
-        return "error,reservation not found";
+        return false;
     }
 
     public ArrayList<Reservation> getReservation(String passengerName, Airport originAirport, Airport destinationAirport)
@@ -69,7 +69,7 @@ public class ReservationManager
         return passengersReservations;
     }
 
-    public String makeReservation(String passengerName, Itinerary itinerary)
+    public boolean makeReservation(String passengerName, Itinerary itinerary)
     {
         // check if reservation exists
         if (getReservation(passengerName, itinerary.getOriginAirport(), itinerary.getDestinationAirport()).size() == 0)
@@ -79,10 +79,10 @@ public class ReservationManager
 
             // add reservation to list
             reservations.add(newReservation);
-            return "reserve,successful";
+            return true;
         }
 
         // reservation exists raise error
-        return "error,duplicate reservation";
+        return false;
     }
 }

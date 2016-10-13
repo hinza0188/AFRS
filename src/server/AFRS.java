@@ -10,7 +10,11 @@ public class AFRS
 {
     public static String makeReservation(String passengerName, Itinerary itinerary)
     {
-        return ReservationManager.getManager().makeReservation(passengerName, itinerary);
+        boolean success = ReservationManager.getManager().makeReservation(passengerName, itinerary);
+        if (success)
+            return "reserve,successful";
+        else
+            return "error,duplicate reservation";
     }
 
     public static String getItinerary(Airport originAirport, Airport destinationAirport, int maxConnections, ItinerarySortingAlgorithm sortingMethod)
@@ -62,7 +66,11 @@ public class AFRS
 
     public static String deleteReservation(String passengerName,Airport originAirport, Airport destinationAirport)
     {
-        return ReservationManager.getManager().deleteReservation(passengerName, originAirport, destinationAirport);
+        boolean success = ReservationManager.getManager().deleteReservation(passengerName, originAirport, destinationAirport);
+        if (success)
+            return "delete,successful";
+        else
+            return "error,reservation not found";
     }
 
     public static String getWeather(Airport airport)
