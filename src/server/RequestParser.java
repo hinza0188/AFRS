@@ -10,6 +10,8 @@ import helpers.SortByArrivalTime;
 import helpers.SortByDepartureTime;
 import information.Airport;
 import information.AirportManager;
+import information.Itinerary;
+import information.ItineraryManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,6 +93,14 @@ public class RequestParser
                 else if (mainCommand.equals("reserve"))
                 {
                     // reserve,id,passenger;
+                    String passenger = commandArgs[1];
+                    int identifier = Integer.parseInt(commandArgs[2]);
+
+                    Itinerary itinerary = ItineraryManager.getManager().getItineraryWithIdentifier(identifier);
+                    if (itinerary == null)
+                        throw new Exception("error,invalid id");
+
+                    commands.add(new MakeReservation(passenger, itinerary));
                 }
                 else if (mainCommand.equals("retrieve"))
                 {

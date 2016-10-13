@@ -1,5 +1,7 @@
 package information;
 
+import helpers.ItinerarySortingAlgorithm;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -13,7 +15,6 @@ import java.util.List;
 public class ItineraryManager {
     private static ItineraryManager singleton = null;
     private List<Itinerary> itineraries = new ArrayList<Itinerary>();
-    private int nextItineraryId = 0;
 
     protected ItineraryManager() { }
     public static ItineraryManager getManager() {
@@ -25,28 +26,30 @@ public class ItineraryManager {
 
     public Itinerary getItineraryWithIdentifier(int identifier)
     {
-        // find itinierary
-        for (Itinerary itinerary : this.itineraries)
-            if (itinerary.getIdentifier() == identifier)
-                return itinerary;
+        // find itinerary
+        if (identifier >= 1 && identifier <= this.itineraries.size())
+            return this.itineraries.get(identifier - 1);
 
         return null;
     }
 
-    public List<Itinerary> getItineraries(Airport originAirport, Airport destinationAirport, int maxConnections)
+    public List<Itinerary> getItineraries(Airport originAirport, Airport destinationAirport, int maxConnections, ItinerarySortingAlgorithm sortingMethod)
     {
-        List<Itinerary> allNewItineraries = new ArrayList<Itinerary>();
+        this.itineraries.clear();
 
+        // find itineraries
         List<Flight> flights = FlightManager.getManager().flightsLeavingAirport(originAirport);
         for (Flight flight : flights)
         {
             List<Flight> flightsList = Arrays.asList(new Flight[] { flight });
             List<Itinerary> newItineraries = this.getItineraries(flightsList, destinationAirport, maxConnections, 0);
-            allNewItineraries.addAll(newItineraries);
+            this.itineraries.addAll(newItineraries);
         }
 
-        this.itineraries.addAll(allNewItineraries);
-        return allNewItineraries;
+        // sort
+        sortingMethod.sortItineraries(this.itineraries);
+
+        return this.itineraries;
     }
 
     private List<Itinerary> getItineraries(List<Flight> currentFlights, Airport destinationAirport, int maxConnections, int depth)
@@ -62,7 +65,7 @@ public class ItineraryManager {
         if (lastFlight.getDestinationAirport() == destinationAirport)
         {
             // create new itinerary
-            Itinerary itinerary = new Itinerary(currentFlights.toArray(new Flight[] { }), nextItineraryId++);
+            Itinerary itinerary = new Itinerary(currentFlights.toArray(new Flight[] { }));
             newItineraries.add(itinerary);
         }
 

@@ -66,16 +66,16 @@ public class ReservationManager
     public String makeReservation(String passengerName, Itinerary itinerary)
     {
         //check if reservation exists
-        if (getReservation(passengerName, itinerary.getOriginAirport(),itinerary.getDestinationAirport()).size()==0){
+        if (getReservation(passengerName, itinerary.getOriginAirport(), itinerary.getDestinationAirport()).size()==0){
             //create reservation object
-            Reservation newReservation = new Reservation(passengerName,itinerary);
+            Reservation newReservation = new Reservation(passengerName, itinerary);
             //add reservation to list
             reservations.add(newReservation);
-            return "reserve, successful";
+            return "reserve,successful";
         }
         else{
             //reservation exists raise error
-            return "delete, successful";
+            return "error,duplicate reservation";
         }
     }
 }

@@ -15,13 +15,15 @@ public class AFRS
     }
 
     public static String getItinerary(Airport originAirport, Airport destinationAirport, int maxConnections, ItinerarySortingAlgorithm sortingMethod){
-        List<Itinerary> itins = ItineraryManager.getManager().getItineraries(originAirport,destinationAirport, maxConnections);
-        itins = sortingMethod.sortItineraries(itins);
+        List<Itinerary> itins = ItineraryManager.getManager().getItineraries(originAirport,destinationAirport, maxConnections, sortingMethod);
         StringBuilder stringBuilder=new StringBuilder();
         stringBuilder.append("info "+itins.size()+"[");
 
+        int x = 1;
         for (Itinerary i : itins)
-            stringBuilder.append("\r\n"+ i.getIdentifier() + " " + i.toString());
+        {
+            stringBuilder.append("\r\n" + x++ + " " + i.toString());
+        }
 
         stringBuilder.append("]");
         return stringBuilder.toString();
