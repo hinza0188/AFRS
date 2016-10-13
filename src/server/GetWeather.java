@@ -17,6 +17,6 @@ public class GetWeather implements Request
     @Override
     public String executeCommand()
     {
-        return this.airport.getWeather();
+        return AFRS.getWeather(airport);
     }
 }

@@ -14,7 +14,6 @@
 package server;
 
 import information.Itinerary;
-import information.ReservationManager;
 
 public class MakeReservation implements Request
 {
@@ -32,7 +31,7 @@ public class MakeReservation implements Request
     public String executeCommand()
     {
         RequestManager.getManager().commandStack.add(this);
-        return ReservationManager.getManager().makeReservation(passengerName, itinerary);
+        return AFRS.makeReservation(passengerName, itinerary);
     }
     
     public String undo()

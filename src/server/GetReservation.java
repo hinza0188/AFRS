@@ -5,7 +5,6 @@
 package server;
 
 import information.Airport;
-import information.ReservationManager;
 
 public class GetReservation implements Request
 {
