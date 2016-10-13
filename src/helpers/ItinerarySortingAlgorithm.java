@@ -10,5 +10,5 @@ import java.util.List;
 
 public interface ItinerarySortingAlgorithm
 {
-    List<Itinerary> sortItineraries(List<Itinerary> Itineraries);
+    void sortItineraries(List<Itinerary> Itineraries);
 }

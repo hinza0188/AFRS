@@ -12,9 +12,8 @@ import java.util.List;
 public class SortByAirfare implements ItinerarySortingAlgorithm
 {
     @Override
-    public List<Itinerary> sortItineraries(List<Itinerary> Itineraries)
+    public void sortItineraries(List<Itinerary> itineraries)
     {
-        Itineraries.sort(Comparator.comparing(Itinerary::getAirfare));
-        return Itineraries;
+        itineraries.sort(Comparator.comparing(Itinerary::getAirfare));
     }
 }

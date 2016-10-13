@@ -12,7 +12,7 @@ import java.util.List;
 public class SortByArrivalTime implements ItinerarySortingAlgorithm
 {
     @Override
-    public List<Itinerary> sortItineraries(List<Itinerary> Itineraries)
+    public void sortItineraries(List<Itinerary> itineraries)
     {
         /*
         for (int i=0;i<Itineraries.size()-1; i++){
@@ -27,8 +27,6 @@ public class SortByArrivalTime implements ItinerarySortingAlgorithm
             Itineraries.set(i,smallerItinerary);
         }
         */
-        Itineraries.sort(Comparator.comparing(Itinerary::getArrivalTime));
-        return Itineraries;
-
+        itineraries.sort(Comparator.comparing(Itinerary::getArrivalTime));
     }
 }
