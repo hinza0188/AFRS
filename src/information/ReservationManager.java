@@ -24,27 +24,44 @@ public class ReservationManager
         return singleton;
     }
     
-    public String deleteReservation(String passengerName, Airport originAirport, Airport destinationAirport) {
-        for (Reservation res : reservations) {
-            if ((res.getPassengerName().equals(passengerName)) && (res.getDestinationAirport() == destinationAirport) && (res.getOriginAirport() == originAirport)) {
-                reservations.remove(res);
+    public String deleteReservation(String passengerName, Airport originAirport, Airport destinationAirport)
+    {
+        for (Reservation reservation : this.reservations)
+        {
+            if (reservation.getPassengerName().equals(passengerName)
+                    && reservation.getDestinationAirport() == destinationAirport
+                    && reservation.getOriginAirport() == originAirport)
+            {
+                reservations.remove(reservation);
                 return "delete,successful";
             }
         }
-        return "error, reservation not found";
+
+        return "error,reservation not found";
     }
-    public ArrayList<Reservation> getReservation(String passengerName, Airport originAirport, Airport destinationAirport){
+
+    public ArrayList<Reservation> getReservation(String passengerName, Airport originAirport, Airport destinationAirport)
+    {
         ArrayList<Reservation> reservations=new ArrayList<Reservation>();
-        if(originAirport!=null&&destinationAirport!=null){
-            for(Reservation currentReservation:this.reservations){
-                if (currentReservation.getPassenger().equals(passengerName)&&currentReservation.getItinerary().getOriginAirport()==originAirport&&currentReservation.getItinerary().getDestinationAirport()==destinationAirport){
+        if(originAirport != null && destinationAirport != null)
+        {
+            for(Reservation currentReservation : this.reservations)
+            {
+                if (currentReservation.getPassenger().equals(passengerName)
+                        && currentReservation.getItinerary().getOriginAirport() == originAirport
+                        && currentReservation.getItinerary().getDestinationAirport() == destinationAirport)
+                {
                     reservations.add(currentReservation);
                 }
             }
         }
-        else{
-            for(Reservation currentReservation:this.reservations){
-                if (currentReservation.getPassenger().equals(passengerName)&&(currentReservation.getItinerary().getOriginAirport()==originAirport||currentReservation.getItinerary().getDestinationAirport()==destinationAirport)){
+        else
+        {
+            for(Reservation currentReservation:this.reservations)
+            {
+                if (currentReservation.getPassenger().equals(passengerName)
+                        && (currentReservation.getItinerary().getOriginAirport() == originAirport || currentReservation.getItinerary().getDestinationAirport() == destinationAirport))
+                {
                     reservations.add(currentReservation);
                 }
             }
@@ -53,9 +70,12 @@ public class ReservationManager
 
         return reservations;
     }
-    public ArrayList<Reservation> getReservationsForPassenger(String passengerName){
-        ArrayList<Reservation>passengersReservations=new ArrayList<Reservation>();
-        for(Reservation currentReservation:this.reservations){
+
+    public ArrayList<Reservation> getReservationsForPassenger(String passengerName)
+    {
+        ArrayList<Reservation> passengersReservations = new ArrayList<Reservation>();
+        for (Reservation currentReservation : this.reservations)
+        {
             if (currentReservation.getPassenger().equals(passengerName)){
                 passengersReservations.add(currentReservation);
             }
@@ -65,17 +85,18 @@ public class ReservationManager
 
     public String makeReservation(String passengerName, Itinerary itinerary)
     {
-        //check if reservation exists
-        if (getReservation(passengerName, itinerary.getOriginAirport(), itinerary.getDestinationAirport()).size()==0){
-            //create reservation object
+        // check if reservation exists
+        if (getReservation(passengerName, itinerary.getOriginAirport(), itinerary.getDestinationAirport()).size() == 0)
+        {
+            // create reservation object
             Reservation newReservation = new Reservation(passengerName, itinerary);
-            //add reservation to list
+
+            // add reservation to list
             reservations.add(newReservation);
             return "reserve,successful";
         }
-        else{
-            //reservation exists raise error
-            return "error,duplicate reservation";
-        }
+
+        // reservation exists raise error
+        return "error,duplicate reservation";
     }
 }
