@@ -82,6 +82,6 @@ public class Flight implements Flyable
     @Override
     public String toString()
     {
-        return "[, " + this.flightNumber + ", " + this.originAirport.getAbbreviation() + ", " + this.departureTime + ", " + this.destinationAirport.getAbbreviation() + ", " + this.arrivalTime + "]";
+        return "[ " + this.flightNumber + ", " + this.originAirport.getAbbreviation() + ", " + this.departureTime + ", " + this.destinationAirport.getAbbreviation() + ", " + this.arrivalTime + " ]";
     }
 }
