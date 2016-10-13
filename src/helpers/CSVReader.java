@@ -25,8 +25,9 @@ public class CSVReader
         try
         {
             this.br.close();
+        } catch (IOException ex)
+        {
         }
-        catch (IOException ex) { }
     }
 
     public String[] readLine()
@@ -39,8 +40,9 @@ public class CSVReader
                 // use comma as separator
                 return line.split(",");
             }
+        } catch (Exception ex)
+        {
         }
-        catch (Exception ex)  { }
 
         // close and return
         this.close();

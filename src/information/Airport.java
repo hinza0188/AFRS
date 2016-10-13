@@ -18,11 +18,6 @@ public class Airport
         this.cityName = cityName;
     }
 
-    protected void setWeather(String[] weather)
-    {
-        this.weather = weather;
-    }
-
     public String getAbbreviation()
     {
         return abbreviation;
@@ -49,14 +44,19 @@ public class Airport
         return weather + "," + temperature;
     }
 
-    protected void setTimeDelay(OffsetTime timeDelay)
+    protected void setWeather(String[] weather)
     {
-        this.timeDelay = timeDelay;
+        this.weather = weather;
     }
 
     public OffsetTime getTimeDelay()
     {
         return timeDelay;
+    }
+
+    protected void setTimeDelay(OffsetTime timeDelay)
+    {
+        this.timeDelay = timeDelay;
     }
 
     @Override

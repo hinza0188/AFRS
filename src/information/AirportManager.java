@@ -17,10 +17,13 @@ public class AirportManager
     private static AirportManager singleton = null;
     private ArrayList<Airport> airports;
 
-    protected AirportManager()  { }
+    protected AirportManager()
+    {
+    }
+
     public static AirportManager getManager()
     {
-        if(AirportManager.singleton == null)
+        if (AirportManager.singleton == null)
         {
             // create manager (and read airports/weather)
             AirportManager.singleton = new AirportManager();
@@ -67,8 +70,9 @@ public class AirportManager
 
             // close file
             airportFile.close();
+        } catch (FileNotFoundException ex)
+        {
         }
-        catch (FileNotFoundException ex) { }
     }
 
     private void readWeatherFromFile(String filePath)
@@ -94,8 +98,9 @@ public class AirportManager
 
             // close file
             weatherFile.close();
+        } catch (FileNotFoundException ex)
+        {
         }
-        catch (FileNotFoundException ex) { }
     }
 
     private void readDelaysFromFile(String filePath)
@@ -121,7 +126,8 @@ public class AirportManager
 
             // close file
             delaysFile.close();
+        } catch (FileNotFoundException ex)
+        {
         }
-        catch (FileNotFoundException ex) { }
     }
 }

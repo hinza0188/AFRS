@@ -17,10 +17,13 @@ public class ItineraryManager
     private static ItineraryManager singleton = null;
     private List<Itinerary> itineraries = new ArrayList<>();
 
-    protected ItineraryManager() { }
+    protected ItineraryManager()
+    {
+    }
+
     public static ItineraryManager getManager()
     {
-        if(singleton == null)
+        if (singleton == null)
             singleton = new ItineraryManager();
 
         return singleton;
@@ -67,7 +70,7 @@ public class ItineraryManager
         if (lastFlight.getDestinationAirport() == destinationAirport)
         {
             // create new itinerary
-            Itinerary itinerary = new Itinerary(currentFlights.toArray(new Flight[] { }));
+            Itinerary itinerary = new Itinerary(currentFlights.toArray(new Flight[]{}));
             newItineraries.add(itinerary);
         }
 

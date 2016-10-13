@@ -22,54 +22,6 @@ public class RequestParser
         this.clearData();
     }
 
-    public void appendData(String data)
-    {
-        this.currentData += data;
-    }
-
-    public Request[] parseData() throws Exception
-    {
-        // make sure we have some data and end with a ';'
-        if (currentData.length() < 1 || currentData.charAt(currentData.length() - 1) != ';')
-            return new Request[] { };
-
-        List<Request> commands = new ArrayList<>();
-
-        // loop through each command
-        String[] possibleFullCommands = this.currentData.split(TERMINATOR);
-        for (String possibleFullCommand : possibleFullCommands)
-        {
-            // get command objects
-            String[] commandArgs = possibleFullCommand.split(",");
-            if (commandArgs.length > 0)
-            {
-                String mainCommand = commandArgs[0];
-                switch (mainCommand)
-                {
-                    case "info":
-                        commands.add(RequestParser.parseInfoCommand(commandArgs));
-                        break;
-                    case "reserve":
-                        commands.add(RequestParser.parseMakeReservationCommand(commandArgs));
-                        break;
-                    case "retrieve":
-                        commands.add(RequestParser.parseGetReservationCommand(commandArgs));
-                        break;
-                    case "delete":
-                        commands.add(RequestParser.parseDeleteReservationCommand(commandArgs));
-                        break;
-                    case "weather":
-                        commands.add(RequestParser.parseGetWeatherCommand(commandArgs));
-                        break;
-                    default:
-                        throw new Exception("invalid-command");
-                }
-            }
-        }
-
-        return commands.toArray(new Request[] { });
-    }
-
     private static GetItinerary parseInfoCommand(String[] commandArgs) throws Exception
     {
         // info,origin,destination[,connections[,sort-order]];
@@ -188,6 +140,54 @@ public class RequestParser
             throw new Exception("error,unknown airport");
 
         return new GetWeather(airport);
+    }
+
+    public void appendData(String data)
+    {
+        this.currentData += data;
+    }
+
+    public Request[] parseData() throws Exception
+    {
+        // make sure we have some data and end with a ';'
+        if (currentData.length() < 1 || currentData.charAt(currentData.length() - 1) != ';')
+            return new Request[]{};
+
+        List<Request> commands = new ArrayList<>();
+
+        // loop through each command
+        String[] possibleFullCommands = this.currentData.split(TERMINATOR);
+        for (String possibleFullCommand : possibleFullCommands)
+        {
+            // get command objects
+            String[] commandArgs = possibleFullCommand.split(",");
+            if (commandArgs.length > 0)
+            {
+                String mainCommand = commandArgs[0];
+                switch (mainCommand)
+                {
+                    case "info":
+                        commands.add(RequestParser.parseInfoCommand(commandArgs));
+                        break;
+                    case "reserve":
+                        commands.add(RequestParser.parseMakeReservationCommand(commandArgs));
+                        break;
+                    case "retrieve":
+                        commands.add(RequestParser.parseGetReservationCommand(commandArgs));
+                        break;
+                    case "delete":
+                        commands.add(RequestParser.parseDeleteReservationCommand(commandArgs));
+                        break;
+                    case "weather":
+                        commands.add(RequestParser.parseGetWeatherCommand(commandArgs));
+                        break;
+                    default:
+                        throw new Exception("invalid-command");
+                }
+            }
+        }
+
+        return commands.toArray(new Request[]{});
     }
 
     public void clearData()

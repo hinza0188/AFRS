@@ -3,7 +3,8 @@ package information;
 import java.time.LocalTime;
 import java.util.Arrays;
 
-public class Itinerary implements Flyable{
+public class Itinerary implements Flyable
+{
     private Flight[] legs;
 
     public Itinerary(Flight[] legs)
@@ -12,49 +13,57 @@ public class Itinerary implements Flyable{
     }
 
     @Override
-    public LocalTime getDepartureTime(){
+    public LocalTime getDepartureTime()
+    {
         // gets the first flight object in the itinerary and returns the departure time
         return this.legs[0].getDepartureTime();
     }
 
     @Override
-    public LocalTime getArrivalTime(){
+    public LocalTime getArrivalTime()
+    {
         // gets the last flight object in the itinerary and returns the arrival time
         int last = (this.legs.length) - 1;
         return this.legs[last].getArrivalTime();
     }
 
     @Override
-    public LocalTime getTrueDepartureTime(){
+    public LocalTime getTrueDepartureTime()
+    {
         // gets the first flight object in the itinerary and returns the departure time
         return this.legs[0].getTrueDepartureTime();
     }
 
     @Override
-    public LocalTime getTrueArrivalTime(){
+    public LocalTime getTrueArrivalTime()
+    {
         // gets the last flight object in the itinerary and returns the arrival time
         int last = (this.legs.length) - 1;
         return this.legs[last].getTrueArrivalTime();
     }
 
     @Override
-    public Airport getOriginAirport(){
+    public Airport getOriginAirport()
+    {
         // gets the first flight object in the itinerary and returns the origination airport
         return this.legs[0].getOriginAirport();
     }
 
     @Override
-    public Airport getDestinationAirport(){
+    public Airport getDestinationAirport()
+    {
         // gets the last flight object in the itinerary and returns the arrival time
         int last = (this.legs.length) - 1;
         return this.legs[last].getDestinationAirport();
     }
 
     @Override
-    public double getAirfare(){
+    public double getAirfare()
+    {
         // loops through the itinerary containing flights and increment each iteration for the price calculation
         double tot = 0;
-        for (Flight e: this.legs) {
+        for (Flight e : this.legs)
+        {
             tot += e.getAirfare();
         }
         return tot;
@@ -63,6 +72,6 @@ public class Itinerary implements Flyable{
     @Override
     public String toString()
     {
-        return "$" + this.getAirfare() + " "+ legs.length + Arrays.toString(legs);
+        return "$" + this.getAirfare() + " " + legs.length + Arrays.toString(legs);
     }
 }

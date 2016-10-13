@@ -13,10 +13,13 @@ public class FlightManager
     private static FlightManager singleton = null;
     private ArrayList<Flight> flights;
 
-    protected FlightManager()  { }
+    protected FlightManager()
+    {
+    }
+
     public static FlightManager getManager()
     {
-        if(singleton == null)
+        if (singleton == null)
         {
             // create manager (and read flights)
             singleton = new FlightManager();
@@ -26,11 +29,30 @@ public class FlightManager
         return singleton;
     }
 
+    private static LocalTime parseTime(String time)
+    {
+        // get string info
+        String timeOnly = time.substring(0, time.length() - 1);
+        String[] timeParts = timeOnly.split(":");
+
+        // parse info
+        int hour = Integer.parseInt(timeParts[0]);
+        int minute = Integer.parseInt(timeParts[1]);
+        boolean morning = time.charAt(time.length() - 1) == 'a';
+
+        // create local time
+        if (morning)
+            return LocalTime.of(hour - 1, minute);
+        else
+            return LocalTime.of(hour + 11, minute);
+    }
+
     public ArrayList<Flight> flightsLeavingAirport(Airport originAirport)
     {
         // find flights leaving
         ArrayList<Flight> flightsLeaving = new ArrayList<>();
-        this.flights.forEach(flight -> {
+        this.flights.forEach(flight ->
+        {
             if (flight.getOriginAirport() == originAirport)
                 flightsLeaving.add(flight);
         });
@@ -78,25 +100,8 @@ public class FlightManager
 
             // close file
             flightFile.close();
+        } catch (FileNotFoundException ex)
+        {
         }
-        catch (FileNotFoundException ex) { }
-    }
-
-    private static LocalTime parseTime(String time)
-    {
-        // get string info
-        String timeOnly = time.substring(0, time.length() - 1);
-        String[] timeParts = timeOnly.split(":");
-
-        // parse info
-        int hour = Integer.parseInt(timeParts[0]);
-        int minute = Integer.parseInt(timeParts[1]);
-        boolean morning = time.charAt(time.length() - 1) == 'a';
-
-        // create local time
-        if (morning)
-            return LocalTime.of(hour - 1, minute);
-        else
-            return LocalTime.of(hour + 11, minute);
     }
 }

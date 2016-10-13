@@ -20,7 +20,7 @@ public class AFRS
     public static String getItinerary(Airport originAirport, Airport destinationAirport, int maxConnections, ItinerarySortingAlgorithm sortingMethod)
     {
         // get itineraries
-        List<Itinerary> itineraries = ItineraryManager.getManager().getItineraries(originAirport,destinationAirport, maxConnections, sortingMethod);
+        List<Itinerary> itineraries = ItineraryManager.getManager().getItineraries(originAirport, destinationAirport, maxConnections, sortingMethod);
 
         // create response string
         StringBuilder stringBuilder = new StringBuilder();
@@ -38,7 +38,7 @@ public class AFRS
         return stringBuilder.toString();
     }
 
-    public static String getReservation(String passengerName,Airport originAirport, Airport destinationAirport)
+    public static String getReservation(String passengerName, Airport originAirport, Airport destinationAirport)
     {
         List<Reservation> reservations;
 
@@ -47,7 +47,7 @@ public class AFRS
         stringBuilder.append("retrieve ");
 
         // get reservations
-        if(originAirport == null && destinationAirport == null)
+        if (originAirport == null && destinationAirport == null)
             reservations = ReservationManager.getManager().getReservationsForPassenger(passengerName);
         else
             reservations = ReservationManager.getManager().getReservation(passengerName, originAirport, destinationAirport);
@@ -56,7 +56,7 @@ public class AFRS
         stringBuilder.append(reservations.size()).append("[");
 
         // put reservations in correct order
-        for(Reservation r:reservations)
+        for (Reservation r : reservations)
             stringBuilder.append("\r\n").append(r.getItinerary());
 
         // finish
@@ -64,7 +64,7 @@ public class AFRS
         return stringBuilder.toString();
     }
 
-    public static String deleteReservation(String passengerName,Airport originAirport, Airport destinationAirport)
+    public static String deleteReservation(String passengerName, Airport originAirport, Airport destinationAirport)
     {
         boolean success = ReservationManager.getManager().deleteReservation(passengerName, originAirport, destinationAirport);
         if (success)
