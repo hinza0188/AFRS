@@ -1,5 +1,14 @@
-# AFRS
+# Airline Flight Reservation System [ AFRS ]
 This is for Group B: Glorious Basterds
 
-all codes and comments are directly pushed into master
-rather than creating new branch.
+# To run the program
+ [Windows Platform]
+    double click start.bat file that is included in the directory
+
+ [Linux / Mac]
+    open Terminal and go to the directory where AFRS and start.sh is located
+    Then, run following code:
+        chmod +x start.sh
+        ./start.sh
+
+# Usage
