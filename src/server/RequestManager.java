@@ -60,6 +60,9 @@ public class RequestManager
                 if (command.equals("quit"))
                     break;
             }
+            catch (ArrayIndexOutOfBoundsException ob) {
+                System.out.println("retrieve 0[]");
+            }
             catch (Exception ex)
             {
                 System.out.println(ex.getMessage());
