@@ -40,8 +40,18 @@ public class Airport
             return null;
 
         // return current weather
-        int currentWeatherIndex = this.weatherRequestCounter++ % this.weather.length;
-        return this.weather[currentWeatherIndex];
+        int currentWeatherIndex = this.weatherRequestCounter % this.weather.length;
+        String weather = this.weather[currentWeatherIndex];
+        String temperature = this.weather[currentWeatherIndex + 1];
+
+        this.weatherRequestCounter += 2;
+
+        return weather + "," + temperature;
+    }
+
+    protected void setTimeDelay(OffsetTime timeDelay)
+    {
+        this.timeDelay = timeDelay;
     }
 
     public OffsetTime getTimeDelay()
