@@ -105,6 +105,29 @@ public class RequestParser
                 else if (mainCommand.equals("retrieve"))
                 {
                     // retrieve,passenger[,origin[,destination]];
+                    String passenger = commandArgs[1];
+
+                    if (commandArgs.length == 2)
+                        commands.add(new GetReservation(passenger));
+                    else if (commandArgs.length >= 3)
+                    {
+                        Airport originAirport = AirportManager.getManager().getAirport(commandArgs[2]);
+                        if (originAirport == null)
+                            throw new Exception("error,unknown origin");
+
+                        if (commandArgs.length == 4)
+                        {
+                            Airport destinationAirport = AirportManager.getManager().getAirport(commandArgs[3]);
+                            if (destinationAirport == null)
+                                throw new Exception("error,unknown destination");
+
+                            commands.add(new GetReservation(passenger, originAirport, destinationAirport));
+                        }
+                        else
+                            commands.add(new GetReservation(passenger, originAirport));
+                    }
+                    else
+                        commands.add(new GetReservation(passenger));
                 }
                 else if (mainCommand.equals("delete"))
                 {
