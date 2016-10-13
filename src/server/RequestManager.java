@@ -64,10 +64,15 @@ public class RequestManager
             }
             catch (ArrayIndexOutOfBoundsException ob)
             {
+                // allow empty string to be passed as parameter
                 System.out.println("retrieve 0[]");
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 System.out.println(ex.getMessage());
+            }
+            finally
+            {
                 RequestManager.parser.clearData();
             }
         }
