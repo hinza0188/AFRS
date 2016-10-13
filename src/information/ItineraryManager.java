@@ -43,7 +43,7 @@ public class ItineraryManager
         List<Flight> flights = FlightManager.getManager().flightsLeavingAirport(originAirport);
         for (Flight flight : flights)
         {
-            List<Flight> flightsList = Arrays.asList(new Flight[] { flight });
+            List<Flight> flightsList = Arrays.asList(flight);
             List<Itinerary> newItineraries = this.getItineraries(flightsList, destinationAirport, maxConnections, 0);
             this.itineraries.addAll(newItineraries);
         }

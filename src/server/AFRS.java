@@ -4,7 +4,6 @@ import helpers.ItinerarySortingAlgorithm;
 import information.*;
 
 import java.time.OffsetTime;
-import java.util.ArrayList;
 import java.util.List;
 
 public class AFRS
@@ -21,13 +20,13 @@ public class AFRS
 
         // create response string
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("info " + itineraries.size() + "[");
+        stringBuilder.append("info ").append(itineraries.size()).append("[");
 
         // create string for each itinerary
         int x = 1;
         for (Itinerary i : itineraries)
         {
-            stringBuilder.append("\r\n" + x++ + " " + i.toString());
+            stringBuilder.append("\r\n").append(x++).append(" ").append(i);
         }
 
         // finish
@@ -37,7 +36,7 @@ public class AFRS
 
     public static String getReservation(String passengerName,Airport originAirport, Airport destinationAirport)
     {
-        ArrayList<Reservation> reservations = new ArrayList<>();
+        List<Reservation> reservations;
 
         // start response string
         StringBuilder stringBuilder = new StringBuilder();
@@ -50,11 +49,11 @@ public class AFRS
             reservations = ReservationManager.getManager().getReservation(passengerName, originAirport, destinationAirport);
 
         // add size to string
-        stringBuilder.append(reservations.size() + "[");
+        stringBuilder.append(reservations.size()).append("[");
 
         // put reservations in correct order
         for(Reservation r:reservations)
-            stringBuilder.append("\r\n"+r.getItinerary().toString());
+            stringBuilder.append("\r\n").append(r.getItinerary());
 
         // finish
         stringBuilder.append("]");
@@ -74,12 +73,8 @@ public class AFRS
         String airportCode = airport.getAbbreviation();
 
         // create weather string
-        StringBuilder stringBuilder=new StringBuilder();
-        stringBuilder.append("weather, ");
-        stringBuilder.append(airportCode + ", ");
-        stringBuilder.append(weather + ", ");
-        stringBuilder.append(delayTime + ", ");
+        String stringBuilder = "weather," + airportCode + "," + weather + "," + delayTime;
 
-        return stringBuilder.toString();
+        return stringBuilder;
     }
 }
