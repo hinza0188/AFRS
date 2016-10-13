@@ -12,10 +12,13 @@ public class RequestManager
     private static RequestManager singleton = null;
     List<server.Request> commandStack = new Stack<>();
 
-    protected RequestManager()  { }
+    protected RequestManager()
+    {
+    }
+
     public static RequestManager getManager()
     {
-        if(singleton == null)
+        if (singleton == null)
             singleton = new RequestManager();
 
         return singleton;
@@ -50,8 +53,7 @@ public class RequestManager
 
                     // clear data
                     RequestManager.parser.clearData();
-                }
-                else
+                } else
                 {
                     System.out.println("partial-request");
                 }
@@ -60,10 +62,10 @@ public class RequestManager
                 if (command.equals("quit"))
                     break;
             }
-            catch (ArrayIndexOutOfBoundsException ob) {
+            catch (ArrayIndexOutOfBoundsException ob)
+            {
                 System.out.println("retrieve 0[]");
-            }
-            catch (Exception ex)
+            } catch (Exception ex)
             {
                 System.out.println(ex.getMessage());
                 RequestManager.parser.clearData();

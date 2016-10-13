@@ -4,29 +4,35 @@ public class Reservation
 {
     private String passenger;
     private Itinerary itinerary;
-    
-    protected Reservation(String passenger, Itinerary itinerary){
+
+    protected Reservation(String passenger, Itinerary itinerary)
+    {
         this.itinerary = itinerary;
         this.passenger = passenger;
     }
-    
-    public String getPassengerName(){
+
+    public String getPassengerName()
+    {
         return this.passenger;
     }
-    
-    public Airport getOriginAirport(){
+
+    public Airport getOriginAirport()
+    {
         return this.itinerary.getOriginAirport();
     }
-    
-    public Airport getDestinationAirport() {
+
+    public Airport getDestinationAirport()
+    {
         return this.itinerary.getDestinationAirport();
     }
 
-    public Itinerary getItinerary() {
+    public Itinerary getItinerary()
+    {
         return itinerary;
     }
 
-    public String getPassenger() {
+    public String getPassenger()
+    {
         return passenger;
     }
 

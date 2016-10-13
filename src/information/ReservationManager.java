@@ -15,12 +15,12 @@ public class ReservationManager
 
     public static ReservationManager getManager()
     {
-        if(singleton == null)
+        if (singleton == null)
             singleton = new ReservationManager();
 
         return singleton;
     }
-    
+
     public boolean deleteReservation(String passengerName, Airport originAirport, Airport destinationAirport)
     {
         for (Reservation reservation : this.reservations)
@@ -39,21 +39,20 @@ public class ReservationManager
 
     public ArrayList<Reservation> getReservation(String passengerName, Airport originAirport, Airport destinationAirport)
     {
-        ArrayList<Reservation> reservations= new ArrayList<>();
-        if(originAirport != null && destinationAirport != null)
+        ArrayList<Reservation> reservations = new ArrayList<>();
+        if (originAirport != null && destinationAirport != null)
         {
             reservations.addAll(this.reservations.stream().filter(
                     currentReservation -> currentReservation.getPassenger().equals(passengerName) &&
-                    currentReservation.getItinerary().getOriginAirport() == originAirport &&
-                    currentReservation.getItinerary().getDestinationAirport() == destinationAirport
+                            currentReservation.getItinerary().getOriginAirport() == originAirport &&
+                            currentReservation.getItinerary().getDestinationAirport() == destinationAirport
             ).collect(Collectors.toList()));
-        }
-        else
+        } else
         {
             reservations.addAll(this.reservations.stream().filter(
                     currentReservation -> currentReservation.getPassenger().equals(passengerName) &&
-                    (currentReservation.getItinerary().getOriginAirport() == originAirport ||
-                            currentReservation.getItinerary().getDestinationAirport() == destinationAirport)
+                            (currentReservation.getItinerary().getOriginAirport() == originAirport ||
+                                    currentReservation.getItinerary().getDestinationAirport() == destinationAirport)
             ).collect(Collectors.toList()));
         }
 

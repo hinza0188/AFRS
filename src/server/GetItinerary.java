@@ -9,7 +9,7 @@ public class GetItinerary implements Request
     private Airport destinationAirport;
     private int maxConnections;
     private ItinerarySortingAlgorithm sortingAlgorithm;
-    
+
     public GetItinerary(Airport originAirport, Airport destinationAirport, int maxConnections, ItinerarySortingAlgorithm sortingMethod)
     {
         this.originAirport = originAirport;
