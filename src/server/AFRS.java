@@ -1,6 +1,4 @@
-package server; /**
- * Created by Yongki Jay An
- */
+package server;
 
 import helpers.ItinerarySortingAlgorithm;
 import information.*;
@@ -39,7 +37,7 @@ public class AFRS
 
     public static String getReservation(String passengerName,Airport originAirport, Airport destinationAirport)
     {
-        ArrayList<Reservation> reservations = new ArrayList<Reservation>();
+        ArrayList<Reservation> reservations = new ArrayList<>();
 
         // start response string
         StringBuilder stringBuilder = new StringBuilder();

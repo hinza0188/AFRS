@@ -1,10 +1,3 @@
-/**
- * Created by hetelek on 10/6/16.
- * Modifier : Jay
- * This class designs itinerary object under flyable interface
- */
-
-
 package information;
 
 import java.time.LocalTime;

@@ -1,7 +1,3 @@
-/**
- * Created by hetelek on 10/6/16.
- */
-
 package information;
 
 import helpers.CSVReader;
@@ -47,7 +43,7 @@ public class AirportManager
     private void readAirportsFromFile(String filePath)
     {
         // create new array list
-        this.airports = new ArrayList<Airport>();
+        this.airports = new ArrayList<>();
 
         try
         {

@@ -1,12 +1,7 @@
-/**
- * Created by hetelek on 10/6/16.
- * modified by Roger
- * modified by Dylan
- */
-
 package information;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class ReservationManager
 {
@@ -15,7 +10,7 @@ public class ReservationManager
 
     protected ReservationManager()
     {
-        reservations = new ArrayList<Reservation>();
+        reservations = new ArrayList<>();
     }
 
     public static ReservationManager getManager()
@@ -44,44 +39,33 @@ public class ReservationManager
 
     public ArrayList<Reservation> getReservation(String passengerName, Airport originAirport, Airport destinationAirport)
     {
-        ArrayList<Reservation> reservations=new ArrayList<Reservation>();
+        ArrayList<Reservation> reservations= new ArrayList<>();
         if(originAirport != null && destinationAirport != null)
         {
-            for(Reservation currentReservation : this.reservations)
-            {
-                if (currentReservation.getPassenger().equals(passengerName)
-                        && currentReservation.getItinerary().getOriginAirport() == originAirport
-                        && currentReservation.getItinerary().getDestinationAirport() == destinationAirport)
-                {
-                    reservations.add(currentReservation);
-                }
-            }
+            reservations.addAll(this.reservations.stream().filter(
+                    currentReservation -> currentReservation.getPassenger().equals(passengerName) &&
+                    currentReservation.getItinerary().getOriginAirport() == originAirport &&
+                    currentReservation.getItinerary().getDestinationAirport() == destinationAirport
+            ).collect(Collectors.toList()));
         }
         else
         {
-            for(Reservation currentReservation : this.reservations)
-            {
-                if (currentReservation.getPassenger().equals(passengerName)
-                        && (currentReservation.getItinerary().getOriginAirport() == originAirport || currentReservation.getItinerary().getDestinationAirport() == destinationAirport))
-                {
-                    reservations.add(currentReservation);
-                }
-            }
+            reservations.addAll(this.reservations.stream().filter(
+                    currentReservation -> currentReservation.getPassenger().equals(passengerName) &&
+                    (currentReservation.getItinerary().getOriginAirport() == originAirport ||
+                            currentReservation.getItinerary().getDestinationAirport() == destinationAirport)
+            ).collect(Collectors.toList()));
         }
-
 
         return reservations;
     }
 
     public ArrayList<Reservation> getReservationsForPassenger(String passengerName)
     {
-        ArrayList<Reservation> passengersReservations = new ArrayList<Reservation>();
-        for (Reservation currentReservation : this.reservations)
-        {
-            if (currentReservation.getPassenger().equals(passengerName)){
-                passengersReservations.add(currentReservation);
-            }
-        }
+        ArrayList<Reservation> passengersReservations = this.reservations.stream().filter(currentReservation ->
+                currentReservation.getPassenger().equals(passengerName)
+        ).collect(Collectors.toCollection(ArrayList::new));
+
         return passengersReservations;
     }
 

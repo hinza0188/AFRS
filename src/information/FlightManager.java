@@ -1,7 +1,3 @@
-/**
- * Created by hetelek on 10/6/16.
- */
-
 package information;
 
 import helpers.CSVReader;
@@ -33,7 +29,7 @@ public class FlightManager
     public ArrayList<Flight> flightsLeavingAirport(Airport originAirport)
     {
         // find flights leaving
-        ArrayList<Flight> flightsLeaving = new ArrayList<Flight>();
+        ArrayList<Flight> flightsLeaving = new ArrayList<>();
         this.flights.forEach(flight -> {
             if (flight.getOriginAirport() == originAirport)
                 flightsLeaving.add(flight);
@@ -45,7 +41,7 @@ public class FlightManager
     private void readFlightsFromFile(String filePath)
     {
         // create new array list
-        this.flights = new ArrayList<Flight>();
+        this.flights = new ArrayList<>();
 
         try
         {

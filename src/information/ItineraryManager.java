@@ -15,7 +15,7 @@ import java.util.List;
 public class ItineraryManager
 {
     private static ItineraryManager singleton = null;
-    private List<Itinerary> itineraries = new ArrayList<Itinerary>();
+    private List<Itinerary> itineraries = new ArrayList<>();
 
     protected ItineraryManager() { }
     public static ItineraryManager getManager()
@@ -58,9 +58,9 @@ public class ItineraryManager
     {
         // check if we're over the max connections
         if (depth > maxConnections)
-            return new ArrayList<Itinerary>();
+            return new ArrayList<>();
 
-        List<Itinerary> newItineraries = new ArrayList<Itinerary>();
+        List<Itinerary> newItineraries = new ArrayList<>();
         Flight lastFlight = currentFlights.get(currentFlights.size() - 1);
 
         // check if we are leaving
@@ -76,7 +76,7 @@ public class ItineraryManager
         for (Flight flightLeaving : flightsLeavingDestination)
         {
             // create new list
-            List<Flight> newFlightsList = new ArrayList<Flight>(currentFlights);
+            List<Flight> newFlightsList = new ArrayList<>(currentFlights);
             newFlightsList.add(flightLeaving);
 
             // do same thing with greater depth

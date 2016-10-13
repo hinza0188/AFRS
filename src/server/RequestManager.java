@@ -1,7 +1,3 @@
-/**
- * Created by hetelek on 10/6/16.
- */
-
 package server;
 
 import java.util.List;
@@ -14,7 +10,7 @@ public class RequestManager
     private static Scanner scanner = new Scanner(System.in);
 
     private static RequestManager singleton = null;
-    List<server.Request> commandStack = new Stack<server.Request>();
+    List<server.Request> commandStack = new Stack<>();
 
     protected RequestManager()  { }
     public static RequestManager getManager()

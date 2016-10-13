@@ -1,7 +1,3 @@
-/**
- * Created by hetelek on 10/6/16.
- */
-
 package server;
 
 import helpers.ItinerarySortingAlgorithm;
@@ -37,7 +33,7 @@ public class RequestParser
         if (currentData.length() < 1 || currentData.charAt(currentData.length() - 1) != ';')
             return new Request[] { };
 
-        List<Request> commands = new ArrayList<Request>();
+        List<Request> commands = new ArrayList<>();
 
         // loop through each command
         String[] possibleFullCommands = this.currentData.split(TERMINATOR);
@@ -48,18 +44,26 @@ public class RequestParser
             if (commandArgs.length > 0)
             {
                 String mainCommand = commandArgs[0];
-                if (mainCommand.equals("info"))
-                    commands.add(RequestParser.parseInfoCommand(commandArgs));
-                else if (mainCommand.equals("reserve"))
-                    commands.add(RequestParser.parseMakeReservationCommand(commandArgs));
-                else if (mainCommand.equals("retrieve"))
-                    commands.add(RequestParser.parseGetReservationCommand(commandArgs));
-                else if (mainCommand.equals("delete"))
-                    commands.add(RequestParser.parseDeleteReservationCommand(commandArgs));
-                else if (mainCommand.equals("weather"))
-                    commands.add(RequestParser.parseGetWeatherCommand(commandArgs));
-                else
-                    throw new Exception("invalid-command");
+                switch (mainCommand)
+                {
+                    case "info":
+                        commands.add(RequestParser.parseInfoCommand(commandArgs));
+                        break;
+                    case "reserve":
+                        commands.add(RequestParser.parseMakeReservationCommand(commandArgs));
+                        break;
+                    case "retrieve":
+                        commands.add(RequestParser.parseGetReservationCommand(commandArgs));
+                        break;
+                    case "delete":
+                        commands.add(RequestParser.parseDeleteReservationCommand(commandArgs));
+                        break;
+                    case "weather":
+                        commands.add(RequestParser.parseGetWeatherCommand(commandArgs));
+                        break;
+                    default:
+                        throw new Exception("invalid-command");
+                }
             }
         }
 
