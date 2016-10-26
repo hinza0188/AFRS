@@ -8,14 +8,14 @@ import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class OfflineAirportData implements AirportData
+public class OfflineProxy implements AirportData
 {
     private ArrayList<Airport> airports;
     private static String AIRPORT_FILE_PATH = "data/airports.txt";
     private static String AIRPORT_WEATHER_FILE_PATH = "data/weather.txt";
     private static String AIRPORT_DELAYS_FILE_PATH = "data/delays.txt";
 
-    public OfflineAirportData()
+    public OfflineProxy()
     {
         this.readAirportsFromFile(AIRPORT_FILE_PATH);
         this.readWeatherFromFile(AIRPORT_WEATHER_FILE_PATH);

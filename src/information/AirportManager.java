@@ -12,18 +12,21 @@ public class AirportManager
 {
     private static AirportManager singleton = null;
     private AirportData airportData;
+    private boolean offline;
 
     protected AirportManager()
     {
-        this.airportData = new OfflineAirportData();
+        this.setOffline(true);
     }
 
     public void setOffline(boolean offline)
     {
+        this.offline = offline;
+
         if (offline)
-            this.airportData = new OfflineAirportData();
+            this.airportData = new OfflineProxy();
         else
-            this.airportData = new OnlineAirportData();
+            this.airportData = new OnlineProxy();
     }
 
     public static AirportManager getManager()
