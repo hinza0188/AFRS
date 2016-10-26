@@ -16,7 +16,7 @@ public class AirportManager
 
     protected AirportManager()
     {
-        this.setOffline(true);
+        this.setOffline(false);
     }
 
     public void setOffline(boolean offline)
