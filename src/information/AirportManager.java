@@ -1,13 +1,5 @@
 package information;
 
-import helpers.CSVReader;
-
-import java.io.FileNotFoundException;
-import java.time.OffsetTime;
-import java.time.ZoneOffset;
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class AirportManager
 {
     private static AirportManager singleton = null;
@@ -23,10 +15,16 @@ public class AirportManager
     {
         this.offline = offline;
 
+        // update proxy from state
         if (offline)
             this.airportData = new OfflineProxy();
         else
             this.airportData = new OnlineProxy();
+    }
+
+    public boolean isOffline()
+    {
+        return this.offline;
     }
 
     public static AirportManager getManager()
