@@ -6,10 +6,13 @@ import javafx.geometry.Pos;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
@@ -23,10 +26,32 @@ public class client extends Application{
         launch(args);
     }
 
-    public HBox inputHboxBottom() {
-        HBox hb = new HBox();
-        hb.setPadding(new Insets(15, 12, 15, 12));
-        hb.setSpacing(10);
+    private Tab getTabs(final TabPane tabPane, final String title) {
+        Tab tab = new Tab(title);
+
+        return tab;
+    }
+
+    private HBox outputHBoxCenter() {
+        HBox obx = new HBox();
+        obx.setPadding(new Insets(15, 12, 15, 12));
+        obx.setSpacing(10);
+
+        TextArea textArea = new TextArea();
+        textArea.setId("outputField");
+        textArea.setPrefSize(460, 400);
+        textArea.setEditable(false);      // read-only
+        textArea.setMouseTransparent(true);
+        textArea.setFocusTraversable(false);
+        obx.getChildren().add(textArea);
+
+        return obx;
+    }
+
+    private HBox inputHBoxBottom() {
+        HBox ibx = new HBox();
+        ibx.setPadding(new Insets(15, 12, 15, 12));
+        ibx.setSpacing(10);
         //hb.setStyle("-fx-background-color: #336699;");
 
         /* input field */
@@ -47,20 +72,20 @@ public class client extends Application{
         });
         enter_btn.setPrefSize(100, 20);
 
-        hb.getChildren().addAll(textField, enter_btn);
+        ibx.getChildren().addAll(textField, enter_btn);
 
-        return hb;
+        return ibx;
     }
 
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("AFRS"); // set title of entire window
-
-        BorderPane root = new BorderPane();
-
+        BorderPane root = new BorderPane(); // with border pane
         root.setPadding(new Insets(0, 10, 0, 10));
-        HBox iField = inputHboxBottom();
-        root.setBottom(iField);
+
+        root.setBottom(inputHBoxBottom()); // call input HBox at the bottom of the border pane
+
+        root.setCenter(outputHBoxCenter()); // call output HBox at the center of the border pane
 
         primaryStage.setScene(new Scene(root, 500, 450));
         primaryStage.show();
