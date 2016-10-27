@@ -29,6 +29,11 @@ public class AirportManager
             this.airportData = new OnlineProxy();
     }
 
+    public boolean isOffline()
+    {
+        return this.offline;
+    }
+
     public static AirportManager getManager()
     {
         if (AirportManager.singleton == null)
