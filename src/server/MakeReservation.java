@@ -17,7 +17,6 @@ public class MakeReservation implements Request
     @Override
     public String executeCommand()
     {
-        RequestManager.getManager().commandStack.add(this);
         return AFRS.makeReservation(passengerName, itinerary);
     }
 
