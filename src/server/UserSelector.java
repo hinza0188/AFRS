@@ -30,12 +30,4 @@ public class UserSelector
         // parse command
         return this.currentManager.takeCommand(command);
     }
-
-    public static void main(String[] args)
-    {
-        // testing (while waiting for GUI)
-        UserSelector a = new UserSelector();
-        a.changeUser("hetelek");
-        System.out.println(a.takeCommand("info,LAX,JFK;")[0]);
-    }
 }

@@ -2,7 +2,6 @@ package gui;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -12,7 +11,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
@@ -21,7 +19,7 @@ import javafx.stage.Stage;
  * on 2016. 10. 25.
  */
 
-public class client extends Application{
+public class Client extends Application {
     public static void main(String[] args) {
         launch(args);
     }
