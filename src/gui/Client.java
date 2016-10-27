@@ -53,9 +53,20 @@ public class Client extends Application {
         //hb.setStyle("-fx-background-color: #336699;");
 
         /* input field */
-        TextField textField = new TextField ();
-        textField.setId("inputField");
-        textField.setPrefSize(400, 20);
+        TextField txtFld = new TextField ();
+        txtFld.setId("inputField");
+        txtFld.setPrefSize(400, 20);
+        txtFld.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event){
+                String txt = txtFld.getText(); // get the string in variable txt
+
+                // run codes here for passing this input
+
+                System.out.println(txt); // print the input in the console
+                txtFld.clear();
+            }
+        });
 
         /* input button */
         Button enter_btn = new Button();
@@ -64,13 +75,17 @@ public class Client extends Application {
         enter_btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                String txt_input = "hi";
-                System.out.println(txt_input);
+                String txt = txtFld.getText(); // get the string in variable txt
+
+                // run codes here for passing this input
+
+                System.out.println(txt); // print the input in the console
+                txtFld.clear();
             }
         });
         enter_btn.setPrefSize(100, 20);
 
-        ibx.getChildren().addAll(textField, enter_btn);
+        ibx.getChildren().addAll(txtFld, enter_btn);
 
         return ibx;
     }
