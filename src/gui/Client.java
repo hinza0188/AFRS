@@ -13,6 +13,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import server.UserSelector;
 
 /**
  * Created by Yongki An
@@ -20,11 +21,14 @@ import javafx.stage.Stage;
  */
 
 public class Client extends Application {
+    private UserSelector userSelector = new UserSelector();
+
     public static void main(String[] args) {
         launch(args);
     }
 
     private Tab getTabs(final TabPane tabPane, final String title) {
+        // TODO: call this.userSelector.changeUser("[TAB_INDEX HERE]"); when tab changed
         Tab tab = new Tab(title);
 
         return tab;
@@ -59,11 +63,13 @@ public class Client extends Application {
         txtFld.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event){
-                String txt = txtFld.getText(); // get the string in variable txt
+                // get the command string
+                String txt = txtFld.getText();
 
-                // run codes here for passing this input
+                String[] response = userSelector.takeCommand(txt);
+                // TODO: write response to text area
 
-                System.out.println(txt); // print the input in the console
+                // clear command area
                 txtFld.clear();
             }
         });
@@ -75,11 +81,13 @@ public class Client extends Application {
         enter_btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                String txt = txtFld.getText(); // get the string in variable txt
+                // get the command string
+                String txt = txtFld.getText();
 
-                // run codes here for passing this input
+                String[] response = userSelector.takeCommand(txt);
+                // TODO: write response to text area
 
-                System.out.println(txt); // print the input in the console
+                // clear command area
                 txtFld.clear();
             }
         });
@@ -92,14 +100,23 @@ public class Client extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("AFRS"); // set title of entire window
-        BorderPane root = new BorderPane(); // with border pane
+        // set current user
+        this.userSelector.changeUser("user1");
+
+        // set title of entire window
+        primaryStage.setTitle("AFRS");
+
+        // create border pane
+        BorderPane root = new BorderPane();
         root.setPadding(new Insets(0, 10, 0, 10));
 
-        root.setBottom(inputHBoxBottom()); // call input HBox at the bottom of the border pane
+        // call input HBox at the bottom of the border pane
+        root.setBottom(inputHBoxBottom());
 
-        root.setCenter(outputHBoxCenter()); // call output HBox at the center of the border pane
+        // call output HBox at the center of the border pane
+        root.setCenter(outputHBoxCenter());
 
+        // show window
         primaryStage.setScene(new Scene(root, 500, 450));
         primaryStage.show();
     }

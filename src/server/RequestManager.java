@@ -6,7 +6,7 @@ import java.util.Stack;
 public class RequestManager
 {
     private RequestParser parser = new RequestParser();
-    private List<server.Request> commandStack = new Stack<>();
+    private List<Request> commandStack = new Stack<>();
 
     public String[] takeCommand(String command)
     {
