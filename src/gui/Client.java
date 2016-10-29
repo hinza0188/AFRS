@@ -4,7 +4,10 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.Button;
@@ -22,6 +25,7 @@ import server.UserSelector;
 
 public class Client extends Application {
     private UserSelector userSelector = new UserSelector();
+    private Group root = new Group();
 
     public static void main(String[] args) {
         launch(args);
@@ -41,7 +45,7 @@ public class Client extends Application {
 
         TextArea textArea = new TextArea();
         textArea.setId("outputField");
-        textArea.setPrefSize(460, 400);
+        textArea.setPrefSize(460, 380);
         textArea.setEditable(false);      // read-only
         textArea.setMouseTransparent(true);
         textArea.setFocusTraversable(false);
@@ -68,7 +72,7 @@ public class Client extends Application {
 
                 String[] response = userSelector.takeCommand(txt);
                 // TODO: write response to text area
-
+                System.out.println(txt);
                 // clear command area
                 txtFld.clear();
             }
@@ -98,26 +102,47 @@ public class Client extends Application {
         return ibx;
     }
 
-    @Override
-    public void start(Stage primaryStage) {
-        // set current user
-        this.userSelector.changeUser("user1");
+    private BorderPane borderContents() {
+        // create border pane
+        BorderPane page = new BorderPane();
+        page.setPadding(new Insets(0, 10, 0, 10));
 
+        // call input HBox at the bottom of the border pane
+        page.setBottom(inputHBoxBottom());
+
+        // call output HBox at the center of the border pane
+        page.setCenter(outputHBoxCenter());
+        return page;
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        // set current user
+        Scene scene = new Scene(this.root, 500, 450);
+
+        TabPane tabPane = new TabPane();
+        BorderPane edge = new BorderPane();
+
+        for (int i = 1; i < 6; i++) {
+            Tab tab = new Tab();
+            tab.setText("Client_" + i);
+
+            tab.setContent(borderContents());
+            tabPane.getTabs().add(tab);
+        }
+        edge.prefHeightProperty().bind(scene.heightProperty());
+        edge.prefWidthProperty().bind(scene.widthProperty());
+
+        edge.setCenter(tabPane);
+        root.getChildren().add(edge);
+
+        this.userSelector.changeUser("user1");
         // set title of entire window
         primaryStage.setTitle("AFRS");
 
-        // create border pane
-        BorderPane root = new BorderPane();
-        root.setPadding(new Insets(0, 10, 0, 10));
-
-        // call input HBox at the bottom of the border pane
-        root.setBottom(inputHBoxBottom());
-
-        // call output HBox at the center of the border pane
-        root.setCenter(outputHBoxCenter());
 
         // show window
-        primaryStage.setScene(new Scene(root, 500, 450));
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 }
