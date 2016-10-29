@@ -1,6 +1,10 @@
 package gui;
 
 import javafx.application.Application;
+import javafx.beans.binding.Bindings;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -26,23 +30,13 @@ public class Client extends Application {
         launch(args);
     }
 
-    private Tab getTabs(final TabPane tabPane, final String title) {
-        // TODO: call this.userSelector.changeUser("[TAB_INDEX HERE]"); when tab changed
-        Tab tab = new Tab(title);
-
-        return tab;
-    }
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        // set current user
-        Group root = new Group();
-        Scene scene = new Scene(root, 500, 450);
-        TabPane tabPane = new TabPane();
-        BorderPane tabBorder = new BorderPane();
-
-        Tab tab = new Tab();  // instanciates a new tab
-        tab.setText("New Client");  // name the tab
+    private Tab createAndSelectNewTab(final TabPane tabPane, final Scene scene) {
+        Tab tab = new Tab("New Client");
+        final ObservableList<Tab> tabs = tabPane.getTabs();
+        tab.closableProperty().bind(Bindings.size(tabs).greaterThan(2));
+        int tab_index = tabs.size()-1;
+        tabs.add(tab_index, tab);
+        tabPane.getSelectionModel().select(tab);
 
         this.userSelector.currentManager = null; // make sure user is not created yet
 
@@ -51,7 +45,7 @@ public class Client extends Application {
         obx.setPadding(new Insets(15, 12, 15, 12));
         obx.setSpacing(10);
         TextArea textArea = new TextArea();
-        textArea.setId("outputField_0");
+        textArea.setId("outputField_" + tab_index);
         textArea.setPrefSize(460, 380);
         textArea.setEditable(false);  // read-only
         textArea.setMouseTransparent(true);
@@ -63,9 +57,9 @@ public class Client extends Application {
         HBox ibx = new HBox();
         ibx.setPadding(new Insets(15, 12, 15, 12));
         ibx.setSpacing(10);
-            // input text field
+        // input text field
         TextField txtFld = new TextField ();
-        txtFld.setId("inputField_0");
+        txtFld.setId("inputField_" + tab_index);
         txtFld.setPrefSize(400, 20);
         txtFld.setOnAction(event -> {
             String txt = txtFld.getText();
@@ -87,18 +81,12 @@ public class Client extends Application {
             txtFld.clear();
 
         }); // add event handler
-            // enter button
+        // enter button
         Button enter_btn = new Button();
-        enter_btn.setId("EnterButton_0");
+        enter_btn.setId("EnterButton_" + tab_index);
         enter_btn.setText("Enter");
         enter_btn.setOnAction(event -> {
-            // get the command string
-            String txt = txtFld.getText();
-            String[] response = userSelector.takeCommand(txt);
-            TextArea outputField = (TextArea)scene.lookup("#outputField_0");
-            outputField.appendText(txt);
-            // clear input command area
-            txtFld.clear();
+            //TODO: I gotta figure out how to call above action code
         });
         enter_btn.setPrefSize(100, 20);
         ibx.getChildren().addAll(txtFld, enter_btn);
@@ -107,14 +95,37 @@ public class Client extends Application {
         BorderPane page = new BorderPane();
         page.setPadding(new Insets(0, 10, 0, 10));
 
-            // call input HBox at the bottom of the border pane
+        // call input HBox at the bottom of the border pane
         page.setBottom(ibx);
-            // call output HBox at the center of the border pane
+        // call output HBox at the center of the border pane
         page.setCenter(obx);
 
         /* add the page into the tab */
         tab.setContent(page); // call contents constructor method
-        tabPane.getTabs().add(tab); // attach the tab to the tabPane
+
+        return tab;
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        // set current user
+        Group root = new Group();
+        Scene scene = new Scene(root, 500, 450);
+        TabPane tabPane = new TabPane();
+        BorderPane tabBorder = new BorderPane();
+
+        final Tab newTab = new Tab("+");
+        newTab.setClosable(false);
+        tabPane.getTabs().add(newTab);
+
+        tabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldSelectedTab, newSelectedTab) -> {
+            if (newSelectedTab == newTab) {
+                createAndSelectNewTab(tabPane, scene);
+            }
+        });
+
+        Tab init = createAndSelectNewTab(tabPane, scene);
+        tabPane.getTabs().add(init);
 
         tabBorder.prefHeightProperty().bind(scene.heightProperty());
         tabBorder.prefWidthProperty().bind(scene.widthProperty());
