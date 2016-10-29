@@ -12,6 +12,8 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.InputEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -37,21 +39,21 @@ public class Client extends Application {
     }
 
 //    private HBox outputHBoxCenter() {
-//        HBox obx = new HBox();
-//        obx.setPadding(new Insets(15, 12, 15, 12));
-//        obx.setSpacing(10);
+//    HBox obx = new HBox();
+//    obx.setPadding(new Insets(15, 12, 15, 12));
+//    obx.setSpacing(10);
 //
-//        TextArea textArea = new TextArea();
-//        textArea.setId("outputField");
-//        textArea.setPrefSize(460, 380);
-//        textArea.setEditable(false);      // read-only
-//        textArea.setMouseTransparent(true);
-//        textArea.setFocusTraversable(false);
-//        obx.getChildren().add(textArea);
+//    TextArea textArea = new TextArea();
+//    textArea.setId("outputField");
+//    textArea.setPrefSize(460, 380);
+//    textArea.setEditable(false);      // read-only
+//    textArea.setMouseTransparent(true);
+//    textArea.setFocusTraversable(false);
+//    obx.getChildren().add(textArea);
 //
-//        return obx;
-//    }
-
+//    return obx;
+//}
+//
 //    private HBox inputHBoxBottom() {
 //        HBox ibx = new HBox();
 //        ibx.setPadding(new Insets(15, 12, 15, 12));
@@ -99,7 +101,7 @@ public class Client extends Application {
 //
 //        return ibx;
 //    }
-
+//
 //    private BorderPane borderContents() {
 //        BorderPane page = new BorderPane();
 //        page.setPadding(new Insets(0, 10, 0, 10));
@@ -144,39 +146,32 @@ public class Client extends Application {
             TextField txtFld = new TextField ();
             txtFld.setId("inputField_" + i);
             txtFld.setPrefSize(400, 20);
-            txtFld.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    // get the command string
-                    String txt = txtFld.getText();
+            txtFld.setOnAction(event -> {
+                String txt = txtFld.getText();
+                //TODO: Do something with response
+                String[] response = userSelector.takeCommand(txt);
 
-                    String[] response = userSelector.takeCommand(txt);
-                    // TODO: write response to text area
-                    TextArea a = (TextArea)scene.lookup("#outputField_1");
-                    System.out.println(txt);
-                    a.setText(txt);
+                // Get Output Field
+                TextArea outputField = (TextArea)scene.lookup("#outputField_1");
+                // Append the input Command
+                outputField.setText(txt);
 
-                    // clear command area
-                    txtFld.clear();
+                // clear input command area
+                txtFld.clear();
 
-                }
             }); // add event handler
                 // enter button
             Button enter_btn = new Button();
             enter_btn.setId("EnterButton_" + i);
             enter_btn.setText("Enter");
-            enter_btn.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    // get the command string
-                    String txt = txtFld.getText();
-
-                    String[] response = userSelector.takeCommand(txt);
-                    // TODO: write response to text area
-
-                    // clear command area
-                    txtFld.clear();
-                }
+            enter_btn.setOnAction(event -> {
+                // get the command string
+                String txt = txtFld.getText();
+                String[] response = userSelector.takeCommand(txt);
+                TextArea outputField = (TextArea)scene.lookup("#outputField_2");
+                outputField.setText(txt);
+                // clear input command area
+                txtFld.clear();
             });
             enter_btn.setPrefSize(100, 20);
             ibx.getChildren().addAll(txtFld, enter_btn);
