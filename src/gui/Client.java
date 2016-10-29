@@ -2,8 +2,6 @@ package gui;
 
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
@@ -63,17 +61,17 @@ public class Client extends Application {
         txtFld.setPrefSize(400, 20);
         txtFld.setOnAction(event -> {
             String txt = txtFld.getText();
-            //TODO: Do something with response
             if (userSelector.currentManager == null){
                 // if user is not allocated with id, create one
                 userSelector.changeUser(txt);
                 tab.setText(txt); // change the tab display with user id
                 textArea.appendText("\nLog in success! your user_ID: ");
             } else { //otherwise, proceed taking input text as command
+                //TODO: Do something with response
                 String[] response = userSelector.takeCommand(txt);
             }
             // Get Output Field
-            TextArea outputField = (TextArea)scene.lookup("#outputField_0");
+            TextArea outputField = (TextArea)scene.lookup("#outputField_" + tab_index);
             // Append the input Command
             outputField.appendText(txt + "\n");
 
