@@ -2,9 +2,6 @@ package gui;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
@@ -12,8 +9,6 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
-import javafx.scene.input.InputEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -38,168 +33,96 @@ public class Client extends Application {
         return tab;
     }
 
-//    private HBox outputHBoxCenter() {
-//    HBox obx = new HBox();
-//    obx.setPadding(new Insets(15, 12, 15, 12));
-//    obx.setSpacing(10);
-//
-//    TextArea textArea = new TextArea();
-//    textArea.setId("outputField");
-//    textArea.setPrefSize(460, 380);
-//    textArea.setEditable(false);      // read-only
-//    textArea.setMouseTransparent(true);
-//    textArea.setFocusTraversable(false);
-//    obx.getChildren().add(textArea);
-//
-//    return obx;
-//}
-//
-//    private HBox inputHBoxBottom() {
-//        HBox ibx = new HBox();
-//        ibx.setPadding(new Insets(15, 12, 15, 12));
-//        ibx.setSpacing(10);
-//        //hb.setStyle("-fx-background-color: #336699;");
-//
-//        /* input field */
-//        TextField txtFld = new TextField ();
-//        txtFld.setId("inputField");
-//        txtFld.setPrefSize(400, 20);
-//        txtFld.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent event){
-//                // get the command string
-//                String txt = txtFld.getText();
-//
-//                String[] response = userSelector.takeCommand(txt);
-//                // TODO: write response to text area
-//                System.out.println(txt);
-//                // clear command area
-//                txtFld.clear();
-//            }
-//        });
-//
-//        /* input button */
-//        Button enter_btn = new Button();
-//        enter_btn.setId("EnterButton");
-//        enter_btn.setText("Enter");
-//        enter_btn.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent event) {
-//                // get the command string
-//                String txt = txtFld.getText();
-//
-//                String[] response = userSelector.takeCommand(txt);
-//                // TODO: write response to text area
-//
-//                // clear command area
-//                txtFld.clear();
-//            }
-//        });
-//        enter_btn.setPrefSize(100, 20);
-//
-//        ibx.getChildren().addAll(txtFld, enter_btn);
-//
-//        return ibx;
-//    }
-//
-//    private BorderPane borderContents() {
-//        BorderPane page = new BorderPane();
-//        page.setPadding(new Insets(0, 10, 0, 10));
-//
-//        // call input HBox at the bottom of the border pane
-//        page.setBottom(inputHBoxBottom());
-//        // call output HBox at the center of the border pane
-//        page.setCenter(outputHBoxCenter());
-//        return page;
-//    }
-
     @Override
     public void start(Stage primaryStage) throws Exception {
         // set current user
         Group root = new Group();
         Scene scene = new Scene(root, 500, 450);
         TabPane tabPane = new TabPane();
-        BorderPane edge = new BorderPane();
+        BorderPane tabBorder = new BorderPane();
 
-        // temporary hard coded tabs with
-        for (int i = 1; i < 6; i++) {
-            Tab tab = new Tab();  // instanciates a new tab
-            tab.setText("Client_" + i);  // name the tab
+        Tab tab = new Tab();  // instanciates a new tab
+        tab.setText("New Client");  // name the tab
 
-            /* create output box */
-            HBox obx = new HBox();
-            obx.setPadding(new Insets(15, 12, 15, 12));
-            obx.setSpacing(10);
-            TextArea textArea = new TextArea();
-            textArea.setId("outputField_" + i);
-            textArea.setPrefSize(460, 380);
-            textArea.setEditable(false);  // read-only
-            textArea.setMouseTransparent(true);
-            textArea.setFocusTraversable(false);
-            obx.getChildren().add(textArea);
+        this.userSelector.currentManager = null; // make sure user is not created yet
 
-            /* create input box */
-            HBox ibx = new HBox();
-            ibx.setPadding(new Insets(15, 12, 15, 12));
-            ibx.setSpacing(10);
-                // input text field
-            TextField txtFld = new TextField ();
-            txtFld.setId("inputField_" + i);
-            txtFld.setPrefSize(400, 20);
-            txtFld.setOnAction(event -> {
-                String txt = txtFld.getText();
-                //TODO: Do something with response
+        /* create output box */
+        HBox obx = new HBox();
+        obx.setPadding(new Insets(15, 12, 15, 12));
+        obx.setSpacing(10);
+        TextArea textArea = new TextArea();
+        textArea.setId("outputField_0");
+        textArea.setPrefSize(460, 380);
+        textArea.setEditable(false);  // read-only
+        textArea.setMouseTransparent(true);
+        textArea.setFocusTraversable(false);
+        textArea.setText("Welcome to the AFRS System!\nPlease provide your username");
+        obx.getChildren().add(textArea);
+
+        /* create input box */
+        HBox ibx = new HBox();
+        ibx.setPadding(new Insets(15, 12, 15, 12));
+        ibx.setSpacing(10);
+            // input text field
+        TextField txtFld = new TextField ();
+        txtFld.setId("inputField_0");
+        txtFld.setPrefSize(400, 20);
+        txtFld.setOnAction(event -> {
+            String txt = txtFld.getText();
+            //TODO: Do something with response
+            if (userSelector.currentManager == null){
+                // if user is not allocated with id, create one
+                userSelector.changeUser(txt);
+                tab.setText(txt); // change the tab display with user id
+                textArea.appendText("\nLog in success! your user_ID: ");
+            } else { //otherwise, proceed taking input text as command
                 String[] response = userSelector.takeCommand(txt);
+            }
+            // Get Output Field
+            TextArea outputField = (TextArea)scene.lookup("#outputField_0");
+            // Append the input Command
+            outputField.appendText(txt + "\n");
 
-                // Get Output Field
-                TextArea outputField = (TextArea)scene.lookup("#outputField_1");
-                // Append the input Command
-                outputField.appendText(txt + "\n");
+            // clear input command area
+            txtFld.clear();
 
-                // clear input command area
-                txtFld.clear();
+        }); // add event handler
+            // enter button
+        Button enter_btn = new Button();
+        enter_btn.setId("EnterButton_0");
+        enter_btn.setText("Enter");
+        enter_btn.setOnAction(event -> {
+            // get the command string
+            String txt = txtFld.getText();
+            String[] response = userSelector.takeCommand(txt);
+            TextArea outputField = (TextArea)scene.lookup("#outputField_0");
+            outputField.appendText(txt);
+            // clear input command area
+            txtFld.clear();
+        });
+        enter_btn.setPrefSize(100, 20);
+        ibx.getChildren().addAll(txtFld, enter_btn);
 
-            }); // add event handler
-                // enter button
-            Button enter_btn = new Button();
-            enter_btn.setId("EnterButton_" + i);
-            enter_btn.setText("Enter");
-            enter_btn.setOnAction(event -> {
-                // get the command string
-                String txt = txtFld.getText();
-                String[] response = userSelector.takeCommand(txt);
-                TextArea outputField = (TextArea)scene.lookup("#outputField_2");
-                outputField.appendText(txt);
-                // clear input command area
-                txtFld.clear();
-            });
-            enter_btn.setPrefSize(100, 20);
-            ibx.getChildren().addAll(txtFld, enter_btn);
+        /* cluster altogether into a border pane*/
+        BorderPane page = new BorderPane();
+        page.setPadding(new Insets(0, 10, 0, 10));
 
-            /* cluster altogether into a border pane*/
-            BorderPane page = new BorderPane();
-            page.setPadding(new Insets(0, 10, 0, 10));
+            // call input HBox at the bottom of the border pane
+        page.setBottom(ibx);
+            // call output HBox at the center of the border pane
+        page.setCenter(obx);
 
-                // call input HBox at the bottom of the border pane
-            page.setBottom(ibx);
-                // call output HBox at the center of the border pane
-            page.setCenter(obx);
+        /* add the page into the tab */
+        tab.setContent(page); // call contents constructor method
+        tabPane.getTabs().add(tab); // attach the tab to the tabPane
 
-            /* add the page into the tab */
-            tab.setContent(page); // call contents constructor method
-            tabPane.getTabs().add(tab); // attach the tab to the tabPane
-        }
-        edge.prefHeightProperty().bind(scene.heightProperty());
-        edge.prefWidthProperty().bind(scene.widthProperty());
-        edge.setCenter(tabPane);
-        root.getChildren().add(edge);
-
-        this.userSelector.changeUser("user1");
-        // set title of entire window
-        primaryStage.setTitle("AFRS");
-
+        tabBorder.prefHeightProperty().bind(scene.heightProperty());
+        tabBorder.prefWidthProperty().bind(scene.widthProperty());
+        tabBorder.setCenter(tabPane);
+        root.getChildren().add(tabBorder);
 
         // show window
+        primaryStage.setTitle("AFRS");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
