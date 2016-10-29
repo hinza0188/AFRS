@@ -123,8 +123,8 @@ public class Client extends Application {
 
         // temporary hard coded tabs with
         for (int i = 1; i < 6; i++) {
-            Tab tab = new Tab(); // instanciates a new tab
-            tab.setText("Client_" + i); // name the tab
+            Tab tab = new Tab();  // instanciates a new tab
+            tab.setText("Client_" + i);  // name the tab
 
             /* create output box */
             HBox obx = new HBox();
@@ -133,7 +133,7 @@ public class Client extends Application {
             TextArea textArea = new TextArea();
             textArea.setId("outputField_" + i);
             textArea.setPrefSize(460, 380);
-            textArea.setEditable(false);      // read-only
+            textArea.setEditable(false);  // read-only
             textArea.setMouseTransparent(true);
             textArea.setFocusTraversable(false);
             obx.getChildren().add(textArea);
@@ -154,7 +154,7 @@ public class Client extends Application {
                 // Get Output Field
                 TextArea outputField = (TextArea)scene.lookup("#outputField_1");
                 // Append the input Command
-                outputField.setText(txt);
+                outputField.appendText(txt + "\n");
 
                 // clear input command area
                 txtFld.clear();
@@ -169,7 +169,7 @@ public class Client extends Application {
                 String txt = txtFld.getText();
                 String[] response = userSelector.takeCommand(txt);
                 TextArea outputField = (TextArea)scene.lookup("#outputField_2");
-                outputField.setText(txt);
+                outputField.appendText(txt);
                 // clear input command area
                 txtFld.clear();
             });
