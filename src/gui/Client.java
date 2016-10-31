@@ -32,7 +32,7 @@ public class Client extends Application {
         Tab tab = new Tab("New Client");
         final ObservableList<Tab> tabs = tabPane.getTabs();
         tab.closableProperty().bind(Bindings.size(tabs).greaterThan(2));
-        int tab_index = tabs.size()-1;
+        int tab_index = tabs.size();
         tabs.add(tab_index, tab);
         tabPane.getSelectionModel().select(tab);
 
@@ -125,8 +125,7 @@ public class Client extends Application {
             }
         });
 
-        Tab init = createAndSelectNewTab(tabPane, scene);
-        tabPane.getTabs().add(init);
+        createAndSelectNewTab(tabPane, scene);
 
         tabBorder.prefHeightProperty().bind(scene.heightProperty());
         tabBorder.prefWidthProperty().bind(scene.widthProperty());
