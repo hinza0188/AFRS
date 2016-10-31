@@ -28,6 +28,29 @@ public class Client extends Application {
         launch(args);
     }
 
+    private static void inputAction(
+            UserSelector user, Tab tab, TextField txtFld,
+            TextArea textArea, Scene scene, int tab_index) {
+        // set user as tab name
+        user.changeUser(tab.getText());
+
+        // get text input
+        String txt = txtFld.getText();
+
+        // get response
+        String[] response = user.takeCommand(txt);
+        for (String resp : response)
+            textArea.appendText(resp);
+
+        // Get Output Field
+        TextArea outputField = (TextArea)scene.lookup("#outputField_" + tab_index);
+        // Append the input Command
+        outputField.appendText(txt + "\n");
+
+        // clear input command area
+        txtFld.clear();
+    }
+
     private Tab createAndSelectNewTab(final TabPane tabPane, final Scene scene) {
         final ObservableList<Tab> tabs = tabPane.getTabs();
 
@@ -59,49 +82,14 @@ public class Client extends Application {
         txtFld.setId("inputField_" + tab_index);
         txtFld.setPrefSize(400, 20);
         txtFld.setOnAction(event -> {
-            // set user as tab name
-            userSelector.changeUser(tab.getText());
-
-            // get text input
-            String txt = txtFld.getText();
-
-            // get response
-            String[] response = userSelector.takeCommand(txt);
-            for (String resp : response)
-                textArea.appendText(resp);
-
-            // Get Output Field
-            TextArea outputField = (TextArea)scene.lookup("#outputField_" + tab_index);
-            // Append the input Command
-            outputField.appendText(txt + "\n");
-
-            // clear input command area
-            txtFld.clear();
-
-        }); // add event handler
+            inputAction(userSelector, tab, txtFld, textArea, scene, tab_index);
+        });
         // enter button
         Button enter_btn = new Button();
         enter_btn.setId("EnterButton_" + tab_index);
         enter_btn.setText("Enter");
         enter_btn.setOnAction(event -> {
-            // set user as tab name
-            userSelector.changeUser(tab.getText());
-
-            // get text input
-            String txt = txtFld.getText();
-
-            // get response
-            String[] response = userSelector.takeCommand(txt);
-            for (String resp : response)
-                textArea.appendText(resp);
-
-            // Get Output Field
-            TextArea outputField = (TextArea)scene.lookup("#outputField_" + tab_index);
-            // Append the input Command
-            outputField.appendText(txt + "\n");
-
-            // clear input command area
-            txtFld.clear();
+            inputAction(userSelector, tab, txtFld, textArea, scene, tab_index);
         });
         enter_btn.setPrefSize(100, 20);
         ibx.getChildren().addAll(txtFld, enter_btn);
