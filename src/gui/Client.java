@@ -37,8 +37,6 @@ public class Client extends Application {
         tabs.add(tab_index, tab);
         tabPane.getSelectionModel().select(tab);
 
-        this.userSelector.currentManager = null; // make sure user is not created yet
-
         /* create output box */
         HBox obx = new HBox();
         obx.setPadding(new Insets(15, 12, 15, 12));
@@ -68,12 +66,7 @@ public class Client extends Application {
             // get response
             String[] response = userSelector.takeCommand(txt);
             for (String resp : response)
-                textArea.appendText(resp);
-
-            // Get Output Field
-            TextArea outputField = (TextArea)scene.lookup("#outputField_" + tab_index);
-            // Append the input Command
-            outputField.appendText(txt + "\n");
+                textArea.appendText(resp + "\n");
 
             // clear input command area
             txtFld.clear();
@@ -93,12 +86,7 @@ public class Client extends Application {
             // get response
             String[] response = userSelector.takeCommand(txt);
             for (String resp : response)
-                textArea.appendText(resp);
-
-            // Get Output Field
-            TextArea outputField = (TextArea)scene.lookup("#outputField_" + tab_index);
-            // Append the input Command
-            outputField.appendText(txt + "\n");
+                textArea.appendText(resp + "\n");
 
             // clear input command area
             txtFld.clear();
@@ -134,9 +122,8 @@ public class Client extends Application {
         tabPane.getTabs().add(newTab);
 
         tabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldSelectedTab, newSelectedTab) -> {
-            if (newSelectedTab == newTab) {
+            if (newSelectedTab == newTab)
                 createAndSelectNewTab(tabPane, scene);
-            }
         });
 
         createAndSelectNewTab(tabPane, scene);
