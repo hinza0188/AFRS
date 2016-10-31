@@ -29,8 +29,9 @@ public class Client extends Application {
     }
 
     private Tab createAndSelectNewTab(final TabPane tabPane, final Scene scene) {
-        Tab tab = new Tab("New Client");
         final ObservableList<Tab> tabs = tabPane.getTabs();
+
+        Tab tab = new Tab("Client " + tabs.size());
         tab.closableProperty().bind(Bindings.size(tabs).greaterThan(2));
         int tab_index = tabs.size();
         tabs.add(tab_index, tab);
@@ -46,9 +47,7 @@ public class Client extends Application {
         textArea.setId("outputField_" + tab_index);
         textArea.setPrefSize(460, 380);
         textArea.setEditable(false);  // read-only
-        textArea.setMouseTransparent(true);
-        textArea.setFocusTraversable(false);
-        textArea.setText("Welcome to the AFRS System!\nPlease provide your username");
+        textArea.setText("Welcome to the AFRS System!\n");
         obx.getChildren().add(textArea);
 
         /* create input box */
@@ -60,19 +59,17 @@ public class Client extends Application {
         txtFld.setId("inputField_" + tab_index);
         txtFld.setPrefSize(400, 20);
         txtFld.setOnAction(event -> {
+            // set user as tab name
+            userSelector.changeUser(tab.getText());
+
+            // get text input
             String txt = txtFld.getText();
-            if (userSelector.currentManager == null){
-                // if user is not allocated with id, create one
-                userSelector.changeUser(txt);
-                tab.setText(txt); // change the tab display with user id
-                textArea.appendText("\nLog in success! your user_ID: ");
-            } else { //otherwise, proceed taking input text as command
-                //TODO: Do something with response
-                String[] response = userSelector.takeCommand(txt);
-                for (String resp: response) {
-                    textArea.appendText(resp);
-                }
-            }
+
+            // get response
+            String[] response = userSelector.takeCommand(txt);
+            for (String resp : response)
+                textArea.appendText(resp);
+
             // Get Output Field
             TextArea outputField = (TextArea)scene.lookup("#outputField_" + tab_index);
             // Append the input Command
@@ -87,7 +84,24 @@ public class Client extends Application {
         enter_btn.setId("EnterButton_" + tab_index);
         enter_btn.setText("Enter");
         enter_btn.setOnAction(event -> {
-            //TODO: I gotta figure out how to call above action code
+            // set user as tab name
+            userSelector.changeUser(tab.getText());
+
+            // get text input
+            String txt = txtFld.getText();
+
+            // get response
+            String[] response = userSelector.takeCommand(txt);
+            for (String resp : response)
+                textArea.appendText(resp);
+
+            // Get Output Field
+            TextArea outputField = (TextArea)scene.lookup("#outputField_" + tab_index);
+            // Append the input Command
+            outputField.appendText(txt + "\n");
+
+            // clear input command area
+            txtFld.clear();
         });
         enter_btn.setPrefSize(100, 20);
         ibx.getChildren().addAll(txtFld, enter_btn);
