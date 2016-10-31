@@ -28,9 +28,7 @@ public class Client extends Application {
         launch(args);
     }
 
-    private static void inputAction(
-            UserSelector user, Tab tab, TextField txtFld,
-            TextArea textArea, Scene scene, int tab_index) {
+    private static void inputAction(UserSelector user, Tab tab, TextField txtFld,  TextArea textArea) {
         // set user as tab name
         user.changeUser(tab.getText());
 
@@ -40,12 +38,7 @@ public class Client extends Application {
         // get response
         String[] response = user.takeCommand(txt);
         for (String resp : response)
-            textArea.appendText(resp);
-
-        // Get Output Field
-        TextArea outputField = (TextArea)scene.lookup("#outputField_" + tab_index);
-        // Append the input Command
-        outputField.appendText(txt + "\n");
+            textArea.appendText(resp + "\n");
 
         // clear input command area
         txtFld.clear();
@@ -59,8 +52,6 @@ public class Client extends Application {
         int tab_index = tabs.size();
         tabs.add(tab_index, tab);
         tabPane.getSelectionModel().select(tab);
-
-        this.userSelector.currentManager = null; // make sure user is not created yet
 
         /* create output box */
         HBox obx = new HBox();
@@ -82,14 +73,15 @@ public class Client extends Application {
         txtFld.setId("inputField_" + tab_index);
         txtFld.setPrefSize(400, 20);
         txtFld.setOnAction(event -> {
-            inputAction(userSelector, tab, txtFld, textArea, scene, tab_index);
+            inputAction(userSelector, tab, txtFld, textArea);
         });
+
         // enter button
         Button enter_btn = new Button();
         enter_btn.setId("EnterButton_" + tab_index);
         enter_btn.setText("Enter");
         enter_btn.setOnAction(event -> {
-            inputAction(userSelector, tab, txtFld, textArea, scene, tab_index);
+            inputAction(userSelector, tab, txtFld, textArea);
         });
         enter_btn.setPrefSize(100, 20);
         ibx.getChildren().addAll(txtFld, enter_btn);
@@ -122,9 +114,8 @@ public class Client extends Application {
         tabPane.getTabs().add(newTab);
 
         tabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldSelectedTab, newSelectedTab) -> {
-            if (newSelectedTab == newTab) {
+            if (newSelectedTab == newTab)
                 createAndSelectNewTab(tabPane, scene);
-            }
         });
 
         createAndSelectNewTab(tabPane, scene);
