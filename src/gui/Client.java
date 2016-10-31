@@ -69,6 +69,9 @@ public class Client extends Application {
             } else { //otherwise, proceed taking input text as command
                 //TODO: Do something with response
                 String[] response = userSelector.takeCommand(txt);
+                for (String resp: response) {
+                    textArea.appendText(resp);
+                }
             }
             // Get Output Field
             TextArea outputField = (TextArea)scene.lookup("#outputField_" + tab_index);
