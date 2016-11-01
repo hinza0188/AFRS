@@ -49,14 +49,26 @@ public class RequestManager
             return new String[] { ex.getMessage() };
         }
     }
-    public String undo(){
-        Request request=undoStack.pop();
+
+    public String undo()
+    {
+        if (undoStack.size() < 1)
+            return "nothing to undo";
+
+        // undo command
+        Request request = undoStack.pop();
         redoStack.push(request);
         return request.undo();
 
     }
-    public String redo(){
-        Request request=redoStack.pop();
+
+    public String redo()
+    {
+        if (redoStack.size() < 1)
+            return "nothing to redo";
+
+        // redo command
+        Request request = redoStack.pop();
         undoStack.push(request);
         return request.redo();
     }

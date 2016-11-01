@@ -30,7 +30,7 @@ public class Client extends Application
         launch(args);
     }
 
-    private static void inputAction(UserSelector user, Tab tab, TextField txtFld,  TextArea textArea)
+    private void inputAction(UserSelector user, Tab tab, TextField txtFld,  TextArea textArea)
     {
         // set user as tab name
         user.changeUser(tab.getText());
@@ -38,10 +38,18 @@ public class Client extends Application
         // get text input
         String txt = txtFld.getText();
 
-        // get response
-        String[] response = user.takeCommand(txt);
-        for (String resp : response)
-            textArea.appendText(resp + "\n");
+        // parse command and get response
+        if (txt.equals("undo;"))
+            textArea.appendText(userSelector.currentManager.undo() + "\n");
+        else if (txt.equals("redo;"))
+            textArea.appendText(userSelector.currentManager.redo() + "\n");
+        else
+        {
+            // get response
+            String[] response = user.takeCommand(txt);
+            for (String resp : response)
+                textArea.appendText(resp + "\n");
+        }
 
         // clear input command area
         txtFld.clear();
