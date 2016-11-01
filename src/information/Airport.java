@@ -34,6 +34,10 @@ public class Airport
         if (this.weather.length < 1)
             return null;
 
+        // check if this is online data
+        if (this.weather.length == 1)
+            return this.weather[0];
+
         // return current weather
         int currentWeatherIndex = this.weatherRequestCounter % this.weather.length;
         String weather = this.weather[currentWeatherIndex];
