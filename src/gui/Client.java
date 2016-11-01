@@ -17,19 +17,32 @@ import javafx.stage.Stage;
 import server.UserSelector;
 
 /**
- * Created by Yongki An
- * on 2016. 10. 25.
+ * Client class made out of JavaFX for constructing
+ * Graphical User Interface for AFRS.
  */
-
 public class Client extends Application
 {
     private UserSelector userSelector = new UserSelector();
 
+    /**
+     * Start up the primary stage by calling this method
+     * @param args
+     */
     public static void main(String[] args)
     {
         launch(args);
     }
 
+
+    /**
+     * This is static method that controls input command from the
+     * selected tab and pass it to the selected manager ( a.k.a. tab)
+     *
+     * @param user
+     * @param tab
+     * @param txtFld
+     * @param textArea
+     */
     private void inputAction(UserSelector user, Tab tab, TextField txtFld,  TextArea textArea)
     {
         // set user as tab name
@@ -55,6 +68,14 @@ public class Client extends Application
         txtFld.clear();
     }
 
+    /**
+     * This method calls TabPane object to create
+     * a brand new tab with specific id of input and output field
+     * with corresponding buttons.
+     *
+     * @param tabPane
+     * @return
+     */
     private Tab createAndSelectNewTab(final TabPane tabPane)
     {
         // get current tabs
@@ -117,6 +138,13 @@ public class Client extends Application
 
         return tab;
     }
+
+
+    /**
+     *
+     * @param primaryStage:
+     * @throws Exception:
+     */
 
     @Override
     public void start(Stage primaryStage) throws Exception
