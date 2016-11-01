@@ -52,16 +52,19 @@ public class Client extends Application
         String txt = txtFld.getText();
 
         // parse command and get response
-        if (txt.equals("undo;"))
-            textArea.appendText(userSelector.currentManager.undo() + "\n");
-        else if (txt.equals("redo;"))
-            textArea.appendText(userSelector.currentManager.redo() + "\n");
-        else
-        {
-            // get response
-            String[] response = user.takeCommand(txt);
-            for (String resp : response)
-                textArea.appendText(resp + "\n");
+        switch (txt) {
+            case "undo;":
+                textArea.appendText(userSelector.currentManager.undo() + "\n");
+                break;
+            case "redo;":
+                textArea.appendText(userSelector.currentManager.redo() + "\n");
+                break;
+            default:
+                // get response
+                String[] response = user.takeCommand(txt);
+                for (String resp : response)
+                    textArea.appendText(resp + "\n");
+                break;
         }
 
         // clear input command area
@@ -74,7 +77,7 @@ public class Client extends Application
      * with corresponding buttons.
      *
      * @param tabPane
-     * @return
+     * @return Tab
      */
     private Tab createAndSelectNewTab(final TabPane tabPane)
     {
@@ -111,17 +114,13 @@ public class Client extends Application
         // create input text field
         TextField textField = new TextField ();
         textField.setPrefSize(400, 20);
-        textField.setOnAction(event -> {
-            inputAction(userSelector, tab, textField, textArea);
-        });
+        textField.setOnAction(event -> inputAction(userSelector, tab, textField, textArea));
         textField.prefWidthProperty().bind(ibx.widthProperty());
 
         // create enter button
         Button enterButton = new Button();
         enterButton.setText("Enter");
-        enterButton.setOnAction(event -> {
-            inputAction(userSelector, tab, textField, textArea);
-        });
+        enterButton.setOnAction(event -> inputAction(userSelector, tab, textField, textArea));
         enterButton.setMinWidth(100);
         ibx.getChildren().addAll(textField, enterButton);
 
@@ -142,8 +141,8 @@ public class Client extends Application
 
     /**
      *
-     * @param primaryStage:
-     * @throws Exception:
+     * @param primaryStage
+     * @throws Exception
      */
 
     @Override
