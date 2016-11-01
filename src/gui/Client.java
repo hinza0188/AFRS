@@ -21,14 +21,17 @@ import server.UserSelector;
  * on 2016. 10. 25.
  */
 
-public class Client extends Application {
+public class Client extends Application
+{
     private UserSelector userSelector = new UserSelector();
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         launch(args);
     }
 
-    private static void inputAction(UserSelector user, Tab tab, TextField txtFld,  TextArea textArea) {
+    private static void inputAction(UserSelector user, Tab tab, TextField txtFld,  TextArea textArea)
+    {
         // set user as tab name
         user.changeUser(tab.getText());
 
@@ -44,7 +47,8 @@ public class Client extends Application {
         txtFld.clear();
     }
 
-    private Tab createAndSelectNewTab(final TabPane tabPane, final Scene scene) {
+    private Tab createAndSelectNewTab(final TabPane tabPane)
+    {
         // get current tabs
         final ObservableList<Tab> tabs = tabPane.getTabs();
         int tabCount = tabs.size();
@@ -67,6 +71,7 @@ public class Client extends Application {
         textArea.setPrefSize(460, 380);
         textArea.setEditable(false);
         textArea.setText("Welcome to the AFRS System!\n");
+        textArea.prefWidthProperty().bind(obx.widthProperty());
         obx.getChildren().add(textArea);
 
         // create input box
@@ -75,20 +80,21 @@ public class Client extends Application {
         ibx.setSpacing(10);
 
         // create input text field
-        TextField txtFld = new TextField ();
-        txtFld.setPrefSize(400, 20);
-        txtFld.setOnAction(event -> {
-            inputAction(userSelector, tab, txtFld, textArea);
+        TextField textField = new TextField ();
+        textField.setPrefSize(400, 20);
+        textField.setOnAction(event -> {
+            inputAction(userSelector, tab, textField, textArea);
         });
+        textField.prefWidthProperty().bind(ibx.widthProperty());
 
         // create enter button
-        Button enter_btn = new Button();
-        enter_btn.setText("Enter");
-        enter_btn.setOnAction(event -> {
-            inputAction(userSelector, tab, txtFld, textArea);
+        Button enterButton = new Button();
+        enterButton.setText("Enter");
+        enterButton.setOnAction(event -> {
+            inputAction(userSelector, tab, textField, textArea);
         });
-        enter_btn.setPrefSize(100, 20);
-        ibx.getChildren().addAll(txtFld, enter_btn);
+        enterButton.setMinWidth(100);
+        ibx.getChildren().addAll(textField, enterButton);
 
         // cluster altogether into a border pane
         BorderPane page = new BorderPane();
@@ -105,7 +111,8 @@ public class Client extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) throws Exception
+    {
         // create main GUI components
         Group root = new Group();
         Scene scene = new Scene(root, 500, 450);
@@ -120,11 +127,11 @@ public class Client extends Application {
         // add functionality for creating new tab
         tabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldSelectedTab, newSelectedTab) -> {
             if (newSelectedTab == newTab)
-                createAndSelectNewTab(tabPane, scene);
+                createAndSelectNewTab(tabPane);
         });
 
         // create first tab
-        createAndSelectNewTab(tabPane, scene);
+        createAndSelectNewTab(tabPane);
 
         // add tab properties
         tabBorder.prefHeightProperty().bind(scene.heightProperty());
@@ -133,6 +140,8 @@ public class Client extends Application {
         root.getChildren().add(tabBorder);
 
         // show window
+        primaryStage.setMinWidth(500);
+        primaryStage.setMinHeight(200);
         primaryStage.setTitle("AFRS");
         primaryStage.setScene(scene);
         primaryStage.show();
