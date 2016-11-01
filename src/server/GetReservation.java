@@ -31,4 +31,14 @@ public class GetReservation implements Request
     {
         return AFRS.getReservation(passengerName, originAirport, destinationAirport);
     }
+
+    @Override
+    public String undo() {
+        return null;
+    }
+
+    @Override
+    public String redo() {
+        return null;
+    }
 }

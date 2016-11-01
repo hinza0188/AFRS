@@ -16,4 +16,14 @@ public class GetWeather implements Request
     {
         return AFRS.getWeather(airport);
     }
+
+    @Override
+    public String undo() {
+        return null;
+    }
+
+    @Override
+    public String redo() {
+        return null;
+    }
 }

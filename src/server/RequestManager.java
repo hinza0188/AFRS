@@ -7,6 +7,8 @@ public class RequestManager
 {
     private RequestParser parser = new RequestParser();
     private List<Request> commandStack = new Stack<>();
+    private Stack<Request> undoStack = new Stack<>();
+    private Stack<Request> redoStack = new Stack<>();
 
     public String[] takeCommand(String command)
     {
@@ -25,7 +27,9 @@ public class RequestManager
                 {
                     Request requestCommand = requestCommands[i];
                     commandResponses[i] = requestCommand.executeCommand();
-
+                    if(requestCommand instanceof MakeReservation ||requestCommand instanceof DeleteReservation ){
+                        undoStack.push(requestCommand);
+                    }
                     // add to command stack
                     this.commandStack.add(requestCommand);
                 }
@@ -44,5 +48,16 @@ public class RequestManager
             this.parser.clearData();
             return new String[] { ex.getMessage() };
         }
+    }
+    public String undo(){
+        Request request=undoStack.pop();
+        redoStack.push(request);
+        return request.undo();
+
+    }
+    public String redo(){
+        Request request=redoStack.pop();
+        undoStack.push(request);
+        return request.redo();
     }
 }

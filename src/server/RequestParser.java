@@ -181,6 +181,8 @@ public class RequestParser
                     case "weather":
                         commands.add(RequestParser.parseGetWeatherCommand(commandArgs));
                         break;
+
+
                     default:
                         throw new Exception("invalid-command");
                 }

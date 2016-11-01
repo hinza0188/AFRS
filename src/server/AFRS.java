@@ -4,6 +4,7 @@ import helpers.ItinerarySortingAlgorithm;
 import information.*;
 
 import java.time.OffsetTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AFRS
@@ -85,5 +86,9 @@ public class AFRS
         String stringBuilder = "weather," + airportCode + "," + weather + "," + totalMinutes;
 
         return stringBuilder;
+    }
+    public static Itinerary getItineraryObjectFromReservation(String passengerName,Airport originAirport, Airport destinationAirport){
+        ArrayList<Reservation> reservations=ReservationManager.getManager().getReservation(passengerName,originAirport,destinationAirport);
+        return reservations.get(0).getItinerary();
     }
 }

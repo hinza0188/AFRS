@@ -23,4 +23,14 @@ public class GetItinerary implements Request
     {
         return AFRS.getItinerary(originAirport, destinationAirport, maxConnections, sortingAlgorithm);
     }
+
+    @Override
+    public String undo() {
+        return null;
+    }
+
+    @Override
+    public String redo() {
+        return null;
+    }
 }

@@ -22,6 +22,19 @@ public class MakeReservation implements Request
 
     public String undo()
     {
-        return null;
+        StringBuilder sb=new StringBuilder();
+        AFRS.deleteReservation(this.passengerName, this.itinerary.getOriginAirport(), this.itinerary.getDestinationAirport());
+        sb.append("undo, reserve,");
+        sb.append(this.passengerName);
+        sb.append(this.itinerary.toString());
+        return sb.toString();
+    }
+    public String redo(){
+        StringBuilder sb=new StringBuilder();
+        AFRS.makeReservation(passengerName, itinerary);
+        sb.append("redo, reserve,");
+        sb.append(this.passengerName);
+        sb.append(this.itinerary.toString());
+        return sb.toString();
     }
 }
