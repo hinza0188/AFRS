@@ -45,40 +45,44 @@ public class Client extends Application {
     }
 
     private Tab createAndSelectNewTab(final TabPane tabPane, final Scene scene) {
+        // get current tabs
         final ObservableList<Tab> tabs = tabPane.getTabs();
+        int tabCount = tabs.size();
 
+        // create tab
         Tab tab = new Tab("Client " + tabs.size());
         tab.closableProperty().bind(Bindings.size(tabs).greaterThan(2));
-        int tab_index = tabs.size();
-        tabs.add(tab_index, tab);
+        tabs.add(tabCount - 1, tab);
+
+        // add to tab pane
         tabPane.getSelectionModel().select(tab);
 
-        /* create output box */
+        // create output box
         HBox obx = new HBox();
         obx.setPadding(new Insets(15, 12, 15, 12));
         obx.setSpacing(10);
+
+        // create text area
         TextArea textArea = new TextArea();
-        textArea.setId("outputField_" + tab_index);
         textArea.setPrefSize(460, 380);
-        textArea.setEditable(false);  // read-only
+        textArea.setEditable(false);
         textArea.setText("Welcome to the AFRS System!\n");
         obx.getChildren().add(textArea);
 
-        /* create input box */
+        // create input box
         HBox ibx = new HBox();
         ibx.setPadding(new Insets(15, 12, 15, 12));
         ibx.setSpacing(10);
-        // input text field
+
+        // create input text field
         TextField txtFld = new TextField ();
-        txtFld.setId("inputField_" + tab_index);
         txtFld.setPrefSize(400, 20);
         txtFld.setOnAction(event -> {
             inputAction(userSelector, tab, txtFld, textArea);
         });
 
-        // enter button
+        // create enter button
         Button enter_btn = new Button();
-        enter_btn.setId("EnterButton_" + tab_index);
         enter_btn.setText("Enter");
         enter_btn.setOnAction(event -> {
             inputAction(userSelector, tab, txtFld, textArea);
@@ -86,40 +90,43 @@ public class Client extends Application {
         enter_btn.setPrefSize(100, 20);
         ibx.getChildren().addAll(txtFld, enter_btn);
 
-        /* cluster altogether into a border pane*/
+        // cluster altogether into a border pane
         BorderPane page = new BorderPane();
         page.setPadding(new Insets(0, 10, 0, 10));
 
-        // call input HBox at the bottom of the border pane
+        // set page with content
         page.setBottom(ibx);
-        // call output HBox at the center of the border pane
         page.setCenter(obx);
 
-        /* add the page into the tab */
-        tab.setContent(page); // call contents constructor method
+        // add the page into the tab
+        tab.setContent(page);
 
         return tab;
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        // set current user
+        // create main GUI components
         Group root = new Group();
         Scene scene = new Scene(root, 500, 450);
         TabPane tabPane = new TabPane();
         BorderPane tabBorder = new BorderPane();
 
+        // create new tab tab
         final Tab newTab = new Tab("+");
         newTab.setClosable(false);
         tabPane.getTabs().add(newTab);
 
+        // add functionality for creating new tab
         tabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldSelectedTab, newSelectedTab) -> {
             if (newSelectedTab == newTab)
                 createAndSelectNewTab(tabPane, scene);
         });
 
+        // create first tab
         createAndSelectNewTab(tabPane, scene);
 
+        // add tab properties
         tabBorder.prefHeightProperty().bind(scene.heightProperty());
         tabBorder.prefWidthProperty().bind(scene.widthProperty());
         tabBorder.setCenter(tabPane);
