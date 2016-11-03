@@ -6,7 +6,7 @@ import information.Airport;
 /**
  * Get itinerary command.
  */
-public class GetItinerary implements Request
+class GetItinerary implements Request
 {
     private final Airport originAirport;
     private final Airport destinationAirport;
