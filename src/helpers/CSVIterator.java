@@ -1,9 +1,7 @@
 package helpers;
 
-import java.io.FileNotFoundException;
-
 /**
- * Created by hetelek on 11/3/16.
+ * Implemented Iterator class
  */
 public class CSVIterator implements Iterator<String[]>
 {
@@ -26,7 +24,8 @@ public class CSVIterator implements Iterator<String[]>
 
             this.currentLine = this.reader.readLine();
         }
-        catch (Exception ex) { }
+        catch (Exception ignored) {
+        }
     }
 
     /**
@@ -40,7 +39,7 @@ public class CSVIterator implements Iterator<String[]>
 
     /**
      * Get the current item.
-     * @return
+     * @return : Item that is selected by pointer
      */
     public String[] currentItem()
     {
