@@ -34,7 +34,7 @@ public class Client extends Application
 
     /**
      * Start up the primary stage by calling this method
-     * @param args
+     * @param args: arguments that could taken with startup of javaFX launching
      */
     public static void main(String[] args)
     {
@@ -46,10 +46,10 @@ public class Client extends Application
      * This is static method that controls input command from the
      * selected tab and pass it to the selected manager ( a.k.a. tab)
      *
-     * @param user
-     * @param tab
-     * @param txtFld
-     * @param textArea
+     * @param user: the userSelector object that contains manager with hashmap to transfer command to corresponding user
+     * @param tab: specific tab within list of tabPane for output generation in corresponding textArea
+     * @param txtFld: specific textField(input) within the tab
+     * @param textArea: specific textArea(output) within the tab
      */
     private void inputAction(UserSelector user, Tab tab, TextField txtFld, TextArea textArea)
     {
@@ -108,8 +108,13 @@ public class Client extends Application
         return imageView;
     }
 
+    /**
+     * Takes current state of user (whether user is in localDrive or networkConnection)
+     * @param imageView: subject to change
+     * @return Corresponding imageView with state change
+     */
     private ImageView getCorrespondingImage(ImageView imageView) {
-
+        //TODO: needs to take current state to work with
         return imageView;
     }
 
@@ -248,9 +253,9 @@ public class Client extends Application
 
 
     /**
-     *
-     * @param primaryStage
-     * @throws Exception
+     * start up the JavaFX system with primary stage
+     * @param primaryStage: stage that has root scene with every pane filled with content included
+     * @throws Exception: if thrown error: keep going without letting user know about it
      */
 
     @Override
