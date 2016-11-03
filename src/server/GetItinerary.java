@@ -18,7 +18,7 @@ public class GetItinerary implements Request
      * @param originAirport airport object
      * @param destinationAirport airport object
      * @param maxConnections user specified limit number for connection
-     * @param sortingMethod user specified alogorithm for sorting itineraries
+     * @param sortingMethod user specified algorithm for sorting itineraries
      */
     GetItinerary(Airport originAirport, Airport destinationAirport, int maxConnections, ItinerarySortingAlgorithm sortingMethod)
     {
