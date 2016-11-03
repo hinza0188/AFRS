@@ -20,7 +20,7 @@ class GetWeather implements Request
 
     /**
      * Execute the command.
-     * @return
+     * @return : the result of execution
      */
     @Override
     public String executeCommand()
@@ -29,9 +29,7 @@ class GetWeather implements Request
     }
 
     @Override
-    public String undo() {
-        return null;
-    }
+    public String undo() {return null;}
 
     @Override
     public String redo() {

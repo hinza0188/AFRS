@@ -2,7 +2,7 @@ package information;
 
 import java.time.LocalTime;
 
-public interface Flyable
+interface Flyable
 {
     LocalTime getDepartureTime();
 

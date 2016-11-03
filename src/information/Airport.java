@@ -72,7 +72,7 @@ public class Airport
      * Set the weather.
      * @param weather An array representing the weather.
      */
-    protected void setWeather(String[] weather)
+    void setWeather(String[] weather)
     {
         this.weather = weather;
     }
@@ -90,7 +90,7 @@ public class Airport
      * Set the delay time.
      * @param timeDelay
      */
-    protected void setTimeDelay(OffsetTime timeDelay)
+    void setTimeDelay(OffsetTime timeDelay)
     {
         this.timeDelay = timeDelay;
     }

@@ -10,24 +10,22 @@ import java.util.List;
 /**
  * Manages all flights in the system.
  */
-public class FlightManager
+class FlightManager
 {
-    private static String FLIGHTS_FILE_PATH = "data/flights.txt";
-
+    final private static String FLIGHTS_FILE_PATH = "data/flights.txt";
     private static FlightManager singleton = null;
     private ArrayList<Flight> flights;
     private ArrayList<Flight> offlineFlights;
     private ArrayList<Flight> onlineFlights;
 
-    protected FlightManager()
-    {
+    private FlightManager() {
     }
 
     /**
      * Get the global flight manager.
-     * @return
+     * @return : Global flight manager
      */
-    public static FlightManager getManager()
+    static FlightManager getManager()
     {
         if (singleton == null)
         {
@@ -60,7 +58,7 @@ public class FlightManager
     /**
      * Parse the given time into a local time.
      * @param time A string representing a time in format: "10:40p".
-     * @return
+     * @return : Parsed local time in readable manner
      */
     private static LocalTime parseTime(String time)
     {
@@ -82,10 +80,10 @@ public class FlightManager
 
     /**
      * Get all the flights leaving the given airport.
-     * @param originAirport
-     * @return
+     * @param originAirport : airport name that will be the start point
+     * @return : list of available flights
      */
-    public ArrayList<Flight> flightsLeavingAirport(Airport originAirport)
+    ArrayList<Flight> flightsLeavingAirport(Airport originAirport)
     {
         // find flights leaving
         ArrayList<Flight> flightsLeaving = new ArrayList<>();
@@ -100,7 +98,7 @@ public class FlightManager
 
     /**
      * Parse the flights file.
-     * @param filePath
+     * @param filePath : String format of directory
      */
     private void readFlightsFromFile(String filePath)
     {

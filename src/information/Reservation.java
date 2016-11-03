@@ -17,42 +17,42 @@ public class Reservation
     }
 
     /**
-     * Returns the passengers name.
-     * @return
+     * Get the passengers name.
+     * @return the passenger's name
      */
-    public String getPassengerName()
+    String getPassengerName()
     {
         return this.passenger;
     }
 
     /**
      * The reservation's origin airport.
-     * @return
+     * @return final origin airport object
      */
-    public Airport getOriginAirport()
+    Airport getOriginAirport()
     {
         return this.itinerary.getOriginAirport();
     }
 
     /**
      * The reservation's destination airport.
-     * @return
+     * @return final destination airport object
      */
-    public Airport getDestinationAirport()
+    Airport getDestinationAirport()
     {
         return this.itinerary.getDestinationAirport();
     }
 
     /**
      * Get the itinerary.
-     * @return
+     * @return specific itinerary for the reservation
      */
     public Itinerary getItinerary()
     {
         return itinerary;
     }
 
-    public String getPassenger()
+    String getPassenger()
     {
         return passenger;
     }

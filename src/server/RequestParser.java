@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Parse requests.
  */
-public class RequestParser
+class RequestParser
 {
     private static final String TERMINATOR = ";";
     private String currentData;
@@ -23,16 +23,16 @@ public class RequestParser
     /**
      * Create a request parser.
      */
-    public RequestParser()
+    RequestParser()
     {
         this.clearData();
     }
 
     /**
      * Parse command for getting itineraries.
-     * @param commandArgs
-     * @return
-     * @throws Exception
+     * @param commandArgs : user choice of sorting algorithm
+     * @return : GetItinerary class
+     * @throws Exception : ignore when issue occur
      */
     private static GetItinerary parseInfoCommand(String[] commandArgs) throws Exception
     {
@@ -80,7 +80,7 @@ public class RequestParser
 
     /**
      * Parse command to make a reservation.
-     * @param commandArgs
+     * @param commandArgs : user choice of sorting algorithm
      * @return
      * @throws Exception
      */
@@ -100,7 +100,7 @@ public class RequestParser
 
     /**
      * Parse command to get reservations.
-     * @param commandArgs
+     * @param commandArgs : user choice of sorting algorithm
      * @return
      * @throws Exception
      */
@@ -137,7 +137,7 @@ public class RequestParser
 
     /**
      * Parse command to delete reservation.
-     * @param commandArgs
+     * @param commandArgs : user choice of sorting algorithm
      * @return
      * @throws Exception
      */
@@ -161,7 +161,7 @@ public class RequestParser
 
     /**
      * Parse command to get the weather.
-     * @param commandArgs
+     * @param commandArgs : user choice of sorting algorithm
      * @return
      * @throws Exception
      */
@@ -182,17 +182,17 @@ public class RequestParser
      * Append a partial command to the current data.
      * @param data
      */
-    public void appendData(String data)
+    void appendData(String data)
     {
         this.currentData += data;
     }
 
     /**
      * Parse all the data in currentData.
-     * @return
-     * @throws Exception
+     * @return parsed data
+     * @throws Exception : ignore if error occurs
      */
-    public Request[] parseData() throws Exception
+    Request[] parseData() throws Exception
     {
         // make sure we have some data and end with a ';'
         if (currentData.length() < 1 || currentData.charAt(currentData.length() - 1) != ';')
@@ -240,7 +240,7 @@ public class RequestParser
     /**
      * Clear the current data (including partial commands).
      */
-    public void clearData()
+    void clearData()
     {
         this.currentData = "";
     }

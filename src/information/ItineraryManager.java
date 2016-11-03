@@ -4,6 +4,7 @@ import helpers.ItinerarySortingAlgorithm;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -17,13 +18,13 @@ public class ItineraryManager
     private static ItineraryManager singleton = null;
     private List<Itinerary> itineraries = new ArrayList<>();
 
-    protected ItineraryManager()
+    private ItineraryManager()
     {
     }
 
     /**
      * Get the global itinerary manager.
-     * @return
+     * @return global itinerary manager
      */
     public static ItineraryManager getManager()
     {
@@ -36,7 +37,7 @@ public class ItineraryManager
     /**
      * Get the itinerary with the given identifier.
      * @param identifier The itinerary's identifier.
-     * @return
+     * @return speicific itinerary object
      */
     public Itinerary getItineraryWithIdentifier(int identifier)
     {
@@ -49,11 +50,11 @@ public class ItineraryManager
 
     /**
      * Get all itineraries with the given information.
-     * @param originAirport
-     * @param destinationAirport
-     * @param maxConnections
-     * @param sortingMethod
-     * @return
+     * @param originAirport target departing airport object
+     * @param destinationAirport target arriving airport object
+     * @param maxConnections depends on user input, from 0 to up to 2
+     * @param sortingMethod sorting algorithm that could be specified by user
+     * @return chain of itineraries
      */
     public List<Itinerary> getItineraries(Airport originAirport, Airport destinationAirport, int maxConnections, ItinerarySortingAlgorithm sortingMethod)
     {
@@ -63,7 +64,7 @@ public class ItineraryManager
         List<Flight> flights = FlightManager.getManager().flightsLeavingAirport(originAirport);
         for (Flight flight : flights)
         {
-            List<Flight> flightsList = Arrays.asList(flight);
+            List<Flight> flightsList = Collections.singletonList(flight);
             List<Itinerary> newItineraries = this.getItineraries(flightsList, destinationAirport, maxConnections, 0);
             this.itineraries.addAll(newItineraries);
         }
@@ -76,11 +77,11 @@ public class ItineraryManager
 
     /**
      * Get all itineraries with the given information.
-     * @param currentFlights
-     * @param destinationAirport
-     * @param maxConnections
-     * @param depth
-     * @return
+     * @param currentFlights flight object
+     * @param destinationAirport target arriving airport object
+     * @param maxConnections depends on user input, from 0 to up to 2
+     * @param depth left over connection
+     * @return find the itinerary with depth based search
      */
     private List<Itinerary> getItineraries(List<Flight> currentFlights, Airport destinationAirport, int maxConnections, int depth)
     {

@@ -17,12 +17,12 @@ public class Flight implements Flyable
 
     /**
      * Create a flight object.
-     * @param flightNumber
-     * @param originAirport
-     * @param destinationAirport
-     * @param departureTime
-     * @param arrivalTime
-     * @param airfare
+     * @param flightNumber identification number of the flight
+     * @param originAirport departing airport of the flight
+     * @param destinationAirport target airport of the flight
+     * @param departureTime departing time of the flight
+     * @param arrivalTime arriving time of the flight
+     * @param airfare price of the flight
      */
     protected Flight(int flightNumber, Airport originAirport, Airport destinationAirport, LocalTime departureTime,
                      LocalTime arrivalTime, double airfare)
@@ -37,7 +37,7 @@ public class Flight implements Flyable
 
     /**
      * Get the time of departure.
-     * @return
+     * @return readable local time for departure
      */
     @Override
     public LocalTime getDepartureTime()
@@ -47,7 +47,7 @@ public class Flight implements Flyable
 
     /**
      * Get the time of arrival.
-     * @return
+     * @return readable local time for arrival
      */
     @Override
     public LocalTime getArrivalTime()
@@ -57,7 +57,7 @@ public class Flight implements Flyable
 
     /**
      * Get the time of departure including the delay time.
-     * @return
+     * @return readable local time after delay time calculated for departure
      */
     @Override
     public LocalTime getTrueDepartureTime()
@@ -74,7 +74,7 @@ public class Flight implements Flyable
 
     /**
      * Get the time of arrival including the delay time.
-     * @return
+     * @return readable local time after delay time calculated for arrival
      */
     @Override
     public LocalTime getTrueArrivalTime()
@@ -91,7 +91,7 @@ public class Flight implements Flyable
 
     /**
      * Get the origin airport.
-     * @return
+     * @return target airport object
      */
     @Override
     public Airport getOriginAirport()
@@ -101,7 +101,7 @@ public class Flight implements Flyable
 
     /**
      * Get the destination airport.
-     * @return
+     * @return target airport object
      */
     @Override
     public Airport getDestinationAirport()
@@ -111,7 +111,7 @@ public class Flight implements Flyable
 
     /**
      * Get the price for this flight.
-     * @return
+     * @return precise value of ticket
      */
     @Override
     public double getAirfare()

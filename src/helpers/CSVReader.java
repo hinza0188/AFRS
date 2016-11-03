@@ -56,7 +56,7 @@ public class CSVReader implements Iterable<String[]>
      * Read the next line in the file and split by comma.
      * @return
      */
-    protected String[] readLine()
+    String[] readLine()
     {
         try
         {

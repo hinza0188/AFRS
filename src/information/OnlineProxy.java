@@ -13,7 +13,7 @@ import java.util.Map;
 /**
  * Reads and manages a list of online airports.
  */
-public class OnlineProxy implements AirportData
+class OnlineProxy implements AirportData
 {
     private final String URL_FORMAT = "http://services.faa.gov/airport/status/%s?format=application/xml";
     Map<String, Airport> airportCache = new HashMap<>();
@@ -21,7 +21,7 @@ public class OnlineProxy implements AirportData
     /**
      * Get the airport from the web service and return an airport object.
      * @param abbreviation The airport's 3 letter code.
-     * @return
+     * @return Corresponding airport object
      */
     public Airport getAirport(String abbreviation)
     {
@@ -56,7 +56,7 @@ public class OnlineProxy implements AirportData
 
             return airport;
         }
-        catch (Exception ex) { }
+        catch (Exception ignored) { }
 
         return null;
     }

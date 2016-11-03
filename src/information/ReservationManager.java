@@ -11,14 +11,14 @@ public class ReservationManager
     private static ReservationManager singleton = null;
     private ArrayList<Reservation> reservations;
 
-    protected ReservationManager()
+    private ReservationManager()
     {
         reservations = new ArrayList<>();
     }
 
     /**
      * Get the reservation manager singleton object.
-     * @return
+     * @return global reservation manager
      */
     public static ReservationManager getManager()
     {
@@ -30,10 +30,10 @@ public class ReservationManager
 
     /**
      * Delete an existing reservation.
-     * @param passengerName
-     * @param originAirport
-     * @param destinationAirport
-     * @return
+     * @param passengerName first key with reservation
+     * @param originAirport second key with reservation
+     * @param destinationAirport thrid key with reservation
+     * @return true if reservation is successfully deleted
      */
     public boolean deleteReservation(String passengerName, Airport originAirport, Airport destinationAirport)
     {
@@ -53,10 +53,10 @@ public class ReservationManager
 
     /**
      * Get an existing reservation.
-     * @param passengerName
-     * @param originAirport
-     * @param destinationAirport
-     * @return
+     * @param passengerName first key for reservation
+     * @param originAirport second key for reservation
+     * @param destinationAirport third key for reservation
+     * @return specific reservation object
      */
     public ArrayList<Reservation> getReservation(String passengerName, Airport originAirport, Airport destinationAirport)
     {
@@ -82,23 +82,21 @@ public class ReservationManager
 
     /**
      * Get an existing reservation given a passenger.
-     * @param passengerName
-     * @return
+     * @param passengerName first key for reservation
+     * @return all reservation with passenger name key
      */
     public ArrayList<Reservation> getReservationsForPassenger(String passengerName)
     {
-        ArrayList<Reservation> passengersReservations = this.reservations.stream().filter(currentReservation ->
+        return this.reservations.stream().filter(currentReservation ->
                 currentReservation.getPassenger().equals(passengerName)
         ).collect(Collectors.toCollection(ArrayList::new));
-
-        return passengersReservations;
     }
 
     /**
      * Create a reservation.
-     * @param passengerName
-     * @param itinerary
-     * @return
+     * @param passengerName first key for reservation
+     * @param itinerary itinerary, that could be one or more, object
+     * @return true if reservation object has been successfully created
      */
     public boolean makeReservation(String passengerName, Itinerary itinerary)
     {

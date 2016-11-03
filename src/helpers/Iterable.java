@@ -1,13 +1,13 @@
 package helpers;
 
 /**
- * Created by hetelek on 11/3/16.
+ * Interface of iterator class
  */
-public interface Iterable<T>
+interface Iterable<T>
 {
     /**
      * Create an iterator for this iterable.
-     * @return
+     * @return Iterator object
      */
     Iterator<T> getIterator();
 }

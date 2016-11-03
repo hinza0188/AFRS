@@ -3,7 +3,7 @@ package information;
 /**
  * Interface for retrieving airport objects.
  */
-public interface AirportData
+interface AirportData
 {
     /**
      * Get an airport object corresponding to the given 3 letter code.
