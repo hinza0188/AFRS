@@ -12,16 +12,28 @@ import information.ItineraryManager;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Parse requests.
+ */
 public class RequestParser
 {
     private static final String TERMINATOR = ";";
     private String currentData;
 
+    /**
+     * Create a request parser.
+     */
     public RequestParser()
     {
         this.clearData();
     }
 
+    /**
+     * Parse command for getting itineraries.
+     * @param commandArgs
+     * @return
+     * @throws Exception
+     */
     private static GetItinerary parseInfoCommand(String[] commandArgs) throws Exception
     {
         // info,origin,destination[,connections[,sort-order]];
@@ -66,6 +78,12 @@ public class RequestParser
         return new GetItinerary(originAirport, destinationAirport, maxConnections, sortingMethod);
     }
 
+    /**
+     * Parse command to make a reservation.
+     * @param commandArgs
+     * @return
+     * @throws Exception
+     */
     public static MakeReservation parseMakeReservationCommand(String[] commandArgs) throws Exception
     {
         // reserve,id,passenger;
@@ -80,6 +98,12 @@ public class RequestParser
         return new MakeReservation(passenger, itinerary);
     }
 
+    /**
+     * Parse command to get reservations.
+     * @param commandArgs
+     * @return
+     * @throws Exception
+     */
     public static GetReservation parseGetReservationCommand(String[] commandArgs) throws Exception
     {
         // retrieve,passenger[,origin[,destination]];
@@ -111,6 +135,12 @@ public class RequestParser
         return new GetReservation(passenger);
     }
 
+    /**
+     * Parse command to delete reservation.
+     * @param commandArgs
+     * @return
+     * @throws Exception
+     */
     public static DeleteReservation parseDeleteReservationCommand(String[] commandArgs) throws Exception
     {
         // delete,passenger,origin,destination;
@@ -129,6 +159,12 @@ public class RequestParser
         return new DeleteReservation(passenger, originAirport, destinationAirport);
     }
 
+    /**
+     * Parse command to get the weather.
+     * @param commandArgs
+     * @return
+     * @throws Exception
+     */
     public static GetWeather parseGetWeatherCommand(String[] commandArgs) throws Exception
     {
         // weather,airport;
@@ -142,11 +178,20 @@ public class RequestParser
         return new GetWeather(airport);
     }
 
+    /**
+     * Append a partial command to the current data.
+     * @param data
+     */
     public void appendData(String data)
     {
         this.currentData += data;
     }
 
+    /**
+     * Parse all the data in currentData.
+     * @return
+     * @throws Exception
+     */
     public Request[] parseData() throws Exception
     {
         // make sure we have some data and end with a ';'
@@ -192,6 +237,9 @@ public class RequestParser
         return commands.toArray(new Request[]{});
     }
 
+    /**
+     * Clear the current data (including partial commands).
+     */
     public void clearData()
     {
         this.currentData = "";

@@ -6,6 +6,9 @@ import java.io.FileNotFoundException;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
+/**
+ * Manages all flights in the system.
+ */
 public class FlightManager
 {
     private static String FLIGHTS_FILE_PATH = "data/flights.txt";
@@ -17,6 +20,10 @@ public class FlightManager
     {
     }
 
+    /**
+     * Get the global flight manager.
+     * @return
+     */
     public static FlightManager getManager()
     {
         if (singleton == null)
@@ -29,6 +36,11 @@ public class FlightManager
         return singleton;
     }
 
+    /**
+     * Parse the given time into a local time.
+     * @param time A string representing a time in format: "10:40p".
+     * @return
+     */
     private static LocalTime parseTime(String time)
     {
         // get string info
@@ -47,6 +59,11 @@ public class FlightManager
             return LocalTime.of(hour + 11, minute);
     }
 
+    /**
+     * Get all the flights leaving the given airport.
+     * @param originAirport
+     * @return
+     */
     public ArrayList<Flight> flightsLeavingAirport(Airport originAirport)
     {
         // find flights leaving
@@ -60,6 +77,10 @@ public class FlightManager
         return flightsLeaving;
     }
 
+    /**
+     * Parse the flights file.
+     * @param filePath
+     */
     private void readFlightsFromFile(String filePath)
     {
         // create new array list

@@ -5,21 +5,35 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * Reads a CSV file from disk line by line.
+ */
 public class CSVReader
 {
     private String filePath;
     private BufferedReader br;
 
+    /**
+     * Initialize with given file path.
+     * @param filePath
+     */
     public CSVReader(String filePath)
     {
         this.filePath = filePath;
     }
 
+    /**
+     * Open the file.
+     * @throws FileNotFoundException
+     */
     public void open() throws FileNotFoundException
     {
         this.br = new BufferedReader(new FileReader(this.filePath));
     }
 
+    /**
+     * Close the file.
+     */
     public void close()
     {
         try
@@ -30,6 +44,10 @@ public class CSVReader
         }
     }
 
+    /**
+     * Read the next line in the file and split by comma.
+     * @return
+     */
     public String[] readLine()
     {
         try

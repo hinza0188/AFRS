@@ -21,6 +21,10 @@ public class ItineraryManager
     {
     }
 
+    /**
+     * Get the global itinerary manager.
+     * @return
+     */
     public static ItineraryManager getManager()
     {
         if (singleton == null)
@@ -29,6 +33,11 @@ public class ItineraryManager
         return singleton;
     }
 
+    /**
+     * Get the itinerary with the given identifier.
+     * @param identifier The itinerary's identifier.
+     * @return
+     */
     public Itinerary getItineraryWithIdentifier(int identifier)
     {
         // find itinerary
@@ -38,6 +47,14 @@ public class ItineraryManager
         return null;
     }
 
+    /**
+     * Get all itineraries with the given information.
+     * @param originAirport
+     * @param destinationAirport
+     * @param maxConnections
+     * @param sortingMethod
+     * @return
+     */
     public List<Itinerary> getItineraries(Airport originAirport, Airport destinationAirport, int maxConnections, ItinerarySortingAlgorithm sortingMethod)
     {
         this.itineraries.clear();
@@ -57,6 +74,14 @@ public class ItineraryManager
         return this.itineraries;
     }
 
+    /**
+     * Get all itineraries with the given information.
+     * @param currentFlights
+     * @param destinationAirport
+     * @param maxConnections
+     * @param depth
+     * @return
+     */
     private List<Itinerary> getItineraries(List<Flight> currentFlights, Airport destinationAirport, int maxConnections, int depth)
     {
         // check if we're over the max connections

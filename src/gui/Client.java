@@ -54,10 +54,10 @@ public class Client extends Application
         // parse command and get response
         switch (txt) {
             case "undo;":
-                textArea.appendText(userSelector.currentManager.undo() + "\n");
+                textArea.appendText(userSelector.getCurrentManager().undo() + "\n");
                 break;
             case "redo;":
-                textArea.appendText(userSelector.currentManager.redo() + "\n");
+                textArea.appendText(userSelector.getCurrentManager().redo() + "\n");
                 break;
             default:
                 // get response

@@ -10,11 +10,19 @@ import java.time.ZoneOffset;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Reads and manages a list of online airports.
+ */
 public class OnlineProxy implements AirportData
 {
     private final String URL_FORMAT = "http://services.faa.gov/airport/status/%s?format=application/xml";
     Map<String, Airport> airportCache = new HashMap<>();
 
+    /**
+     * Get the airport from the web service and return an airport object.
+     * @param abbreviation The airport's 3 letter code.
+     * @return
+     */
     public Airport getAirport(String abbreviation)
     {
         try

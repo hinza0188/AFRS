@@ -8,6 +8,9 @@ import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Reads and manages a list of offline airports.
+ */
 public class OfflineProxy implements AirportData
 {
     private ArrayList<Airport> airports;
@@ -15,6 +18,9 @@ public class OfflineProxy implements AirportData
     private static String AIRPORT_WEATHER_FILE_PATH = "data/weather.txt";
     private static String AIRPORT_DELAYS_FILE_PATH = "data/delays.txt";
 
+    /**
+     * Parse the offline data file.
+     */
     public OfflineProxy()
     {
         this.readAirportsFromFile(AIRPORT_FILE_PATH);
@@ -22,6 +28,11 @@ public class OfflineProxy implements AirportData
         this.readDelaysFromFile(AIRPORT_DELAYS_FILE_PATH);
     }
 
+    /**
+     * Get the airport from the 3 letter airport code.
+     * @param abbreviation The airport's 3 letter code.
+     * @return
+     */
     public Airport getAirport(String abbreviation)
     {
         // find the given airport
@@ -34,6 +45,10 @@ public class OfflineProxy implements AirportData
         return null;
     }
 
+    /**
+     * Parse the airport file.
+     * @param filePath
+     */
     private void readAirportsFromFile(String filePath)
     {
         // create new array list
@@ -62,6 +77,10 @@ public class OfflineProxy implements AirportData
         }
     }
 
+    /**
+     * Parse the weather from the local file.
+     * @param filePath
+     */
     private void readWeatherFromFile(String filePath)
     {
         try
@@ -90,6 +109,10 @@ public class OfflineProxy implements AirportData
         }
     }
 
+    /**
+     * Read the delays from the file.
+     * @param filePath
+     */
     private void readDelaysFromFile(String filePath)
     {
         try

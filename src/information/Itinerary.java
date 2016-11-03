@@ -7,11 +7,19 @@ public class Itinerary implements Flyable
 {
     private Flight[] legs;
 
+    /**
+     * Create an itinerary from multiple flights.
+     * @param legs The flights in chronological order that this itinerary's composed of.
+     */
     public Itinerary(Flight[] legs)
     {
         this.legs = legs;
     }
 
+    /**
+     * Get the itinerary's departure time.
+     * @return
+     */
     @Override
     public LocalTime getDepartureTime()
     {
@@ -19,6 +27,10 @@ public class Itinerary implements Flyable
         return this.legs[0].getDepartureTime();
     }
 
+    /**
+     * Get the itinerary's arrival time.
+     * @return
+     */
     @Override
     public LocalTime getArrivalTime()
     {
@@ -27,6 +39,10 @@ public class Itinerary implements Flyable
         return this.legs[last].getArrivalTime();
     }
 
+    /**
+     * Get the itinerary's departure time including delays.
+     * @return
+     */
     @Override
     public LocalTime getTrueDepartureTime()
     {
@@ -34,6 +50,10 @@ public class Itinerary implements Flyable
         return this.legs[0].getTrueDepartureTime();
     }
 
+    /**
+     * Get the itinerary's arrival time including delays.
+     * @return
+     */
     @Override
     public LocalTime getTrueArrivalTime()
     {
@@ -42,6 +62,10 @@ public class Itinerary implements Flyable
         return this.legs[last].getTrueArrivalTime();
     }
 
+    /**
+     * Get the origin airport of the itinerary.
+     * @return
+     */
     @Override
     public Airport getOriginAirport()
     {
@@ -49,6 +73,10 @@ public class Itinerary implements Flyable
         return this.legs[0].getOriginAirport();
     }
 
+    /**
+     * Get the destination airport of the itinerary.
+     * @return
+     */
     @Override
     public Airport getDestinationAirport()
     {
@@ -57,6 +85,10 @@ public class Itinerary implements Flyable
         return this.legs[last].getDestinationAirport();
     }
 
+    /**
+     * Get the total cost of all the flights in the itinerary.
+     * @return
+     */
     @Override
     public double getAirfare()
     {

@@ -3,6 +3,9 @@ package server;
 import java.util.List;
 import java.util.Stack;
 
+/**
+ * Manager for handling and parsing commands.
+ */
 public class RequestManager
 {
     private RequestParser parser = new RequestParser();
@@ -10,6 +13,11 @@ public class RequestManager
     private Stack<Request> undoStack = new Stack<>();
     private Stack<Request> redoStack = new Stack<>();
 
+    /**
+     * Take a full or partial command.
+     * @param command
+     * @return
+     */
     public String[] takeCommand(String command)
     {
         // append input to parser
@@ -50,6 +58,10 @@ public class RequestManager
         }
     }
 
+    /**
+     * Undo the last command that was done.
+     * @return
+     */
     public String undo()
     {
         if (undoStack.size() < 1)
@@ -62,6 +74,10 @@ public class RequestManager
 
     }
 
+    /**
+     * Redo the last undid command.
+     * @return
+     */
     public String redo()
     {
         if (redoStack.size() < 1)

@@ -7,8 +7,17 @@ import java.time.OffsetTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Provides simple methods to perform more complex actions using our underlying system.
+ */
 public class AFRS
 {
+    /**
+     * Make a reservation.
+     * @param passengerName
+     * @param itinerary
+     * @return
+     */
     public static String makeReservation(String passengerName, Itinerary itinerary)
     {
         boolean success = ReservationManager.getManager().makeReservation(passengerName, itinerary);
@@ -18,6 +27,14 @@ public class AFRS
             return "error,duplicate reservation";
     }
 
+    /**
+     * Get itineraries given criteria.
+     * @param originAirport
+     * @param destinationAirport
+     * @param maxConnections
+     * @param sortingMethod
+     * @return
+     */
     public static String getItinerary(Airport originAirport, Airport destinationAirport, int maxConnections, ItinerarySortingAlgorithm sortingMethod)
     {
         // get itineraries
@@ -39,6 +56,13 @@ public class AFRS
         return stringBuilder.toString();
     }
 
+    /**
+     * Get an existing reservation.
+     * @param passengerName
+     * @param originAirport
+     * @param destinationAirport
+     * @return
+     */
     public static String getReservation(String passengerName, Airport originAirport, Airport destinationAirport)
     {
         List<Reservation> reservations;
@@ -65,6 +89,13 @@ public class AFRS
         return stringBuilder.toString();
     }
 
+    /**
+     * Delete an existing reservation.
+     * @param passengerName
+     * @param originAirport
+     * @param destinationAirport
+     * @return
+     */
     public static String deleteReservation(String passengerName, Airport originAirport, Airport destinationAirport)
     {
         boolean success = ReservationManager.getManager().deleteReservation(passengerName, originAirport, destinationAirport);
@@ -74,6 +105,11 @@ public class AFRS
             return "error,reservation not found";
     }
 
+    /**
+     * Get the weather for a given airport.
+     * @param airport
+     * @return
+     */
     public static String getWeather(Airport airport)
     {
         // get weather/delays
@@ -87,8 +123,17 @@ public class AFRS
 
         return stringBuilder;
     }
-    public static Itinerary getItineraryObjectFromReservation(String passengerName,Airport originAirport, Airport destinationAirport){
-        ArrayList<Reservation> reservations=ReservationManager.getManager().getReservation(passengerName,originAirport,destinationAirport);
+
+    /**
+     * Get itinerary given a reservation.
+     * @param passengerName
+     * @param originAirport
+     * @param destinationAirport
+     * @return
+     */
+    public static Itinerary getItineraryObjectFromReservation(String passengerName, Airport originAirport, Airport destinationAirport)
+    {
+        ArrayList<Reservation> reservations = ReservationManager.getManager().getReservation(passengerName, originAirport, destinationAirport);
         return reservations.get(0).getItinerary();
     }
 }

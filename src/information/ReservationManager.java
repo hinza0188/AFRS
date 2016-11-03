@@ -3,6 +3,9 @@ package information;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+/**
+ * Manages a list of reservations.
+ */
 public class ReservationManager
 {
     private static ReservationManager singleton = null;
@@ -13,6 +16,10 @@ public class ReservationManager
         reservations = new ArrayList<>();
     }
 
+    /**
+     * Get the reservation manager singleton object.
+     * @return
+     */
     public static ReservationManager getManager()
     {
         if (singleton == null)
@@ -21,6 +28,13 @@ public class ReservationManager
         return singleton;
     }
 
+    /**
+     * Delete an existing reservation.
+     * @param passengerName
+     * @param originAirport
+     * @param destinationAirport
+     * @return
+     */
     public boolean deleteReservation(String passengerName, Airport originAirport, Airport destinationAirport)
     {
         for (Reservation reservation : this.reservations)
@@ -37,6 +51,13 @@ public class ReservationManager
         return false;
     }
 
+    /**
+     * Get an existing reservation.
+     * @param passengerName
+     * @param originAirport
+     * @param destinationAirport
+     * @return
+     */
     public ArrayList<Reservation> getReservation(String passengerName, Airport originAirport, Airport destinationAirport)
     {
         ArrayList<Reservation> reservations = new ArrayList<>();
@@ -59,6 +80,11 @@ public class ReservationManager
         return reservations;
     }
 
+    /**
+     * Get an existing reservation given a passenger.
+     * @param passengerName
+     * @return
+     */
     public ArrayList<Reservation> getReservationsForPassenger(String passengerName)
     {
         ArrayList<Reservation> passengersReservations = this.reservations.stream().filter(currentReservation ->
@@ -68,6 +94,12 @@ public class ReservationManager
         return passengersReservations;
     }
 
+    /**
+     * Create a reservation.
+     * @param passengerName
+     * @param itinerary
+     * @return
+     */
     public boolean makeReservation(String passengerName, Itinerary itinerary)
     {
         // check if reservation exists

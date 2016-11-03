@@ -3,6 +3,9 @@ package server;
 import helpers.ItinerarySortingAlgorithm;
 import information.Airport;
 
+/**
+ * Get itinerary command.
+ */
 public class GetItinerary implements Request
 {
     private Airport originAirport;
@@ -10,6 +13,13 @@ public class GetItinerary implements Request
     private int maxConnections;
     private ItinerarySortingAlgorithm sortingAlgorithm;
 
+    /**
+     * Create an itinerary command.
+     * @param originAirport
+     * @param destinationAirport
+     * @param maxConnections
+     * @param sortingMethod
+     */
     public GetItinerary(Airport originAirport, Airport destinationAirport, int maxConnections, ItinerarySortingAlgorithm sortingMethod)
     {
         this.originAirport = originAirport;
@@ -18,6 +28,10 @@ public class GetItinerary implements Request
         this.sortingAlgorithm = sortingMethod;
     }
 
+    /**
+     * Execute the command.
+     * @return
+     */
     @Override
     public String executeCommand()
     {
