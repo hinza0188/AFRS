@@ -1,5 +1,6 @@
 package gui;
 
+import information.AirportManager;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
@@ -229,10 +230,16 @@ public class Client extends Application
         ImageView localDriveImageView = new ImageView(localDriveImage);
         ToggleButton toggleButton = new ToggleButton("", resizeImage(localDriveImageView));
         toggleButton.addEventHandler(ActionEvent.ACTION, event -> {
-            //@TODO: change image and report current state
+            // set offline/online status
+            AirportManager.getManager().setOffline(!toggleButton.isSelected());
+
+            // change online/offline based on button
+            if (toggleButton.isSelected())
+                toggleButton.setGraphic(resizeImage(internetImageView));
+            else
+                toggleButton.setGraphic(resizeImage(localDriveImageView));
         });
 
-        toggleButton.setOnAction(event -> toggleButton.setGraphic(resizeImage(internetImageView)));
         toggleButton.setMinWidth(50);
         ibx.getChildren().addAll(textField, enterButton, toggleButton);
 
