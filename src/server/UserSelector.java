@@ -13,7 +13,7 @@ public class UserSelector
 
     /**
      * Change to a new or existing user.
-     * @param userId
+     * @param userId: customized string from user input
      */
     public void changeUser(String userId)
     {
@@ -26,6 +26,16 @@ public class UserSelector
             this.currentManager = new RequestManager();
             this.managers.put(userId, this.currentManager);
         }
+    }
+
+    /**
+     * Check if provided userID already exists during runtime.
+     * @param userID: customized string from user input
+     * @return  true, when given userID already exists
+     *          false, when given userID does not exist.
+     */
+    public boolean doesUserExist(String userID) {
+        return this.managers.containsKey(userID);
     }
 
     /**

@@ -6,15 +6,13 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import server.UserSelector;
+
+import java.util.Optional;
 
 /**
  * Client class made out of JavaFX for constructing
@@ -23,7 +21,7 @@ import server.UserSelector;
 public class Client extends Application
 {
     private UserSelector userSelector = new UserSelector();
-
+    private String userID;
     /**
      * Start up the primary stage by calling this method
      * @param args
@@ -45,7 +43,7 @@ public class Client extends Application
      */
     private void inputAction(UserSelector user, Tab tab, TextField txtFld,  TextArea textArea)
     {
-        // set user as tab name
+        // select the appropriate user
         user.changeUser(tab.getText());
 
         // get text input
@@ -71,6 +69,14 @@ public class Client extends Application
         txtFld.clear();
     }
 
+    private Alert errorFoundDialog(String errorCode, String new_userID) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error Encountered!");
+        alert.setHeaderText(errorCode);
+        alert.setContentText("Instead, your userID will be set to -> " + new_userID);
+        return alert;
+    }
+
     /**
      * This method calls TabPane object to create
      * a brand new tab with specific id of input and output field
@@ -85,8 +91,58 @@ public class Client extends Application
         final ObservableList<Tab> tabs = tabPane.getTabs();
         int tabCount = tabs.size();
 
+        // pop up dialog
+        TextInputDialog dialog = new TextInputDialog("Your UserID");
+        dialog.setTitle("Text Input Dialog");
+        dialog.setHeaderText("Log In <AFRS>");
+        dialog.setContentText("Please enter your UserID:");
+
+        Optional<String> result = dialog.showAndWait();
+        String default_userID = "Client " + tabs.size();
+        /*  Checks if
+         *  1. retrieved cancel button
+         *  2. retrieved result equals to the placeholder text?
+         *  3. retrieved result equals to the empty string?
+         *  4. retrieved result equals to any other existing client?
+         *  @TODO: This is such a terrible code ... :( I need to make this less coupled
+         */
+        if (result.isPresent()) {
+            if (!result.get().equals("Your UserID") ) {
+                if (!result.get().equals("")){
+                    if (!userSelector.doesUserExist(result.get())) {
+                        // pass all four counter conditions
+                        this.userID = result.get();
+                        this.userSelector.changeUser(result.get());
+                    } else {
+                        // call appropriate error code
+                        String errorCode4 = "Your UserID has been detected as duplicate";
+                        errorFoundDialog(errorCode4, default_userID).showAndWait();
+                        this.userID = default_userID;
+                        this.userSelector.changeUser(default_userID);
+                    }
+                } else {
+                    // call appropriate error code
+                    String errorCode3 = "You have left empty for your UserID!";
+                    errorFoundDialog(errorCode3, default_userID).showAndWait();
+                    this.userID = default_userID;
+                    this.userSelector.changeUser(default_userID);
+                }
+            } else {
+                // call appropriate error code
+                String errorCode2 = "You may not have placeholder as your UserID!";
+                errorFoundDialog(errorCode2, default_userID).showAndWait();
+                this.userID = default_userID;
+                this.userSelector.changeUser(default_userID);
+            }
+        } else {
+            // call appropriate error code
+            String errorCode1 = "You have pressed cancel button!";
+            errorFoundDialog(errorCode1, default_userID).showAndWait();
+            this.userID = default_userID;
+            this.userSelector.changeUser(default_userID);
+        }
         // create tab
-        Tab tab = new Tab("Client " + tabs.size());
+        Tab tab = new Tab(this.userID);
         tab.closableProperty().bind(Bindings.size(tabs).greaterThan(2));
         tabs.add(tabCount - 1, tab);
 
