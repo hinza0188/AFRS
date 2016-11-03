@@ -7,6 +7,8 @@ import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -82,6 +84,20 @@ public class Client extends Application
         alert.setHeaderText(errorCode);
         alert.setContentText("Instead, your userID will be set to -> " + new_userID);
         return alert;
+    }
+
+    /**
+     * Instead of directly resizing image data, take the
+     * image into ImageView and shrink the image for its desired size
+     * This method minimize the pixel loss for GUI.
+     * @param imageView: ImageView object that wraps image object with directory
+     * @return imageView: modified
+     */
+    private ImageView resizeImage(ImageView imageView) {
+        imageView.setFitHeight(20);
+        imageView.setFitWidth(20);
+        imageView.setPreserveRatio(true);
+        return imageView;
     }
 
     /**
@@ -176,16 +192,26 @@ public class Client extends Application
 
         // create input text field
         TextField textField = new TextField ();
-        textField.setPrefSize(400, 20);
+        textField.setPrefSize(400, 30);
         textField.setOnAction(event -> inputAction(userSelector, tab, textField, textArea));
         textField.prefWidthProperty().bind(ibx.widthProperty());
 
         // create enter button
-        Button enterButton = new Button();
-        enterButton.setText("Enter");
+        Image enterImage = new Image(getClass().getResourceAsStream("images/key_enter.png"));
+        ImageView enterImageView = new ImageView(enterImage);
+        Button enterButton = new Button("", resizeImage(enterImageView));
         enterButton.setOnAction(event -> inputAction(userSelector, tab, textField, textArea));
-        enterButton.setMinWidth(100);
-        ibx.getChildren().addAll(textField, enterButton);
+        enterButton.setMinWidth(50);
+
+        // create network/local toggle button
+        Image internetImage = new Image(getClass().getResourceAsStream("images/internet.png"));
+        Image localDriveImage = new Image(getClass().getResourceAsStream("images/hard_drive.png"));
+        ImageView internetImageView = new ImageView(internetImage);
+        ImageView localDriveImageView = new ImageView(localDriveImage);
+        ToggleButton toggleButton = new ToggleButton("", resizeImage(internetImageView));
+        toggleButton.setMinWidth(50);
+        ibx.getChildren().addAll(textField, enterButton, toggleButton);
+
 
         // cluster altogether into a border pane
         BorderPane page = new BorderPane();
