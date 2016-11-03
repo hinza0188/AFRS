@@ -214,6 +214,7 @@ public class Client extends Application
         ToggleButton toggleButton = new ToggleButton("", resizeImage(new ImageView(new Image(getClass().getResourceAsStream("images/floppy_disk_icon.png")))));
         toggleButton.addEventHandler(ActionEvent.ACTION, event -> {
             // set offline <-> online status
+            // TODO: ASK Prof. Bobby whether or not undo command should also operate on online <-> offline switch
             AirportManager.getManager().setOffline(!toggleButton.isSelected());
             getCorrespondingImage(toggleButton);
         });
