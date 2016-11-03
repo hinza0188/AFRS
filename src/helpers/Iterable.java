@@ -5,5 +5,9 @@ package helpers;
  */
 public interface Iterable<T>
 {
+    /**
+     * Create an iterator for this iterable.
+     * @return
+     */
     Iterator<T> getIterator();
 }

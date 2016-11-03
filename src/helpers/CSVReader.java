@@ -44,6 +44,10 @@ public class CSVReader implements Iterable<String[]>
         }
     }
 
+    /**
+     * Create an iterator for this iterable.
+     * @return
+     */
     public CSVIterator getIterator()
     {
         return new CSVIterator(this);
