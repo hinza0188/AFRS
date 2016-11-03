@@ -3,6 +3,9 @@ package gui;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -100,13 +103,18 @@ public class Client extends Application
         return imageView;
     }
 
+    private ImageView getCorrespondingImage(ImageView imageView) {
+
+        return imageView;
+    }
+
     /**
      * This method calls TabPane object to create
      * a brand new tab with specific id of input and output field
      * with corresponding buttons.
      *
-     * @param tabPane
-     * @return Tab
+     * @param tabPane: allocated tabPane from the primaryStage -> root scene.
+     * @return Tab: added new tab with all I/O action contents in the provided tabPane
      */
     private Tab createAndSelectNewTab(final TabPane tabPane)
     {
@@ -209,8 +217,12 @@ public class Client extends Application
         Image localDriveImage = new Image(getClass().getResourceAsStream("images/floppy_disk_icon.png"));
         ImageView internetImageView = new ImageView(internetImage);
         ImageView localDriveImageView = new ImageView(localDriveImage);
-        ToggleButton toggleButton = new ToggleButton("", resizeImage(internetImageView));
-        toggleButton.setOnAction(event -> toggleButton.setGraphic(resizeImage(localDriveImageView)));
+        ToggleButton toggleButton = new ToggleButton("", resizeImage(localDriveImageView));
+        toggleButton.addEventHandler(ActionEvent.ACTION, event -> {
+            //@TODO: change image and report current state
+        });
+
+        toggleButton.setOnAction(event -> toggleButton.setGraphic(resizeImage(internetImageView)));
         toggleButton.setMinWidth(50);
         ibx.getChildren().addAll(textField, enterButton, toggleButton);
 
