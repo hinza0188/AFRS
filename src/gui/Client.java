@@ -53,10 +53,11 @@ public class Client extends Application
      * @param txtFld: specific textField(input) within the tab
      * @param textArea: specific textArea(output) within the tab
      */
-    private void inputAction(UserSelector user, Tab tab, TextField txtFld, TextArea textArea)
+    private void inputAction(UserSelector user, Tab tab, TextField txtFld, TextArea textArea, boolean offline)
     {
         // select the appropriate user
         user.changeUser(tab.getText());
+        AirportManager.getManager().setOffline(offline);
 
         // get text input
         String txt = txtFld.getText();
@@ -209,19 +210,6 @@ public class Client extends Application
         ibx.setPadding(new Insets(15, 12, 15, 12));
         ibx.setSpacing(10);
 
-        // create input text field
-        TextField textField = new TextField ();
-        textField.setPrefSize(400, 30);
-        textField.setOnAction(event -> inputAction(userSelector, tab, textField, textArea));
-        textField.prefWidthProperty().bind(ibx.widthProperty());
-
-        // create enter button
-        Image enterImage = new Image(getClass().getResourceAsStream("images/key_enter.png"));
-        ImageView enterImageView = new ImageView(enterImage);
-        Button enterButton = new Button("", resizeImage(enterImageView));
-        enterButton.setOnAction(event -> inputAction(userSelector, tab, textField, textArea));
-        enterButton.setMinWidth(50);
-
         // create network/local toggle button
         ToggleButton toggleButton = new ToggleButton("", resizeImage(new ImageView(new Image(getClass().getResourceAsStream("images/floppy_disk_icon.png")))));
         toggleButton.addEventHandler(ActionEvent.ACTION, event -> {
@@ -230,6 +218,19 @@ public class Client extends Application
             getCorrespondingImage(toggleButton);
         });
         toggleButton.setMinWidth(50);
+
+        // create input text field
+        TextField textField = new TextField ();
+        textField.setPrefSize(400, 30);
+        textField.setOnAction(event -> inputAction(userSelector, tab, textField, textArea, !toggleButton.isSelected()));
+        textField.prefWidthProperty().bind(ibx.widthProperty());
+
+        // create enter button
+        Image enterImage = new Image(getClass().getResourceAsStream("images/key_enter.png"));
+        ImageView enterImageView = new ImageView(enterImage);
+        Button enterButton = new Button("", resizeImage(enterImageView));
+        enterButton.setOnAction(event -> inputAction(userSelector, tab, textField, textArea, !toggleButton.isSelected()));
+        enterButton.setMinWidth(50);
 
         // add all Input interface to the ibx<HBox>
         ibx.getChildren().addAll(textField, enterButton, toggleButton);
