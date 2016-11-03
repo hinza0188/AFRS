@@ -32,6 +32,7 @@ import java.util.Optional;
 public class Client extends Application
 {
     private UserSelector userSelector = new UserSelector();
+    private int lastTabIndex = 0;
 
     /**
      * Start up the primary stage by calling this method
@@ -133,60 +134,55 @@ public class Client extends Application
     private Tab createAndSelectNewTab(final TabPane tabPane)
     {
         // get current tabs
-        final String userID;
+        String userID;
         final ObservableList<Tab> tabs = tabPane.getTabs();
         int tabCount = tabs.size();
 
         // pop up dialog
-        TextInputDialog dialog = new TextInputDialog("Your UserID");
-        dialog.setTitle("Text Input Dialog");
-        dialog.setHeaderText("Log In <AFRS>");
-        dialog.setContentText("Please enter your UserID:");
+        String defaultUserID = "Client " + tabs.size();
+        TextInputDialog dialog = new TextInputDialog(defaultUserID);
+        dialog.setTitle("New Client");
+        dialog.setHeaderText("Enter user ID");
+        dialog.setContentText("User ID:");
 
         Optional<String> result = dialog.showAndWait();
-        String default_userID = "Client " + tabs.size();
-        /*  Checks if
-         *  1. retrieved cancel button
-         *  2. retrieved result equals to the placeholder text?
-         *  3. retrieved result equals to the empty string?
-         *  4. retrieved result equals to any other existing client?
-         *  @TODO: This is such a terrible code ... :( I need to make this less coupled
-         */
-        if (result.isPresent()) {
-            if (!result.get().equals("Your UserID") ) {
-                if (!result.get().equals("")){
-                    if (!userSelector.doesUserExist(result.get())) {
-                        // pass all four counter conditions
-                        userID = result.get();
-                        this.userSelector.changeUser(result.get());
-                    } else {
-                        // call appropriate error code
-                        String errorCode4 = "Your UserID has been detected as duplicate";
-                        errorFoundDialog(errorCode4, default_userID).showAndWait();
-                        userID = default_userID;
-                        this.userSelector.changeUser(default_userID);
-                    }
-                } else {
-                    // call appropriate error code
-                    String errorCode3 = "You have left empty for your UserID!";
-                    errorFoundDialog(errorCode3, default_userID).showAndWait();
-                    userID = default_userID;
-                    this.userSelector.changeUser(default_userID);
+
+        // check if they hit cancel
+        if (result.isPresent())
+        {
+            userID = result.get();
+            if (!userID.isEmpty())
+            {
+                if (!userSelector.doesUserExist(userID))
+                {
+                    // pass all four counter conditions
+                    this.userSelector.changeUser(userID);
                 }
-            } else {
-                // call appropriate error code
-                String errorCode2 = "You may not have placeholder as your UserID!";
-                errorFoundDialog(errorCode2, default_userID).showAndWait();
-                userID = default_userID;
-                this.userSelector.changeUser(default_userID);
+                else
+                {
+                    // call appropriate error code
+                    String errorCode4 = "Your user ID has been detected as duplicate...";
+                    userID = defaultUserID;
+                    errorFoundDialog(errorCode4, defaultUserID).showAndWait();
+                    this.userSelector.changeUser(defaultUserID);
+                }
             }
-        } else {
-            // call appropriate error code
-            String errorCode1 = "You have pressed cancel button!";
-            errorFoundDialog(errorCode1, default_userID).showAndWait();
-            userID = default_userID;
-            this.userSelector.changeUser(default_userID);
+            else
+            {
+                // call appropriate error code
+                String errorCode3 = "You have left your user ID empty!";
+                errorFoundDialog(errorCode3, defaultUserID).showAndWait();
+                userID = defaultUserID;
+                this.userSelector.changeUser(defaultUserID);
+            }
         }
+        else
+        {
+            // if they hit cancel, don't change the user
+            tabPane.getSelectionModel().select(lastTabIndex);
+            return null;
+        }
+
         // create tab
         Tab tab = new Tab(userID);
         tab.closableProperty().bind(Bindings.size(tabs).greaterThan(2));
@@ -275,12 +271,17 @@ public class Client extends Application
 
         // add functionality for creating new tab
         tabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldSelectedTab, newSelectedTab) -> {
+            // set last tab index
+            lastTabIndex = tabPane.getTabs().indexOf(oldSelectedTab);
+
+            // check if we are creating a new tab
             if (newSelectedTab == newTab)
                 createAndSelectNewTab(tabPane);
         });
 
         // create first tab
-        createAndSelectNewTab(tabPane);
+        while (tabPane.getTabs().size() < 2)
+            createAndSelectNewTab(tabPane);
 
         // add tab properties
         tabBorder.prefHeightProperty().bind(scene.heightProperty());
