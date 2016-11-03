@@ -69,6 +69,13 @@ public class Client extends Application
         txtFld.clear();
     }
 
+    /**
+     * create a new alert dialog that says user did not follow
+     * what the developer intended to do
+     * @param errorCode : String, main error message that goes to the header of the dialog
+     * @param new_userID: String, default userID that will be produced instead of user intended string
+     * @return Alert dialog
+     */
     private Alert errorFoundDialog(String errorCode, String new_userID) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error Encountered!");
