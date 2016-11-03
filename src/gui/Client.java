@@ -267,7 +267,9 @@ public class Client extends Application
         BorderPane tabBorder = new BorderPane();
 
         // create new tab tab
-        final Tab newTab = new Tab("+");
+
+        final Tab newTab = new Tab("");
+        newTab.setGraphic(resizeImage(new ImageView(new Image(getClass().getResourceAsStream("images/symbol_add.png")))));
         newTab.setClosable(false);
         tabPane.getTabs().add(newTab);
 
