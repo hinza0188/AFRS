@@ -40,7 +40,7 @@ public class UserSelector
 
     /**
      * Get the current manager (for the current user).
-     * @return
+     * @return RequestManager object with current UserID
      */
     public RequestManager getCurrentManager()
     {
@@ -48,9 +48,9 @@ public class UserSelector
     }
 
     /**
-     * Take a command.
-     * @param command
-     * @return
+     * Take a command to the selected current manager
+     * @param command: input stream from GUI textField
+     * @return Array of strings to in format of RequestParser
      */
     public String[] takeCommand(String command)
     {
