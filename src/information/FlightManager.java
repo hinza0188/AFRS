@@ -6,6 +6,7 @@ import helpers.CSVReader;
 import java.io.FileNotFoundException;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Manages all flights in the system.
@@ -16,6 +17,8 @@ public class FlightManager
 
     private static FlightManager singleton = null;
     private ArrayList<Flight> flights;
+    private ArrayList<Flight> offlineFlights;
+    private ArrayList<Flight> onlineFlights;
 
     protected FlightManager()
     {
@@ -31,8 +34,26 @@ public class FlightManager
         {
             // create manager (and read flights)
             singleton = new FlightManager();
+        }
+
+        if (AirportManager.getManager().isOffline() && singleton.offlineFlights == null)
+        {
+            singleton.offlineFlights = new ArrayList<>();
+            singleton.flights = singleton.offlineFlights;
+
             FlightManager.singleton.readFlightsFromFile(FLIGHTS_FILE_PATH);
         }
+        else if (!AirportManager.getManager().isOffline() && singleton.onlineFlights == null)
+        {
+            singleton.onlineFlights = new ArrayList<>();
+            singleton.flights = singleton.onlineFlights;
+
+            FlightManager.singleton.readFlightsFromFile(FLIGHTS_FILE_PATH);
+        }
+        else  if (AirportManager.getManager().isOffline())
+            singleton.flights = singleton.offlineFlights;
+        else  if (!AirportManager.getManager().isOffline())
+            singleton.flights = singleton.onlineFlights;
 
         return singleton;
     }
@@ -84,9 +105,6 @@ public class FlightManager
      */
     private void readFlightsFromFile(String filePath)
     {
-        // create new array list
-        this.flights = new ArrayList<>();
-
         // open file
         CSVReader flightFile = new CSVReader(filePath);
         CSVIterator csvIterator = flightFile.getIterator();
