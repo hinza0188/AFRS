@@ -1,6 +1,8 @@
 package information;
 
+import helpers.CSVIterator;
 import helpers.CSVReader;
+import helpers.Iterator;
 
 import java.io.FileNotFoundException;
 import java.time.OffsetTime;
@@ -54,27 +56,27 @@ public class OfflineProxy implements AirportData
         // create new array list
         this.airports = new ArrayList<>();
 
-        try
+        // open file
+        CSVReader airportFile = new CSVReader(filePath);
+        CSVIterator csvIterator = airportFile.getIterator();
+
+        csvIterator.first();
+
+        // read airports
+        while (csvIterator.currentItem() != null)
         {
-            // open file
-            CSVReader airportFile = new CSVReader(filePath);
-            airportFile.open();
+            String[] data = csvIterator.currentItem();
 
-            // read airports
-            String[] data;
-            while ((data = airportFile.readLine()) != null)
-            {
-                String abbreviation = data[0];
-                String cityName = data[1];
+            String abbreviation = data[0];
+            String cityName = data[1];
 
-                airports.add(new Airport(abbreviation, cityName));
-            }
+            airports.add(new Airport(abbreviation, cityName));
 
-            // close file
-            airportFile.close();
-        } catch (FileNotFoundException ex)
-        {
+            csvIterator.next();
         }
+
+        // close file
+        airportFile.close();
     }
 
     /**
@@ -83,30 +85,30 @@ public class OfflineProxy implements AirportData
      */
     private void readWeatherFromFile(String filePath)
     {
-        try
+        // open file
+        CSVReader weatherFile = new CSVReader(filePath);
+        CSVIterator csvIterator = weatherFile.getIterator();
+
+        csvIterator.first();
+
+        // read weather
+        while (csvIterator.currentItem() != null)
         {
-            // open file
-            CSVReader weatherFile = new CSVReader(filePath);
-            weatherFile.open();
+            String[] data = csvIterator.currentItem();
 
-            // read weather
-            String[] data;
-            while ((data = weatherFile.readLine()) != null)
-            {
-                // get airport
-                String abbreviation = data[0];
-                Airport airport = this.getAirport(abbreviation);
+            // get airport
+            String abbreviation = data[0];
+            Airport airport = this.getAirport(abbreviation);
 
-                // get weather (remove first element), and set
-                String[] weatherData = Arrays.copyOfRange(data, 1, data.length);
-                airport.setWeather(weatherData);
-            }
+            // get weather (remove first element), and set
+            String[] weatherData = Arrays.copyOfRange(data, 1, data.length);
+            airport.setWeather(weatherData);
 
-            // close file
-            weatherFile.close();
-        } catch (FileNotFoundException ex)
-        {
+            csvIterator.next();
         }
+
+        // close file
+        weatherFile.close();
     }
 
     /**
@@ -115,29 +117,29 @@ public class OfflineProxy implements AirportData
      */
     private void readDelaysFromFile(String filePath)
     {
-        try
+        // open file
+        CSVReader delaysFile = new CSVReader(filePath);
+        CSVIterator csvIterator = delaysFile.getIterator();
+
+        csvIterator.first();
+
+        // read weather
+        while (csvIterator.currentItem() != null)
         {
-            // open file
-            CSVReader delaysFile = new CSVReader(filePath);
-            delaysFile.open();
+            String[] currentItem = csvIterator.currentItem();
 
-            // read weather
-            String[] data;
-            while ((data = delaysFile.readLine()) != null)
-            {
-                // get airport
-                String abbreviation = data[0];
-                Airport airport = this.getAirport(abbreviation);
+            // get airport
+            String abbreviation = currentItem[0];
+            Airport airport = this.getAirport(abbreviation);
 
-                // get delay, and set
-                int delayInMinutes = Integer.parseInt(data[1]);
-                airport.setTimeDelay(OffsetTime.of(delayInMinutes / 60, delayInMinutes % 60, 0, 0, ZoneOffset.UTC));
-            }
+            // get delay, and set
+            int delayInMinutes = Integer.parseInt(currentItem[1]);
+            airport.setTimeDelay(OffsetTime.of(delayInMinutes / 60, delayInMinutes % 60, 0, 0, ZoneOffset.UTC));
 
-            // close file
-            delaysFile.close();
-        } catch (FileNotFoundException ex)
-        {
+            csvIterator.next();
         }
+
+        // close file
+        delaysFile.close();
     }
 }

@@ -8,7 +8,7 @@ import java.io.IOException;
 /**
  * Reads a CSV file from disk line by line.
  */
-public class CSVReader
+public class CSVReader implements Iterable<String[]>
 {
     private String filePath;
     private BufferedReader br;
@@ -39,9 +39,14 @@ public class CSVReader
         try
         {
             this.br.close();
-        } catch (IOException ex)
+        } catch (Exception ex)
         {
         }
+    }
+
+    public CSVIterator getIterator()
+    {
+        return new CSVIterator(this);
     }
 
     /**
