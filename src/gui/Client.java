@@ -23,7 +23,7 @@ import java.util.Optional;
 public class Client extends Application
 {
     private UserSelector userSelector = new UserSelector();
-    private String userID;
+
     /**
      * Start up the primary stage by calling this method
      * @param args
@@ -111,6 +111,7 @@ public class Client extends Application
     private Tab createAndSelectNewTab(final TabPane tabPane)
     {
         // get current tabs
+        final String userID;
         final ObservableList<Tab> tabs = tabPane.getTabs();
         int tabCount = tabs.size();
 
@@ -134,38 +135,38 @@ public class Client extends Application
                 if (!result.get().equals("")){
                     if (!userSelector.doesUserExist(result.get())) {
                         // pass all four counter conditions
-                        this.userID = result.get();
+                        userID = result.get();
                         this.userSelector.changeUser(result.get());
                     } else {
                         // call appropriate error code
                         String errorCode4 = "Your UserID has been detected as duplicate";
                         errorFoundDialog(errorCode4, default_userID).showAndWait();
-                        this.userID = default_userID;
+                        userID = default_userID;
                         this.userSelector.changeUser(default_userID);
                     }
                 } else {
                     // call appropriate error code
                     String errorCode3 = "You have left empty for your UserID!";
                     errorFoundDialog(errorCode3, default_userID).showAndWait();
-                    this.userID = default_userID;
+                    userID = default_userID;
                     this.userSelector.changeUser(default_userID);
                 }
             } else {
                 // call appropriate error code
                 String errorCode2 = "You may not have placeholder as your UserID!";
                 errorFoundDialog(errorCode2, default_userID).showAndWait();
-                this.userID = default_userID;
+                userID = default_userID;
                 this.userSelector.changeUser(default_userID);
             }
         } else {
             // call appropriate error code
             String errorCode1 = "You have pressed cancel button!";
             errorFoundDialog(errorCode1, default_userID).showAndWait();
-            this.userID = default_userID;
+            userID = default_userID;
             this.userSelector.changeUser(default_userID);
         }
         // create tab
-        Tab tab = new Tab(this.userID);
+        Tab tab = new Tab(userID);
         tab.closableProperty().bind(Bindings.size(tabs).greaterThan(2));
         tabs.add(tabCount - 1, tab);
 
