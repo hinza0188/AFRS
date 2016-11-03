@@ -111,12 +111,15 @@ public class Client extends Application
 
     /**
      * Takes current state of user (whether user is in localDrive or networkConnection)
-     * @param imageView: subject to change
-     * @return Corresponding imageView with state change
+     * and set the toggle button with corresponding image for that
+     * @param toggleButton: takes clicked status of toggleButton to differentiate current user status
      */
-    private ImageView getCorrespondingImage(ImageView imageView) {
-        //TODO: needs to take current state to work with
-        return imageView;
+    private void getCorrespondingImage(ToggleButton toggleButton) {
+        // change online/offline based on button
+        if (toggleButton.isSelected())
+            toggleButton.setGraphic(resizeImage(new ImageView(new Image(getClass().getResourceAsStream("images/internet.png")))));
+        else
+            toggleButton.setGraphic(resizeImage(new ImageView(new Image(getClass().getResourceAsStream("images/floppy_disk_icon.png")))));
     }
 
     /**
@@ -224,25 +227,16 @@ public class Client extends Application
         enterButton.setMinWidth(50);
 
         // create network/local toggle button
-        Image internetImage = new Image(getClass().getResourceAsStream("images/internet.png"));
-        Image localDriveImage = new Image(getClass().getResourceAsStream("images/floppy_disk_icon.png"));
-        ImageView internetImageView = new ImageView(internetImage);
-        ImageView localDriveImageView = new ImageView(localDriveImage);
-        ToggleButton toggleButton = new ToggleButton("", resizeImage(localDriveImageView));
+        ToggleButton toggleButton = new ToggleButton("", resizeImage(new ImageView(new Image(getClass().getResourceAsStream("images/floppy_disk_icon.png")))));
         toggleButton.addEventHandler(ActionEvent.ACTION, event -> {
-            // set offline/online status
+            // set offline <-> online status
             AirportManager.getManager().setOffline(!toggleButton.isSelected());
-
-            // change online/offline based on button
-            if (toggleButton.isSelected())
-                toggleButton.setGraphic(resizeImage(internetImageView));
-            else
-                toggleButton.setGraphic(resizeImage(localDriveImageView));
+            getCorrespondingImage(toggleButton);
         });
-
         toggleButton.setMinWidth(50);
-        ibx.getChildren().addAll(textField, enterButton, toggleButton);
 
+        // add all Input interface to the ibx<HBox>
+        ibx.getChildren().addAll(textField, enterButton, toggleButton);
 
         // cluster altogether into a border pane
         BorderPane page = new BorderPane();
