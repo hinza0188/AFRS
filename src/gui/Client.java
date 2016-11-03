@@ -206,10 +206,11 @@ public class Client extends Application
 
         // create network/local toggle button
         Image internetImage = new Image(getClass().getResourceAsStream("images/internet.png"));
-        Image localDriveImage = new Image(getClass().getResourceAsStream("images/hard_drive.png"));
+        Image localDriveImage = new Image(getClass().getResourceAsStream("images/floppy_disk_icon.png"));
         ImageView internetImageView = new ImageView(internetImage);
         ImageView localDriveImageView = new ImageView(localDriveImage);
         ToggleButton toggleButton = new ToggleButton("", resizeImage(internetImageView));
+        toggleButton.setOnAction(event -> toggleButton.setGraphic(resizeImage(localDriveImageView)));
         toggleButton.setMinWidth(50);
         ibx.getChildren().addAll(textField, enterButton, toggleButton);
 
