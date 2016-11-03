@@ -1,5 +1,6 @@
 package information;
 
+import helpers.CSVIterator;
 import helpers.CSVReader;
 
 import java.io.FileNotFoundException;
@@ -86,43 +87,43 @@ public class FlightManager
         // create new array list
         this.flights = new ArrayList<>();
 
-        try
+        // open file
+        CSVReader flightFile = new CSVReader(filePath);
+        CSVIterator csvIterator = flightFile.getIterator();
+
+        csvIterator.first();
+
+        // read flights
+        while (csvIterator.currentItem() != null)
         {
-            // open file
-            CSVReader flightFile = new CSVReader(filePath);
-            flightFile.open();
+            String[] data = csvIterator.currentItem();
 
-            // read flights
-            String[] data;
-            while ((data = flightFile.readLine()) != null)
-            {
-                // get data
-                String originAirportAbbreviation = data[0];
-                String destinationAirportAbbreviation = data[1];
-                String dTime = data[2];
-                String aTime = data[3];
+            // get data
+            String originAirportAbbreviation = data[0];
+            String destinationAirportAbbreviation = data[1];
+            String dTime = data[2];
+            String aTime = data[3];
 
-                // parse data
-                LocalTime departureTime = FlightManager.parseTime(dTime);
-                LocalTime arrivalTime = FlightManager.parseTime(aTime);
+            // parse data
+            LocalTime departureTime = FlightManager.parseTime(dTime);
+            LocalTime arrivalTime = FlightManager.parseTime(aTime);
 
-                int flightNumber = Integer.parseInt(data[4]);
-                double airfare = Double.parseDouble(data[5]);
+            int flightNumber = Integer.parseInt(data[4]);
+            double airfare = Double.parseDouble(data[5]);
 
-                // get airport objects
-                Airport originAirport = AirportManager.getManager().getAirport(originAirportAbbreviation);
-                Airport destinationAirport = AirportManager.getManager().getAirport(destinationAirportAbbreviation);
+            // get airport objects
+            Airport originAirport = AirportManager.getManager().getAirport(originAirportAbbreviation);
+            Airport destinationAirport = AirportManager.getManager().getAirport(destinationAirportAbbreviation);
 
-                // create flight
-                Flight flight = new Flight(flightNumber, originAirport, destinationAirport, departureTime, arrivalTime,
-                        airfare);
-                this.flights.add(flight);
-            }
+            // create flight
+            Flight flight = new Flight(flightNumber, originAirport, destinationAirport, departureTime, arrivalTime,
+                    airfare);
+            this.flights.add(flight);
 
-            // close file
-            flightFile.close();
-        } catch (FileNotFoundException ex)
-        {
+            csvIterator.next();
         }
+
+        // close file
+        flightFile.close();
     }
 }
