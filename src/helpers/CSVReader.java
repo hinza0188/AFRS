@@ -3,7 +3,6 @@ package helpers;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 
 /**
  * Reads a CSV file from disk line by line.
