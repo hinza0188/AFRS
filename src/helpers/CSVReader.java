@@ -25,7 +25,7 @@ public class CSVReader implements Iterable<String[]>
      * Open the file.
      * @throws FileNotFoundException:
      */
-    public void open() throws FileNotFoundException
+    void open() throws FileNotFoundException
     {
         this.br = new BufferedReader(new FileReader(this.filePath));
     }
@@ -56,7 +56,7 @@ public class CSVReader implements Iterable<String[]>
      * Read the next line in the file and split by comma.
      * @return
      */
-    public String[] readLine()
+    protected String[] readLine()
     {
         try
         {

@@ -2,9 +2,6 @@ package information;
 
 import helpers.CSVIterator;
 import helpers.CSVReader;
-import helpers.Iterator;
-
-import java.io.FileNotFoundException;
 import java.time.OffsetTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
@@ -13,17 +10,17 @@ import java.util.Arrays;
 /**
  * Reads and manages a list of offline airports.
  */
-public class OfflineProxy implements AirportData
+class OfflineProxy implements AirportData
 {
     private ArrayList<Airport> airports;
-    private static String AIRPORT_FILE_PATH = "data/airports.txt";
-    private static String AIRPORT_WEATHER_FILE_PATH = "data/weather.txt";
-    private static String AIRPORT_DELAYS_FILE_PATH = "data/delays.txt";
+    final private static String AIRPORT_FILE_PATH = "data/airports.txt";
+    final private static String AIRPORT_WEATHER_FILE_PATH = "data/weather.txt";
+    final private static String AIRPORT_DELAYS_FILE_PATH = "data/delays.txt";
 
     /**
      * Parse the offline data file.
      */
-    public OfflineProxy()
+    OfflineProxy()
     {
         this.readAirportsFromFile(AIRPORT_FILE_PATH);
         this.readWeatherFromFile(AIRPORT_WEATHER_FILE_PATH);
@@ -33,7 +30,7 @@ public class OfflineProxy implements AirportData
     /**
      * Get the airport from the 3 letter airport code.
      * @param abbreviation The airport's 3 letter code.
-     * @return
+     * @return Corresponding Airport object
      */
     public Airport getAirport(String abbreviation)
     {
@@ -49,7 +46,7 @@ public class OfflineProxy implements AirportData
 
     /**
      * Parse the airport file.
-     * @param filePath
+     * @param filePath: String format of directory
      */
     private void readAirportsFromFile(String filePath)
     {
@@ -81,7 +78,7 @@ public class OfflineProxy implements AirportData
 
     /**
      * Parse the weather from the local file.
-     * @param filePath
+     * @param filePath: String format of directory
      */
     private void readWeatherFromFile(String filePath)
     {
@@ -113,7 +110,7 @@ public class OfflineProxy implements AirportData
 
     /**
      * Read the delays from the file.
-     * @param filePath
+     * @param filePath: String format of directory
      */
     private void readDelaysFromFile(String filePath)
     {

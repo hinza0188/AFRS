@@ -1,14 +1,14 @@
 package information;
 
 /**
- * Interface for retreiving airport objects.
+ * Interface for retrieving airport objects.
  */
 public interface AirportData
 {
     /**
      * Get an airport object corresponding to the given 3 letter code.
      * @param abbreviation The airport's 3 letter code.
-     * @return
+     * @return : corresponding Airport Object
      */
     Airport getAirport(String abbreviation);
 }

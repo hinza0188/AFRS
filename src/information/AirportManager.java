@@ -10,16 +10,16 @@ public class AirportManager
     private boolean offline;
 
     /**
-     * Intialize an airport manager.
+     * Initialize an airport manager.
      */
-    protected AirportManager()
+    private AirportManager()
     {
         this.setOffline(true);
     }
 
     /**
-     *
-     * @param offline
+     * use boolean representation for setting system in online <-> offline
+     * @param offline: set to true if status is declared offline
      */
     public void setOffline(boolean offline)
     {
@@ -33,8 +33,8 @@ public class AirportManager
     }
 
     /**
-     * Returns true if data is coming from a local file.
-     * @return
+     * Identify if airport is pointing at online or offline
+     * @return : true if data is coming from a local file.
      */
     public boolean isOffline()
     {
@@ -43,7 +43,7 @@ public class AirportManager
 
     /**
      * Get the global airport manager.
-     * @return
+     * @return : the global airport manager
      */
     public static AirportManager getManager()
     {
@@ -59,7 +59,7 @@ public class AirportManager
     /**
      * Get an airport object.
      * @param abbreviation The airport's 3 letter abbreviation.
-     * @return
+     * @return : Get the corresponding Airport Object
      */
     public Airport getAirport(String abbreviation)
     {

@@ -5,21 +5,21 @@ import information.Airport;
 /**
  * Get weather command.
  */
-public class GetWeather implements Request
+class GetWeather implements Request
 {
     private Airport airport;
 
     /**
      * Create get weather command given an airport object.
-     * @param airport
+     * @param airport: target airport name
      */
-    public GetWeather(Airport airport)
+    GetWeather(Airport airport)
     {
         this.airport = airport;
     }
 
     /**
-     * Exeecute the command.
+     * Execute the command.
      * @return
      */
     @Override

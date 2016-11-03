@@ -48,7 +48,7 @@ public class Client extends Application
      * This is static method that controls input command from the
      * selected tab and pass it to the selected manager ( a.k.a. tab)
      *
-     * @param user: the userSelector object that contains manager with hashmap to transfer command to corresponding user
+     * @param user: the userSelector object that contains manager with Hash Map to transfer command to corresponding user
      * @param tab: specific tab within list of tabPane for output generation in corresponding textArea
      * @param txtFld: specific textField(input) within the tab
      * @param textArea: specific textArea(output) within the tab
