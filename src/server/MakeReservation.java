@@ -12,8 +12,8 @@ class MakeReservation implements Request
 
     /**
      * Create a make reservation command.
-     * @param passengerName
-     * @param itinerary
+     * @param passengerName first key of reservation
+     * @param itinerary chain of flight data in itinerary object
      */
     MakeReservation(String passengerName, Itinerary itinerary)
     {
@@ -23,7 +23,7 @@ class MakeReservation implements Request
 
     /**
      * Execute the command (make the reservation).
-     * @return
+     * @return success string if executed without error
      */
     @Override
     public String executeCommand()
@@ -33,7 +33,7 @@ class MakeReservation implements Request
 
     /**
      * Undo the make reservation command.
-     * @return
+     * @return success string if executed without error
      */
     public String undo()
     {
@@ -47,7 +47,7 @@ class MakeReservation implements Request
 
     /**
      * Redo the undid make reservation command.
-     * @return
+     * @return success string if executed without error
      */
     public String redo()
     {

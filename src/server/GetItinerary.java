@@ -15,10 +15,10 @@ public class GetItinerary implements Request
 
     /**
      * Create an itinerary command.
-     * @param originAirport
-     * @param destinationAirport
-     * @param maxConnections
-     * @param sortingMethod
+     * @param originAirport airport object
+     * @param destinationAirport airport object
+     * @param maxConnections user specified limit number for connection
+     * @param sortingMethod user specified alogorithm for sorting itineraries
      */
     GetItinerary(Airport originAirport, Airport destinationAirport, int maxConnections, ItinerarySortingAlgorithm sortingMethod)
     {
@@ -30,7 +30,7 @@ public class GetItinerary implements Request
 
     /**
      * Execute the command.
-     * @return
+     * @return success string if executed without error
      */
     @Override
     public String executeCommand()

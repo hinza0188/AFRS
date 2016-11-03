@@ -45,7 +45,7 @@ public class CSVReader implements Iterable<String[]>
 
     /**
      * Create an iterator for this iterable.
-     * @return
+     * @return Iterator
      */
     public CSVIterator getIterator()
     {
@@ -54,7 +54,7 @@ public class CSVReader implements Iterable<String[]>
 
     /**
      * Read the next line in the file and split by comma.
-     * @return
+     * @return strings in array
      */
     String[] readLine()
     {

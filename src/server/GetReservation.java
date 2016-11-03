@@ -13,9 +13,9 @@ public class GetReservation implements Request
 
     /**
      * Create a get reservation command with explicit parameters.
-     * @param passengerName
-     * @param originAirport
-     * @param destinationAirport
+     * @param passengerName first key of reservation
+     * @param originAirport second key of reservation
+     * @param destinationAirport third key of reservation
      */
     public GetReservation(String passengerName, Airport originAirport, Airport destinationAirport)
     {
@@ -26,8 +26,8 @@ public class GetReservation implements Request
 
     /**
      * Create a get reservation command.
-     * @param passengerName
-     * @param originAirport
+     * @param passengerName first key of reservation
+     * @param originAirport second key of reservation
      */
     public GetReservation(String passengerName, Airport originAirport)
     {
@@ -37,7 +37,7 @@ public class GetReservation implements Request
 
     /**
      * Create a get reservation command given a passenger name.
-     * @param passengerName
+     * @param passengerName first key of reservation
      */
     public GetReservation(String passengerName)
     {
@@ -46,7 +46,7 @@ public class GetReservation implements Request
 
     /**
      * Execute the command.
-     * @return
+     * @return success string if command got executed without error
      */
     @Override
     public String executeCommand()

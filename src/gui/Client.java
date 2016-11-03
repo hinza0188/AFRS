@@ -130,7 +130,6 @@ public class Client extends Application
      * with corresponding buttons.
      *
      * @param tabPane: allocated tabPane from the primaryStage -> root scene.
-     * @return Tab: added new tab with all I/O action contents in the provided tabPane
      */
     private void createAndSelectNewTab(final TabPane tabPane)
     {

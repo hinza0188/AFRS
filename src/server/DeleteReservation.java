@@ -15,9 +15,9 @@ public class DeleteReservation implements Request
 
     /**
      * Create the command to delete.
-     * @param passengerName
-     * @param originAirport
-     * @param destinationAirport
+     * @param passengerName first key of reservation
+     * @param originAirport second key of reservation
+     * @param destinationAirport third key of reservation
      */
     DeleteReservation(String passengerName, Airport originAirport, Airport destinationAirport)
     {
@@ -29,7 +29,7 @@ public class DeleteReservation implements Request
 
     /**
      * Execute the command.
-     * @return
+     * @return success string if reservation is deleted
      */
     @Override
     public String executeCommand()
@@ -39,7 +39,7 @@ public class DeleteReservation implements Request
 
     /**
      * Undo the command.
-     * @return
+     * @return success of undo command execution
      */
     @Override
     public String undo()
@@ -54,7 +54,7 @@ public class DeleteReservation implements Request
 
     /**
      * Redo the undid command.
-     * @return
+     * @return success of redo command execution
      */
     @Override
     public String redo()

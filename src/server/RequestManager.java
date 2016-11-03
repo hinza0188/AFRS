@@ -8,17 +8,19 @@ import java.util.Stack;
  */
 public class RequestManager
 {
-    private RequestParser parser = new RequestParser();
-    private List<Request> commandStack = new Stack<>();
-    private Stack<Request> undoStack = new Stack<>();
-    private Stack<Request> redoStack = new Stack<>();
+    private final RequestParser parser = new RequestParser();
+    // TODO: IDE yells this is not working
+    private final List<Request> commandStack = new Stack<>();
+    // TODO: LOOK ABOVE
+    private final Stack<Request> undoStack = new Stack<>();
+    private final Stack<Request> redoStack = new Stack<>();
 
     /**
      * Take a full or partial command.
-     * @param command
-     * @return
+     * @param command parsed input string
+     * @return arrays of string for status change
      */
-    public String[] takeCommand(String command)
+    String[] takeCommand(String command)
     {
         // append input to parser
         this.parser.appendData(command);
@@ -60,7 +62,7 @@ public class RequestManager
 
     /**
      * Undo the last command that was done.
-     * @return
+     * @return success string if executed without error
      */
     public String undo()
     {
@@ -76,7 +78,7 @@ public class RequestManager
 
     /**
      * Redo the last undid command.
-     * @return
+     * @return success string if executed without error
      */
     public String redo()
     {

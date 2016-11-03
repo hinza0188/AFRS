@@ -9,7 +9,7 @@ public class SortByArrivalTime implements ItinerarySortingAlgorithm
 {
     /**
      * Sorts itineraries by arrival time.
-     * @param itineraries
+     * @param itineraries all generated itinerary objects
      */
     @Override
     public void sortItineraries(List<Itinerary> itineraries)

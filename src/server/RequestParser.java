@@ -81,8 +81,8 @@ class RequestParser
     /**
      * Parse command to make a reservation.
      * @param commandArgs : user choice of sorting algorithm
-     * @return
-     * @throws Exception
+     * @return MakeReservation class with input identifier
+     * @throws Exception ignores if error occurs
      */
     private static MakeReservation parseMakeReservationCommand(String[] commandArgs) throws Exception
     {
@@ -101,8 +101,8 @@ class RequestParser
     /**
      * Parse command to get reservations.
      * @param commandArgs : user choice of sorting algorithm
-     * @return
-     * @throws Exception
+     * @return GetReservation class with input identifier
+     * @throws Exception ignore error if occur
      */
     private static GetReservation parseGetReservationCommand(String[] commandArgs) throws Exception
     {
@@ -138,8 +138,8 @@ class RequestParser
     /**
      * Parse command to delete reservation.
      * @param commandArgs : user choice of sorting algorithm
-     * @return
-     * @throws Exception
+     * @return DeleteReservation class with input identifier
+     * @throws Exception ignores error if occurs
      */
     private static DeleteReservation parseDeleteReservationCommand(String[] commandArgs) throws Exception
     {
@@ -162,8 +162,8 @@ class RequestParser
     /**
      * Parse command to get the weather.
      * @param commandArgs : user choice of sorting algorithm
-     * @return
-     * @throws Exception
+     * @return GetWeather class with input identifier
+     * @throws Exception ignores error if occurs
      */
     private static GetWeather parseGetWeatherCommand(String[] commandArgs) throws Exception
     {
@@ -180,7 +180,7 @@ class RequestParser
 
     /**
      * Append a partial command to the current data.
-     * @param data
+     * @param data rest of input command from user
      */
     void appendData(String data)
     {

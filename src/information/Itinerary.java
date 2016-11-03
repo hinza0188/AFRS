@@ -18,7 +18,7 @@ public class Itinerary implements Flyable
 
     /**
      * Get the itinerary's departure time.
-     * @return
+     * @return departure time object
      */
     @Override
     public LocalTime getDepartureTime()
@@ -29,7 +29,7 @@ public class Itinerary implements Flyable
 
     /**
      * Get the itinerary's arrival time.
-     * @return
+     * @return arrival time object
      */
     @Override
     public LocalTime getArrivalTime()
@@ -41,7 +41,7 @@ public class Itinerary implements Flyable
 
     /**
      * Get the itinerary's departure time including delays.
-     * @return
+     * @return departure time object with delay calculation applied
      */
     @Override
     public LocalTime getTrueDepartureTime()
@@ -52,7 +52,7 @@ public class Itinerary implements Flyable
 
     /**
      * Get the itinerary's arrival time including delays.
-     * @return
+     * @return arrival time object with delay calculation applied
      */
     @Override
     public LocalTime getTrueArrivalTime()
@@ -64,7 +64,7 @@ public class Itinerary implements Flyable
 
     /**
      * Get the origin airport of the itinerary.
-     * @return
+     * @return airport object
      */
     @Override
     public Airport getOriginAirport()
@@ -75,7 +75,7 @@ public class Itinerary implements Flyable
 
     /**
      * Get the destination airport of the itinerary.
-     * @return
+     * @return airport object
      */
     @Override
     public Airport getDestinationAirport()
@@ -87,7 +87,7 @@ public class Itinerary implements Flyable
 
     /**
      * Get the total cost of all the flights in the itinerary.
-     * @return
+     * @return precised cost of all flights in the itinerary
      */
     @Override
     public double getAirfare()
