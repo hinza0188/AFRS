@@ -15,7 +15,7 @@ public class CSVReader implements Iterable<String[]>
 
     /**
      * Initialize with given file path.
-     * @param filePath
+     * @param filePath: directory that is provided in the running environment
      */
     public CSVReader(String filePath)
     {
@@ -24,7 +24,7 @@ public class CSVReader implements Iterable<String[]>
 
     /**
      * Open the file.
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException:
      */
     public void open() throws FileNotFoundException
     {
@@ -39,7 +39,7 @@ public class CSVReader implements Iterable<String[]>
         try
         {
             this.br.close();
-        } catch (Exception ex)
+        } catch (Exception ignored)
         {
         }
     }
@@ -67,9 +67,7 @@ public class CSVReader implements Iterable<String[]>
                 // use comma as separator
                 return line.split(",");
             }
-        } catch (Exception ex)
-        {
-        }
+        } catch (Exception ignore) {}
 
         // close and return
         this.close();

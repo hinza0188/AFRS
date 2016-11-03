@@ -7,7 +7,7 @@ public class CSVIterator implements Iterator<String[]>
 {
     private CSVReader reader;
     private String[] currentLine;
-    public CSVIterator(CSVReader reader)
+    CSVIterator(CSVReader reader)
     {
         this.reader = reader;
     }
