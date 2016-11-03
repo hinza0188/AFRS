@@ -3,7 +3,6 @@ package information;
 import helpers.ItinerarySortingAlgorithm;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -37,7 +36,7 @@ public class ItineraryManager
     /**
      * Get the itinerary with the given identifier.
      * @param identifier The itinerary's identifier.
-     * @return speicific itinerary object
+     * @return specific itinerary object
      */
     public Itinerary getItineraryWithIdentifier(int identifier)
     {

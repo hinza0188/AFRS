@@ -7,8 +7,8 @@ import java.time.OffsetTime;
  */
 public class Airport
 {
-    private String abbreviation;
-    private String cityName;
+    private final String abbreviation;
+    private final String cityName;
 
     private String[] weather;
     private int weatherRequestCounter = 0;
@@ -28,7 +28,7 @@ public class Airport
 
     /**
      * Get the airport's 3 letter code.
-     * @return
+     * @return The 3 lettered code in String
      */
     public String getAbbreviation()
     {
@@ -37,7 +37,7 @@ public class Airport
 
     /**
      * Get the airport's city name.
-     * @return
+     * @return the city name of airport in String
      */
     public String getCityName()
     {
@@ -46,7 +46,7 @@ public class Airport
 
     /**
      * Get the weather of the airport at this moment.
-     * @return
+     * @return the status of weather in String
      */
     public String getWeather()
     {
@@ -79,7 +79,7 @@ public class Airport
 
     /**
      * Get the delay time.
-     * @return
+     * @return the delay time in OffsetTime
      */
     public OffsetTime getTimeDelay()
     {
@@ -88,7 +88,7 @@ public class Airport
 
     /**
      * Set the delay time.
-     * @param timeDelay
+     * @param timeDelay the delay time
      */
     void setTimeDelay(OffsetTime timeDelay)
     {

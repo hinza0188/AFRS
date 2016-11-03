@@ -5,7 +5,6 @@ import helpers.CSVReader;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Manages all flights in the system.

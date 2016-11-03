@@ -15,8 +15,8 @@ import java.util.Map;
  */
 class OnlineProxy implements AirportData
 {
-    private final String URL_FORMAT = "http://services.faa.gov/airport/status/%s?format=application/xml";
-    Map<String, Airport> airportCache = new HashMap<>();
+    private static final String URL_FORMAT = "http://services.faa.gov/airport/status/%s?format=application/xml";
+    private Map<String, Airport> airportCache = new HashMap<>();
 
     /**
      * Get the airport from the web service and return an airport object.

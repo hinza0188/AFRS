@@ -32,7 +32,7 @@ public class ReservationManager
      * Delete an existing reservation.
      * @param passengerName first key with reservation
      * @param originAirport second key with reservation
-     * @param destinationAirport thrid key with reservation
+     * @param destinationAirport third key with reservation
      * @return true if reservation is successfully deleted
      */
     public boolean deleteReservation(String passengerName, Airport originAirport, Airport destinationAirport)
