@@ -5,7 +5,7 @@ package helpers;
  */
 public class CSVIterator implements Iterator<String[]>
 {
-    private CSVReader reader;
+    private final CSVReader reader;
     private String[] currentLine;
     CSVIterator(CSVReader reader)
     {

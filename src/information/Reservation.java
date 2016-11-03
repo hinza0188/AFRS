@@ -2,15 +2,15 @@ package information;
 
 public class Reservation
 {
-    private String passenger;
-    private Itinerary itinerary;
+    private final String passenger;
+    private final Itinerary itinerary;
 
     /**
      * Create a reservation.
      * @param passenger The passenger's name.
      * @param itinerary The itinerary to reserve.
      */
-    protected Reservation(String passenger, Itinerary itinerary)
+    Reservation(String passenger, Itinerary itinerary)
     {
         this.itinerary = itinerary;
         this.passenger = passenger;

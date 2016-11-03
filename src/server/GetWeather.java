@@ -7,7 +7,7 @@ import information.Airport;
  */
 class GetWeather implements Request
 {
-    private Airport airport;
+    private final Airport airport;
 
     /**
      * Create get weather command given an airport object.

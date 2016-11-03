@@ -20,7 +20,7 @@ public class Airport
      * @param abbreviation The airport abbreviation.
      * @param cityName The name of the city.
      */
-    protected Airport(String abbreviation, String cityName)
+    Airport(String abbreviation, String cityName)
     {
         this.abbreviation = abbreviation;
         this.cityName = cityName;

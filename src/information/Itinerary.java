@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class Itinerary implements Flyable
 {
-    private Flight[] legs;
+    private final Flight[] legs;
 
     /**
      * Create an itinerary from multiple flights.

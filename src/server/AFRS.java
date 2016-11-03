@@ -14,9 +14,9 @@ class AFRS
 {
     /**
      * Make a reservation.
-     * @param passengerName
-     * @param itinerary
-     * @return
+     * @param passengerName first key for reservation
+     * @param itinerary details data of reservation
+     * @return success message if reservation is created
      */
     static String makeReservation(String passengerName, Itinerary itinerary)
     {
@@ -29,11 +29,11 @@ class AFRS
 
     /**
      * Get itineraries given criteria.
-     * @param originAirport
-     * @param destinationAirport
-     * @param maxConnections
-     * @param sortingMethod
-     * @return
+     * @param originAirport user desired departure airport
+     * @param destinationAirport user desired arriving airport
+     * @param maxConnections user desired number of connection flight
+     * @param sortingMethod user
+     * @return list of itinerary in user readable string format
      */
     static String getItinerary(Airport originAirport, Airport destinationAirport, int maxConnections, ItinerarySortingAlgorithm sortingMethod)
     {
@@ -58,10 +58,10 @@ class AFRS
 
     /**
      * Get an existing reservation.
-     * @param passengerName
-     * @param originAirport
-     * @param destinationAirport
-     * @return
+     * @param passengerName first key for reservation query
+     * @param originAirport second key for reservation query
+     * @param destinationAirport third key for reservation query
+     * @return reservations in readable string format
      */
     static String getReservation(String passengerName, Airport originAirport, Airport destinationAirport)
     {
@@ -91,10 +91,10 @@ class AFRS
 
     /**
      * Delete an existing reservation.
-     * @param passengerName
-     * @param originAirport
-     * @param destinationAirport
-     * @return
+     * @param passengerName first key of reservation
+     * @param originAirport second key of reservation
+     * @param destinationAirport third key of reservation
+     * @return success string if deleted
      */
     static String deleteReservation(String passengerName, Airport originAirport, Airport destinationAirport)
     {
@@ -107,8 +107,8 @@ class AFRS
 
     /**
      * Get the weather for a given airport.
-     * @param airport
-     * @return
+     * @param airport airport object
+     * @return weather status in readable string format
      */
     static String getWeather(Airport airport)
     {
@@ -125,10 +125,10 @@ class AFRS
 
     /**
      * Get itinerary given a reservation.
-     * @param passengerName
-     * @param originAirport
-     * @param destinationAirport
-     * @return
+     * @param passengerName first key from reservation
+     * @param originAirport second key from reservation
+     * @param destinationAirport third key from reservation
+     * @return extracted itinerary data from reservation
      */
     static Itinerary getItineraryObjectFromReservation(String passengerName, Airport originAirport, Airport destinationAirport)
     {

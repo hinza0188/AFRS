@@ -9,7 +9,7 @@ import java.io.FileReader;
  */
 public class CSVReader implements Iterable<String[]>
 {
-    private String filePath;
+    private final String filePath;
     private BufferedReader br;
 
     /**

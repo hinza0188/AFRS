@@ -8,12 +8,12 @@ import java.time.OffsetTime;
  */
 public class Flight implements Flyable
 {
-    private int flightNumber;
-    private Airport originAirport;
-    private Airport destinationAirport;
-    private LocalTime departureTime;
-    private LocalTime arrivalTime;
-    private double airfare;
+    private final int flightNumber;
+    private final  Airport originAirport;
+    private final Airport destinationAirport;
+    private final LocalTime departureTime;
+    private final LocalTime arrivalTime;
+    private final double airfare;
 
     /**
      * Create a flight object.
@@ -24,7 +24,7 @@ public class Flight implements Flyable
      * @param arrivalTime arriving time of the flight
      * @param airfare price of the flight
      */
-    protected Flight(int flightNumber, Airport originAirport, Airport destinationAirport, LocalTime departureTime,
+    Flight(int flightNumber, Airport originAirport, Airport destinationAirport, LocalTime departureTime,
                      LocalTime arrivalTime, double airfare)
     {
         this.flightNumber = flightNumber;

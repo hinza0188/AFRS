@@ -31,7 +31,7 @@ import java.util.Optional;
  */
 public class Client extends Application
 {
-    private UserSelector userSelector = new UserSelector();
+    private final UserSelector userSelector = new UserSelector();
     private int lastTabIndex = 0;
 
     /**
@@ -132,7 +132,7 @@ public class Client extends Application
      * @param tabPane: allocated tabPane from the primaryStage -> root scene.
      * @return Tab: added new tab with all I/O action contents in the provided tabPane
      */
-    private Tab createAndSelectNewTab(final TabPane tabPane)
+    private void createAndSelectNewTab(final TabPane tabPane)
     {
         // get current tabs
         String userID;
@@ -181,7 +181,7 @@ public class Client extends Application
         {
             // if they hit cancel, don't change the user
             tabPane.getSelectionModel().select(lastTabIndex);
-            return null;
+            return;
         }
 
         // create tab
@@ -246,8 +246,6 @@ public class Client extends Application
 
         // add the page into the tab
         tab.setContent(page);
-
-        return tab;
     }
 
 

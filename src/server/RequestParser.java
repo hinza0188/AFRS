@@ -84,7 +84,7 @@ class RequestParser
      * @return
      * @throws Exception
      */
-    public static MakeReservation parseMakeReservationCommand(String[] commandArgs) throws Exception
+    private static MakeReservation parseMakeReservationCommand(String[] commandArgs) throws Exception
     {
         // reserve,id,passenger;
         int identifier = Integer.parseInt(commandArgs[1]);
@@ -104,7 +104,7 @@ class RequestParser
      * @return
      * @throws Exception
      */
-    public static GetReservation parseGetReservationCommand(String[] commandArgs) throws Exception
+    private static GetReservation parseGetReservationCommand(String[] commandArgs) throws Exception
     {
         // retrieve,passenger[,origin[,destination]];
         String passenger = commandArgs[1];
@@ -141,7 +141,7 @@ class RequestParser
      * @return
      * @throws Exception
      */
-    public static DeleteReservation parseDeleteReservationCommand(String[] commandArgs) throws Exception
+    private static DeleteReservation parseDeleteReservationCommand(String[] commandArgs) throws Exception
     {
         // delete,passenger,origin,destination;
         String passenger = commandArgs[1];
@@ -165,7 +165,7 @@ class RequestParser
      * @return
      * @throws Exception
      */
-    public static GetWeather parseGetWeatherCommand(String[] commandArgs) throws Exception
+    private static GetWeather parseGetWeatherCommand(String[] commandArgs) throws Exception
     {
         // weather,airport;
         String airportAbbreviation = commandArgs[1];

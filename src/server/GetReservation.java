@@ -7,7 +7,7 @@ import information.Airport;
  */
 public class GetReservation implements Request
 {
-    private String passengerName;
+    private final String passengerName;
     private Airport originAirport;
     private Airport destinationAirport;
 

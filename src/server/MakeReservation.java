@@ -5,17 +5,17 @@ import information.Itinerary;
 /**
  * Make reservation command.
  */
-public class MakeReservation implements Request
+class MakeReservation implements Request
 {
-    private String passengerName;
-    private Itinerary itinerary;
+    private final String passengerName;
+    private final Itinerary itinerary;
 
     /**
      * Create a make reservation command.
      * @param passengerName
      * @param itinerary
      */
-    public MakeReservation(String passengerName, Itinerary itinerary)
+    MakeReservation(String passengerName, Itinerary itinerary)
     {
         this.passengerName = passengerName;
         this.itinerary = itinerary;

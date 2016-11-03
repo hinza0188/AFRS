@@ -8,10 +8,10 @@ import information.Airport;
  */
 public class GetItinerary implements Request
 {
-    private Airport originAirport;
-    private Airport destinationAirport;
-    private int maxConnections;
-    private ItinerarySortingAlgorithm sortingAlgorithm;
+    private final Airport originAirport;
+    private final Airport destinationAirport;
+    private final int maxConnections;
+    private final ItinerarySortingAlgorithm sortingAlgorithm;
 
     /**
      * Create an itinerary command.
@@ -20,7 +20,7 @@ public class GetItinerary implements Request
      * @param maxConnections
      * @param sortingMethod
      */
-    public GetItinerary(Airport originAirport, Airport destinationAirport, int maxConnections, ItinerarySortingAlgorithm sortingMethod)
+    GetItinerary(Airport originAirport, Airport destinationAirport, int maxConnections, ItinerarySortingAlgorithm sortingMethod)
     {
         this.originAirport = originAirport;
         this.destinationAirport = destinationAirport;

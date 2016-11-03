@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class ReservationManager
 {
     private static ReservationManager singleton = null;
-    private ArrayList<Reservation> reservations;
+    private final ArrayList<Reservation> reservations;
 
     private ReservationManager()
     {

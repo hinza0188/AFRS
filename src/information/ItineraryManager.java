@@ -15,7 +15,7 @@ import java.util.List;
 public class ItineraryManager
 {
     private static ItineraryManager singleton = null;
-    private List<Itinerary> itineraries = new ArrayList<>();
+    private final List<Itinerary> itineraries = new ArrayList<>();
 
     private ItineraryManager()
     {

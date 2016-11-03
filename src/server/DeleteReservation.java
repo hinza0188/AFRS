@@ -8,10 +8,10 @@ import information.Itinerary;
  */
 public class DeleteReservation implements Request
 {
-    private String passengerName;
-    private Airport originAirport;
-    private Airport destinationAirport;
-    private Itinerary itinerary;
+    private final String passengerName;
+    private final Airport originAirport;
+    private final Airport destinationAirport;
+    private final Itinerary itinerary;
 
     /**
      * Create the command to delete.
@@ -19,7 +19,7 @@ public class DeleteReservation implements Request
      * @param originAirport
      * @param destinationAirport
      */
-    public DeleteReservation(String passengerName, Airport originAirport, Airport destinationAirport)
+    DeleteReservation(String passengerName, Airport originAirport, Airport destinationAirport)
     {
         this.passengerName = passengerName;
         this.originAirport = originAirport;

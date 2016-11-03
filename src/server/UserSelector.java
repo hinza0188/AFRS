@@ -8,7 +8,7 @@ import java.util.HashMap;
  */
 public class UserSelector
 {
-    private Map<String, RequestManager> managers = new HashMap<>();
+    private final Map<String, RequestManager> managers = new HashMap<>();
     private RequestManager currentManager;
 
     /**
