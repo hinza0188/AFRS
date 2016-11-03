@@ -14,6 +14,9 @@ public class CSVIterator implements Iterator<String[]>
         this.reader = reader;
     }
 
+    /**
+     * Move to the first iterable item.
+     */
     public void first()
     {
         try
@@ -26,12 +29,19 @@ public class CSVIterator implements Iterator<String[]>
         catch (Exception ex) { }
     }
 
+    /**
+     * Move to the next item.
+     */
     public void next()
     {
         if (this.currentItem() != null)
             this.currentLine = this.reader.readLine();
     }
 
+    /**
+     * Get the current item.
+     * @return
+     */
     public String[] currentItem()
     {
         return this.currentLine;
