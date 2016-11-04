@@ -1,6 +1,5 @@
 package server;
 
-import java.util.List;
 import java.util.Stack;
 
 /**
@@ -9,9 +8,6 @@ import java.util.Stack;
 public class RequestManager
 {
     private final RequestParser parser = new RequestParser();
-    // TODO: IDE yells this is not working
-    private final List<Request> commandStack = new Stack<>();
-    // TODO: LOOK ABOVE
     private final Stack<Request> undoStack = new Stack<>();
     private final Stack<Request> redoStack = new Stack<>();
 
@@ -40,8 +36,6 @@ public class RequestManager
                     if(requestCommand instanceof MakeReservation ||requestCommand instanceof DeleteReservation ){
                         undoStack.push(requestCommand);
                     }
-                    // add to command stack
-                    this.commandStack.add(requestCommand);
                 }
 
                 // clear data
