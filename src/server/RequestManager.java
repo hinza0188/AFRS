@@ -33,9 +33,8 @@ public class RequestManager
                 {
                     Request requestCommand = requestCommands[i];
                     commandResponses[i] = requestCommand.executeCommand();
-                    if(requestCommand instanceof MakeReservation ||requestCommand instanceof DeleteReservation ){
+                    if(requestCommand instanceof MakeReservation || requestCommand instanceof DeleteReservation)
                         undoStack.push(requestCommand);
-                    }
                 }
 
                 // clear data
